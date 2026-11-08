@@ -294,10 +294,10 @@ window.SITE = {
       institutions: [
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
-            { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", semester: 1, levels: [], levelText: "Bachelor's", languages: ["C"], roles: ["CM", "TP"], illustration: "ds", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", semester: 1, levels: ["L2"], languages: ["C"], roles: ["CM", "TP"], illustration: "ds", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "INFORMATIQUE 0", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: [], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
+            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
             { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TD"], roleNote: "Tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "", title: "Master's Programming Projects", semester: 2, levels: ["M1", "M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python, including course 4TIN802U.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
@@ -314,8 +314,8 @@ window.SITE = {
       institutions: [
         { institution: "Faculty of Sciences, University of Monastir", unit: "Department of Computer Science", role: "Part-time lecturer",
           courses: [
-            { code: "", title: "Advanced Python Programming", semester: 1, levels: [], levelText: "Bachelor's", languages: ["Python"], roles: ["TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Relational Databases", semester: 1, levels: [], levelText: "Bachelor's", languages: ["SQL"], roles: ["TP"], illustration: "databases", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Advanced Python Programming", semester: 1, levels: ["L3"], languages: ["Python"], roles: ["TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Relational Databases", semester: 1, levels: ["L2"], languages: ["SQL"], roles: ["TP"], illustration: "databases", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "", title: "Data Warehousing", semester: 2, levels: ["L3"], languages: ["SQL", "Python"], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] }
