@@ -1002,7 +1002,7 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 }
 @media (max-width: 760px) {
   .w-profile .portrait { width: 100%; aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
-  .w-profile .portrait .portrait-img { object-position: 36% 28% !important; }
+  .w-profile .portrait .portrait-img { object-position: 40% 8% !important; }
   .panel-lead .about-avatar { width: 52px; height: 52px; }
 }
 /* v9b — desktop: the portrait grows to fill the identity card (no empty band under the text) */
@@ -1017,3 +1017,12 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 .sched-dot { width: 7px; height: 7px; border-radius: 50%; border: 2px solid currentColor; }
 /* v10b — official course names can be long: tighter tracking */
 .official { letter-spacing: .02em; line-height: 1.35; font-size: 12.5px; }
+
+/* v9d — full upper-body portrait: taller frame on mobile so face and shoulders both show */
+@media (max-width: 760px) { .w-profile .portrait { aspect-ratio: 4 / 3.4; } }
+
+/* v9e — portrait shown whole (speaker + full slide): frame follows the photo's ratio, no cropping */
+.w-profile .portrait, .w-profile .portrait .portrait-img { aspect-ratio: 640 / 741; }
+@media (min-width: 981px) { .w-profile .portrait { flex: 0 0 auto; min-height: 0; } }
+@media (max-width: 980px) and (min-width: 761px) { .w-profile .portrait { aspect-ratio: auto; } }
+@media (max-width: 760px) { .w-profile .portrait { aspect-ratio: 640 / 741; } .w-profile .portrait .portrait-img { object-position: 50% 50% !important; } }

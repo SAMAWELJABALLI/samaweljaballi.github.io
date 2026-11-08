@@ -27,16 +27,16 @@ window.SITE = {
     timezone: "Europe/Paris",
     /* Portrait: leave `photo` empty to show the initials instead.
        photoPosition = CSS object-position used to frame the face in the card.
-       Previous portrait (poster session) kept as assets/img/portrait*.jpg. */
-    photo: "assets/img/portrait-talk.jpg",
-    photoSmall: "assets/img/portrait-talk-360.jpg",
-    photoWebp: "assets/img/portrait-talk.webp",
-    photoSmallWebp: "assets/img/portrait-talk-360.webp",
-    photoAvatar: "assets/img/portrait-talk-avatar.jpg",
-    photoBadge: "assets/img/portrait-talk-badge.jpg",   // small face crop for the navigation-bar circle
-    photoWidth: 640, photoHeight: 640,
-    photoPosition: "38% 30%",
-    photoAlt: "Samawel Jaballi speaking into a microphone during a scientific event, wearing a light blue shirt, striped tie and conference badge",
+       Earlier portraits kept as assets/img/portrait*.jpg and portrait-talk*.jpg. */
+    photo: "assets/img/portrait-stage.jpg",
+    photoSmall: "assets/img/portrait-stage-360.jpg",
+    photoWebp: "assets/img/portrait-stage.webp",
+    photoSmallWebp: "assets/img/portrait-stage-360.webp",
+    photoAvatar: "assets/img/portrait-stage-avatar.jpg",
+    photoBadge: "assets/img/portrait-stage-badge.jpg",   // small face crop for the navigation-bar circle
+    photoWidth: 640, photoHeight: 741,
+    photoPosition: "50% 50%",
+    photoAlt: "Samawel Jaballi speaking into a microphone at a scientific conference, wearing a light blue shirt, striped tie and conference badge",
     cv: "files/Samawel_Jaballi_CV.pdf",
     email: "samawel.jaballi@u-bordeaux.fr",
     homeStatement:
@@ -321,7 +321,7 @@ window.SITE = {
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
             { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TD"], roleNote: "Tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Master's Programming Projects", semester: 2, levels: ["M1", "M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python, including course 4TIN802U.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "4TIN802U", title: "Master's Programming Projects", semester: 2, levels: ["M1"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2023–2024",
