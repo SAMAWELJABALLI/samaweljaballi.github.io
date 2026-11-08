@@ -1001,3 +1001,9 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
   .ref-cover.pp img.pp-ico { width: 60px; }
   .ref-cover.pp img.pp-ico:not(.oa) { width: 56px; }
 }
+.pp-lbl { text-align: center; }
+.pp-oa { display: block; text-align: center; line-height: 1.15; }
+@media (max-width: 760px) { .pp-oa { font-size: 9.5px; } }
+/* v8c — plain preprint pictogram fills the same frame as proceedings covers */
+.ref-cover.pp img.pp-ico:not(.oa) { width: 88px; height: 133px; }
+@media (max-width: 760px) { .ref-cover.pp img.pp-ico:not(.oa) { width: 60px; height: 91px; } }

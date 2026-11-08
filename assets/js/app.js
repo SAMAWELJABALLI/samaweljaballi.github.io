@@ -273,7 +273,7 @@
       var oa = p.openAccess === true;
       var pic = (oa
         ? '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.png" srcset="assets/img/covers/preprint-oa.png 1x, assets/img/covers/preprint-oa@2x.png 2x" width="88" height="97" alt="'
-        : '<img class="pp-ico" src="assets/img/covers/preprint.svg" width="100" height="116" alt="') +
+        : '<img class="pp-ico" src="assets/img/covers/preprint.svg" width="88" height="133" alt="') +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
