@@ -195,13 +195,13 @@ window.SITE = {
     { id: "tip-mafnet", year: 2026, date: "2026-04", status: "submitted", type: "Journal",
       coverGeneric: true, openAccess: false, coverImage: "assets/img/covers/preprint.svg", coverImage2x: "", coverWidth: 88, coverHeight: 133,
       coverAlt: "Preprint icon — manuscript under review, not yet published", coverUrl: "", coverCredit: "",
-            authors: ["A. N. P. Dieng", "Samawel Jaballi", "Henri Nicolas", "Mounir Zrigui"], authorsComplete: false,
+            authors: ["Adjia Ndeye Penda Dieng", "Samawel Jaballi", "Henri Nicolas", "Mounir Zrigui"], authorsComplete: true,
       title: "MAF-Net: A Unified Hybrid Convolutional–SSM Framework for Multimodal Chest X-ray Triage, Segmentation, and Automated Reporting",
       venue: "Submitted to IEEE Transactions on Image Processing", venueShort: "IEEE TIP (submitted)", summary: "", links: {}, axes: ["multimodal"] },
     { id: "eswa-triple", year: 2026, date: "2026-04", status: "submitted", type: "Journal",
       coverGeneric: true, openAccess: false, coverImage: "assets/img/covers/preprint.svg", coverImage2x: "", coverWidth: 88, coverHeight: 133,
       coverAlt: "Preprint icon — manuscript under review, not yet published", coverUrl: "", coverCredit: "",
-            authors: ["A. N. P. Dieng", "Samawel Jaballi", "Henri Nicolas", "Mounir Zrigui"], authorsComplete: false,
+            authors: ["Adjia Ndeye Penda Dieng", "Samawel Jaballi", "Henri Nicolas", "Mounir Zrigui"], authorsComplete: true,
       title: "Breaking the Multimodal Shortcut: A Triple-Memory Decoder with Constrained Gating for Radiology Report Generation",
       venue: "Submitted to Expert Systems with Applications", venueShort: "ESWA (submitted)", summary: "", links: {}, axes: ["multimodal"] },
     { id: "csl-augment", year: 2025, date: "2025-06", status: "under-review", type: "Journal",
@@ -238,7 +238,7 @@ window.SITE = {
       approach: "Decides per input whether to classify the original or the normalized view, by factorizing the expected benefit into disagreement detection, which needs no labels, and conditional advantage, with a cost-aware decision rule. Evaluated with four frozen encoders on Tunisian, Algerian and Moroccan test sets.",
       role: "",
       axes: ["dialect"],
-      resources: [] },
+      resources: [{ label: "Research code & archived evidence", url: "https://github.com/SAMAWELJABALLI/-SelectNorm" }] },
     { id: "diafuse", stage: "ongoing", period: "2026", title: "DiaFuse-PRC — cross-script and cross-dialect sentiment transfer in Maghrebi Arabic",
       status: "Research code accompanying a manuscript in progress; the archived run is provisional, and the DiaFuse-PRC++ extension is pre-registered and partly implemented",
       problem: "Sentiment models trained on Arabic-script Tunisian data and synthetic transliterations must hold up on human-written Arabizi and on other Maghrebi varieties.",
@@ -265,6 +265,7 @@ window.SITE = {
   /* Released software & resources (public repositories). */
   releases: [
     { title: "formal-cross-script-transfer", kind: "Research code", text: "Code, pre-registered protocols and archived results for the FORMAL study.", licence: "MIT", url: "https://github.com/SAMAWELJABALLI/formal-cross-script-transfer" },
+    { title: "SelectNorm", kind: "Research code", text: "Code and archived predictions to reproduce the SelectNorm tables and paired tests.", licence: "", url: "https://github.com/SAMAWELJABALLI/-SelectNorm" },
     { title: "DiaFuse-PRC", kind: "Research code", text: "Training and evaluation code, model cards and execution status of each system.", licence: "", url: "https://github.com/SAMAWELJABALLI/DiaFuse-PRC" },
     { title: "NLQCTA data analysis", kind: "Analysis", text: "Exploratory figures for the NLQCTA corpus; the corpus itself is not included in the repository.", licence: "", url: "https://github.com/SAMAWELJABALLI/NLQCTA-New-Linguistic-Quantitative-Corpus-based-on-Temporal-Analysis---Data-Analysis" }
   ],
