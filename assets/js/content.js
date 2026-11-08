@@ -273,6 +273,7 @@ window.SITE = {
        levels:      ["L1"] … ["M1", "M2"] — only confirmed levels
        levelText:   level outside the L/M system (e.g. engineering school)
        languages:   ["Python"], ["C"], ["OCaml"] …
+       tools:       ["dbt"] … (tools, shown separately from languages)
        roles:       any of "CM", "TD", "TP", "Supervision" (only if documented)
        roleNote:    short precision on the role
        illustration: "ds" | "py-basics" | "py-functions" | "trees-graphs" |
@@ -298,15 +299,15 @@ window.SITE = {
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: [], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
             { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TD"], roleNote: "Tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Master's Programming Projects", semester: 2, levels: ["M1", "M2"], languages: [], roles: ["Supervision"], roleNote: "Supervision of master's programming projects, including course 4TIN802U. Languages depend on each project.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "", title: "Master's Programming Projects", semester: 2, levels: ["M1", "M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python, including course 4TIN802U.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2023–2024",
       institutions: [
         { institution: "Private Polytechnic School of Monastir", unit: "Software Engineering programme", role: "Part-time lecturer",
           courses: [
-            { code: "", title: "Data Warehousing", semester: 2, levels: [], levelText: "Engineering — Year 5", termNote: "Evening course", languages: [], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Machine Learning", semester: 2, levels: [], levelText: "Engineering — Year 4", languages: [], roles: ["CM", "TP"], illustration: "ml", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "", title: "Data Warehousing", semester: 2, levels: [], levelText: "Engineering — Year 5", termNote: "Evening course", languages: ["Python", "SQL"], tools: ["dbt"], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Machine Learning", semester: 2, levels: [], levelText: "Engineering — Year 4", languages: ["Advanced Python"], roles: ["CM", "TP"], illustration: "ml", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2022–2023",
