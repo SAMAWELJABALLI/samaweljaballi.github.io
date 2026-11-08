@@ -985,3 +985,27 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 .pp-oa { display: block; font-size: 10px; color: #c2362c; font-weight: 700; }
 :root[data-theme="night"] .pp-oa { color: #ff8a80; }
 @media (max-width: 760px) { .pp-lbl { font-size: 10px; } .pp-oa { font-size: 9.5px; } }
+
+/* =====================================================================
+   v9 — portrait in the identity card + small avatar in About
+   ===================================================================== */
+.portrait { display: block; aspect-ratio: 4 / 3.4; overflow: hidden; background: var(--surface-2); }
+.portrait .portrait-img { width: 100%; height: 100%; aspect-ratio: auto; object-fit: cover; display: block; filter: saturate(.97) contrast(1.01); }
+:root[data-theme="night"] .portrait .portrait-img { filter: saturate(.95) brightness(.97); }
+.w-profile .portrait { border-bottom: 1px solid var(--line); }
+.panel-lead .about-avatar {
+  float: left; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; margin: 2px 14px 4px 0;
+  box-shadow: 0 2px 8px -2px rgba(20,40,50,.35); border: 2px solid var(--surface);
+}
+@media (max-width: 980px) {
+  .w-profile .portrait { width: 42%; aspect-ratio: auto; min-height: 220px; border-bottom: 0; border-right: 1px solid var(--line); }
+}
+@media (max-width: 760px) {
+  .w-profile .portrait { width: 100%; aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .w-profile .portrait .portrait-img { object-position: 56% 18% !important; }
+  .panel-lead .about-avatar { width: 52px; height: 52px; }
+}
+/* v9b — desktop: the portrait grows to fill the identity card (no empty band under the text) */
+@media (min-width: 981px) {
+  .w-profile .portrait { flex: 1 1 auto; aspect-ratio: auto; min-height: 300px; }
+}

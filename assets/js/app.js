@@ -145,7 +145,12 @@
   function widgets() {
     var p = S.person;
     var portrait = p.photo
-      ? '<img class="portrait-img" src="' + esc(p.photo) + '" alt="Portrait of ' + esc(p.name) + '" width="600" height="510" decoding="async">'
+      ? '<picture class="portrait">' +
+          (p.photoWebp ? '<source type="image/webp" srcset="' + (p.photoSmallWebp ? esc(p.photoSmallWebp) + " 360w, " : "") + esc(p.photoWebp) + ' 640w" sizes="(max-width: 760px) 100vw, 360px">' : "") +
+          '<img class="portrait-img" src="' + esc(p.photo) + '"' + (p.photoSmall ? ' srcset="' + esc(p.photoSmall) + " 360w, " + esc(p.photo) + ' 640w" sizes="(max-width: 760px) 100vw, 360px"' : "") +
+          ' width="' + (p.photoWidth || 640) + '" height="' + (p.photoHeight || 640) + '" alt="' + esc(p.photoAlt || "Portrait of " + p.name) + '"' +
+          ' style="object-position:' + esc(p.photoPosition || "50% 25%") + '" decoding="async" fetchpriority="high">' +
+        "</picture>"
       : '<div class="portrait-mono" aria-hidden="true"><span>' + initials(p.name) + "</span></div>";
     var axes = S.axes.map(function (x) { return '<li><button type="button" class="axis-link" data-axis="' + x.id + '">' + esc(x.title) + "</button></li>"; }).join("");
     var lc = latestInst.courses;
@@ -271,7 +276,7 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261108e" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109a" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
@@ -527,7 +532,8 @@
     }).join("") + '</ul><p class="legend"><b>Award</b>: prize received · <b>Nomination</b>: nominated, not awarded · <b>Shortlisted</b>: reached a selection stage · <b>Grant</b>: funding obtained.</p>';
     var sk = '<dl class="skills">' + S.skills.map(function (s) { return "<div><dt>" + esc(s.label) + "</dt><dd>" + esc(s.value) + "</dd></div>"; }).join("") + "</dl>";
     var segs = [["Experience", tl(S.experience)], ["Education", tl(S.education)], ["Distinctions", aw], ["Skills & languages", sk]];
-    return panel("about", "About", "Experience, education & distinctions", esc(S.person.intro),
+    var lead = (S.person.photoAvatar ? '<img class="about-avatar" src="' + esc(S.person.photoAvatar) + '" width="80" height="80" alt="" loading="lazy" decoding="async">' : "") + esc(S.person.intro);
+    return panel("about", "About", "Experience, education & distinctions", lead,
       '<div class="segs" role="tablist" aria-label="About sections">' + segs.map(function (s, i) {
         return '<button type="button" role="tab" class="seg" id="ab-' + i + '" aria-controls="abp-' + i + '" aria-selected="' + (i === 0) + '"' + (i ? ' tabindex="-1"' : "") + ">" + s[0] + "</button>";
       }).join("") + "</div>" +

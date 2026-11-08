@@ -25,7 +25,16 @@ window.SITE = {
     ],
     city: "Bordeaux",
     timezone: "Europe/Paris",
-    photo: "",                       // e.g. "assets/img/portrait.jpg" — empty = initials
+    /* Portrait: leave `photo` empty to show the initials instead.
+       photoPosition = CSS object-position used to frame the face in the card. */
+    photo: "assets/img/portrait.jpg",
+    photoSmall: "assets/img/portrait-360.jpg",
+    photoWebp: "assets/img/portrait.webp",
+    photoSmallWebp: "assets/img/portrait-360.webp",
+    photoAvatar: "assets/img/portrait-avatar.jpg",
+    photoWidth: 640, photoHeight: 646,
+    photoPosition: "56% 22%",
+    photoAlt: "Samawel Jaballi, smiling, in a light blue shirt and striped tie, standing beside a research poster at a scientific conference",
     cv: "files/Samawel_Jaballi_CV.pdf",
     email: "samawel.jaballi@u-bordeaux.fr",
     homeStatement:
@@ -361,7 +370,7 @@ window.SITE = {
            "Outreach" | "Event attended" | "Research stay"
      ------------------------------------------------------------------- */
   activities: [
-    { date: "2026-09", kind: "Conference talk", role: "Presenter", title: "Quantifying Clinical Risk in Generative Radiology Reporting: MCRS, A Medical Composite Reliability Score", event: "32nd CoopIS", place: "Angers, France", links: {} },
+    { date: "2026-10", kind: "Conference talk", role: "Presenter", title: "Quantifying Clinical Risk in Generative Radiology Reporting: MCRS, A Medical Composite Reliability Score", event: "32nd CoopIS", place: "Angers, France", links: {} },
     { date: "2026-09", kind: "Conference talk", role: "Presenter", title: "When Silence Matters: How VAD-driven Whisper Architectures Reshape Temporal Alignment in Low-Resource Multilingual ASR", event: "18th ICCCI", place: "Heraklion, Greece", links: { paper: "https://link.springer.com/chapter/10.1007/978-3-032-36868-3_25" } },
     { date: "2026-09", kind: "Conference talk", role: "Presenter", title: "A Hybrid E-Learning Recommendation System Incorporating User Reviews and Ratings for Enhanced Course Selection", event: "18th ICCCI", place: "Heraklion, Greece", links: { paper: "https://link.springer.com/chapter/10.1007/978-3-032-37933-7_4" } },
     { date: "2026-07", kind: "Conference talk", role: "Presenter", title: "Toward a Unified Multimodal Framework for Chest X-Ray Analysis: A Hybrid Convolutional–State Space Approach", event: "12th CoDIT", place: "Bari, Italy", links: { paper: "https://ieeexplore.ieee.org/document/11631022" } },
