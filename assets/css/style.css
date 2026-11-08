@@ -1002,7 +1002,7 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 }
 @media (max-width: 760px) {
   .w-profile .portrait { width: 100%; aspect-ratio: 16 / 10; min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
-  .w-profile .portrait .portrait-img { object-position: 56% 18% !important; }
+  .w-profile .portrait .portrait-img { object-position: 36% 28% !important; }
   .panel-lead .about-avatar { width: 52px; height: 52px; }
 }
 /* v9b — desktop: the portrait grows to fill the identity card (no empty band under the text) */
@@ -1015,3 +1015,5 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 /* v10 — scheduled teaching badge */
 .sched { display: inline-flex; align-self: flex-start; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--research); background: color-mix(in srgb, var(--research) 10%, transparent); border: 1px dashed color-mix(in srgb, var(--research) 55%, transparent); padding: 3px 9px; border-radius: 999px; }
 .sched-dot { width: 7px; height: 7px; border-radius: 50%; border: 2px solid currentColor; }
+/* v10b — official course names can be long: tighter tracking */
+.official { letter-spacing: .02em; line-height: 1.35; font-size: 12.5px; }

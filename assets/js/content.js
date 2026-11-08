@@ -26,16 +26,17 @@ window.SITE = {
     city: "Bordeaux",
     timezone: "Europe/Paris",
     /* Portrait: leave `photo` empty to show the initials instead.
-       photoPosition = CSS object-position used to frame the face in the card. */
-    photo: "assets/img/portrait.jpg",
-    photoSmall: "assets/img/portrait-360.jpg",
-    photoWebp: "assets/img/portrait.webp",
-    photoSmallWebp: "assets/img/portrait-360.webp",
-    photoAvatar: "assets/img/portrait-avatar.jpg",
-    photoBadge: "assets/img/portrait-badge.jpg",   // small face crop for the navigation-bar circle
-    photoWidth: 640, photoHeight: 646,
-    photoPosition: "56% 22%",
-    photoAlt: "Samawel Jaballi, smiling, in a light blue shirt and striped tie, standing beside a research poster at a scientific conference",
+       photoPosition = CSS object-position used to frame the face in the card.
+       Previous portrait (poster session) kept as assets/img/portrait*.jpg. */
+    photo: "assets/img/portrait-talk.jpg",
+    photoSmall: "assets/img/portrait-talk-360.jpg",
+    photoWebp: "assets/img/portrait-talk.webp",
+    photoSmallWebp: "assets/img/portrait-talk-360.webp",
+    photoAvatar: "assets/img/portrait-talk-avatar.jpg",
+    photoBadge: "assets/img/portrait-talk-badge.jpg",   // small face crop for the navigation-bar circle
+    photoWidth: 640, photoHeight: 640,
+    photoPosition: "38% 30%",
+    photoAlt: "Samawel Jaballi speaking into a microphone during a scientific event, wearing a light blue shirt, striped tie and conference badge",
     cv: "files/Samawel_Jaballi_CV.pdf",
     email: "samawel.jaballi@u-bordeaux.fr",
     homeStatement:
