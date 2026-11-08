@@ -271,12 +271,12 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261108c" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261108e" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
     }
-    if (!p.coverImage || p.status !== "published") return '<div class="ref-cover none" aria-hidden="true"></div>';
+    if (!p.coverImage || (p.status !== "published" && !p.coverShow)) return '<div class="ref-cover none" aria-hidden="true"></div>';
     var img = '<img src="' + esc(p.coverImage) + '"' + (p.coverImage2x ? ' srcset="' + esc(p.coverImage) + " 1x, " + esc(p.coverImage2x) + ' 2x"' : "") +
       ' width="' + (p.coverWidth || 92) + '" height="' + (p.coverHeight || 139) + '" alt="' + esc(p.coverAlt || "Cover of the volume") + '"' +
       ' loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'.ref\').classList.add(\'no-cover\')">';
@@ -286,7 +286,7 @@
   function pubItem(p) {
     var st = STATUS[p.status];
     var cite = citation(p);
-    return '<li class="ref' + (p.coverImage && (p.status === "published" || p.coverGeneric) ? " has-cover" : "") + (p.coverGeneric ? " generic-cover" : "") + '" id="pub-' + p.id + '">' + coverHtml(p) +
+    return '<li class="ref' + (p.coverImage && (p.status === "published" || p.coverGeneric || p.coverShow) ? " has-cover" : "") + (p.coverGeneric ? " generic-cover" : "") + '" id="pub-' + p.id + '">' + coverHtml(p) +
       '<div class="ref-body">' +
         '<p class="ref-meta"><span class="status ' + st.cls + '">' + st.label + '</span><span class="ref-type">' + esc(p.type) + "</span></p>" +
         '<p class="ref-title">' + esc(p.title) + "</p>" +

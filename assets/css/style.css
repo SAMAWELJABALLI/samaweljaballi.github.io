@@ -977,8 +977,7 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 
 /* v8e — preprint figures reuse the cover frame defined by `.ref-cover img`
    (88 × 133 on desktop, 60 × 91 on mobile). Only the decoration differs. */
-.ref-cover.pp img.pp-ico { object-fit: contain; background: transparent; box-shadow: none; outline: none; border-radius: 0; }
-:root[data-theme="night"] .ref-cover.pp img.pp-ico { filter: drop-shadow(0 0 1px rgba(255,255,255,.5)); }
+/* the preprint card now uses the exact same frame, radius, outline and shadow as covers (no override) */
 .pp-link { display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; border-radius: 8px; transition: transform .18s ease; }
 .pp-link:hover, .pp-link:focus-visible { transform: translateY(-2px); }
 .pp-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }

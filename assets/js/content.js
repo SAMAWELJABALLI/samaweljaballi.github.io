@@ -102,6 +102,7 @@ window.SITE = {
              journal volume (published items only), served by the publisher;
              coverWidth / coverHeight: intrinsic size of coverImage;
              coverAlt, coverUrl (official volume page), coverCredit.
+     coverShow:    true to display a cover on a non-published item (set by the site owner).
      coverGeneric: true for the preprint pictogram used on work under review.
      openAccess:   true if the full text is free to read: adds the "Open Access"
                    text label (the Preprint + padlock figure is shown for all preprints).
@@ -117,7 +118,9 @@ window.SITE = {
       summary: "Examines how voice-activity detection combined with optimized Whisper pipelines affects temporal alignment in multilingual, low-resource speech recognition.",
       links: { paper: "https://link.springer.com/chapter/10.1007/978-3-032-36868-3_25", doi: "10.1007/978-3-032-36868-3_25" }, axes: ["speech"] },
     { id: "coopis26-mcrs", year: 2026, date: "2026-09", status: "accepted", type: "Conference",
-      authors: ["Wala Tlili", "Samawel Jaballi", "Mounir Zrigui", "Henri Nicolas"], authorsComplete: true,
+      coverShow: true, coverImage: "assets/img/covers/coopis-2025.jpg", coverImage2x: "assets/img/covers/coopis-2025@2x.jpg", coverWidth: 92, coverHeight: 139,
+      coverAlt: "Cover of Cooperative Information Systems — CoopIS 2025, 31st International Conference, Proceedings (LNCS 15535)", coverUrl: "https://link.springer.com/book/10.1007/978-3-032-15538-2", coverCredit: "© Springer Nature",
+            authors: ["Wala Tlili", "Samawel Jaballi", "Mounir Zrigui", "Henri Nicolas"], authorsComplete: true,
       title: "Quantifying Clinical Risk in Generative Radiology Reporting: MCRS, A Medical Composite Reliability Score",
       venue: "32nd International Conference on Cooperative Information Systems (CoopIS 2026)", venueShort: "CoopIS 2026",
       summary: "", links: {}, axes: ["multimodal"] },
