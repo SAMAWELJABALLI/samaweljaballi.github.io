@@ -114,7 +114,7 @@ window.SITE = {
       summary: "Examines how voice-activity detection combined with optimized Whisper pipelines affects temporal alignment in multilingual, low-resource speech recognition.",
       links: { paper: "https://link.springer.com/chapter/10.1007/978-3-032-36868-3_25", doi: "10.1007/978-3-032-36868-3_25" }, axes: ["speech"] },
     { id: "coopis26-mcrs", year: 2026, date: "2026-09", status: "accepted", type: "Conference",
-      authors: ["W. Tlili", "Samawel Jaballi", "et al."], authorsComplete: false,
+      authors: ["Wala Tlili", "Samawel Jaballi", "Mounir Zrigui", "Henri Nicolas"], authorsComplete: true,
       title: "Quantifying Clinical Risk in Generative Radiology Reporting: MCRS, A Medical Composite Reliability Score",
       venue: "32nd International Conference on Cooperative Information Systems (CoopIS 2026)", venueShort: "CoopIS 2026",
       summary: "", links: {}, axes: ["multimodal"] },
