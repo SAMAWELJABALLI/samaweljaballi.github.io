@@ -276,7 +276,7 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109j" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261110b" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";

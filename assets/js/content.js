@@ -32,8 +32,8 @@ window.SITE = {
     photoSmall: "assets/img/portrait-session-420.jpg",
     photoWebp: "assets/img/portrait-session.webp",
     photoSmallWebp: "assets/img/portrait-session-420.webp",
-    photoAvatar: "assets/img/portrait-session-avatar.jpg",
-    photoBadge: "assets/img/portrait-session-badge.jpg",   // small face crop for the navigation-bar circle
+    photoAvatar: "assets/img/portrait-poster-avatar.jpg",
+    photoBadge: "assets/img/portrait-poster-badge.jpg",   // small face crop for the navigation-bar circle
     photoWidth: 800, photoHeight: 521,
     photoPosition: "50% 50%",
     photoAlt: "Samawel Jaballi speaking into a microphone during a conference session, with a presentation slide projected behind him",
