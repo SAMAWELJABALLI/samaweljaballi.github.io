@@ -104,7 +104,7 @@ window.SITE = {
              coverAlt, coverUrl (official volume page), coverCredit.
      coverGeneric: true for the preprint pictogram used on work under review.
      openAccess:   true ONLY if the full text is verifiably free to read; it then
-                   shows the Open Access variant (preprint-oa.svg) and label.
+                   shows the combined Preprint + Open Access image (preprint-oa.png) and label.
      ------------------------------------------------------------------- */
   publications: [
     { id: "iccci26-vad", year: 2026, date: "2026-09", status: "published", type: "Conference",

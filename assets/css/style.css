@@ -990,3 +990,14 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 .pp-oa { font-size: 10px; color: #c2362c; font-weight: 700; }
 :root[data-theme="night"] .pp-oa { color: #ff8a80; }
 @media (max-width: 760px) { .ref-cover.pp img.pp-ico { width: 52px; } .pp-lbl { font-size: 10px; } }
+
+/* v8b — preprint images at proceedings-cover width (88 px desktop / 60 px mobile) */
+.ref-cover.pp { width: 88px; gap: 5px; }
+.ref-cover.pp img.pp-ico { width: 88px; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; padding: 0; margin: 0; background: transparent; box-shadow: none; outline: none; border-radius: 0; }
+.ref-cover.pp img.pp-ico:not(.oa) { width: 80px; }
+.pp-link { padding: 0; }
+@media (max-width: 760px) {
+  .ref-cover.pp { width: 60px; }
+  .ref-cover.pp img.pp-ico { width: 60px; }
+  .ref-cover.pp img.pp-ico:not(.oa) { width: 56px; }
+}
