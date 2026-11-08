@@ -912,3 +912,9 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 }
 @media (prefers-reduced-motion: reduce) { .cover-link { transition: none; } }
 @media (max-width: 760px) { .lchip.doi { font-size: 11px; overflow-wrap: anywhere; } }
+
+/* v6b — uniform cover size: every cover sits in the same 88 × 133 frame (60 × 91 on mobile).
+   Real covers fill the frame (ratio differences ≤ 7 % are trimmed at the edges); the generic
+   preprint icon is drawn on its own neutral card of the same ratio. */
+.ref-cover img { width: 88px; height: 133px; object-fit: cover; object-position: center top; }
+@media (max-width: 760px) { .ref-cover img { width: 60px; height: 91px; } }

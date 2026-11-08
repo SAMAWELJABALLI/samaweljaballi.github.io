@@ -269,7 +269,7 @@
     return parts.join(" ");
   }
   function coverHtml(p) {
-    if (!p.coverImage || p.status !== "published") return '<div class="ref-cover none" aria-hidden="true"></div>';
+    if (!p.coverImage || (p.status !== "published" && !p.coverGeneric)) return '<div class="ref-cover none" aria-hidden="true"></div>';
     var img = '<img src="' + esc(p.coverImage) + '"' + (p.coverImage2x ? ' srcset="' + esc(p.coverImage) + " 1x, " + esc(p.coverImage2x) + ' 2x"' : "") +
       ' width="' + (p.coverWidth || 92) + '" height="' + (p.coverHeight || 139) + '" alt="' + esc(p.coverAlt || "Cover of the volume") + '"' +
       ' loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'.ref\').classList.add(\'no-cover\')">';
@@ -279,7 +279,7 @@
   function pubItem(p) {
     var st = STATUS[p.status];
     var cite = citation(p);
-    return '<li class="ref' + (p.coverImage && p.status === "published" ? " has-cover" : "") + '" id="pub-' + p.id + '">' + coverHtml(p) +
+    return '<li class="ref' + (p.coverImage && (p.status === "published" || p.coverGeneric) ? " has-cover" : "") + (p.coverGeneric ? " generic-cover" : "") + '" id="pub-' + p.id + '">' + coverHtml(p) +
       '<div class="ref-body">' +
         '<p class="ref-meta"><span class="status ' + st.cls + '">' + st.label + '</span><span class="ref-type">' + esc(p.type) + "</span></p>" +
         '<p class="ref-title">' + esc(p.title) + "</p>" +

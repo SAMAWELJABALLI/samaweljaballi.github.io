@@ -102,6 +102,7 @@ window.SITE = {
              journal volume (published items only), served by the publisher;
              coverWidth / coverHeight: intrinsic size of coverImage;
              coverAlt, coverUrl (official volume page), coverCredit.
+     coverGeneric: true for the generic preprint icon used on work under review.
      ------------------------------------------------------------------- */
   publications: [
     { id: "iccci26-vad", year: 2026, date: "2026-09", status: "published", type: "Conference",
@@ -187,19 +188,27 @@ window.SITE = {
       summary: "", links: { paper: "https://link.springer.com/chapter/10.1007/978-3-031-16014-1_15", doi: "10.1007/978-3-031-16014-1_15" }, axes: ["dialect", "social"] },
 
     { id: "tip-mafnet", year: 2026, date: "2026-04", status: "submitted", type: "Journal",
-      authors: ["A. N. P. Dieng", "Samawel Jaballi", "et al."], authorsComplete: false,
+      coverGeneric: true, coverImage: "assets/img/covers/preprint.png", coverImage2x: "assets/img/covers/preprint@2x.png", coverWidth: 92, coverHeight: 139,
+      coverAlt: "Generic preprint icon — manuscript under review, not yet published", coverUrl: "", coverCredit: "",
+            authors: ["A. N. P. Dieng", "Samawel Jaballi", "et al."], authorsComplete: false,
       title: "MAF-Net: A Unified Hybrid Convolutional–SSM Framework for Multimodal Chest X-ray Triage, Segmentation, and Automated Reporting",
       venue: "Submitted to IEEE Transactions on Image Processing", venueShort: "IEEE TIP (submitted)", summary: "", links: {}, axes: ["multimodal"] },
     { id: "eswa-triple", year: 2026, date: "2026-04", status: "submitted", type: "Journal",
-      authors: ["A. N. P. Dieng", "Samawel Jaballi", "et al."], authorsComplete: false,
+      coverGeneric: true, coverImage: "assets/img/covers/preprint.png", coverImage2x: "assets/img/covers/preprint@2x.png", coverWidth: 92, coverHeight: 139,
+      coverAlt: "Generic preprint icon — manuscript under review, not yet published", coverUrl: "", coverCredit: "",
+            authors: ["A. N. P. Dieng", "Samawel Jaballi", "et al."], authorsComplete: false,
       title: "Breaking the Multimodal Shortcut: A Triple-Memory Decoder with Constrained Gating for Radiology Report Generation",
       venue: "Submitted to Expert Systems with Applications", venueShort: "ESWA (submitted)", summary: "", links: {}, axes: ["multimodal"] },
     { id: "csl-augment", year: 2025, date: "2025-06", status: "under-review", type: "Journal",
-      authors: [], authorsComplete: false,
+      coverGeneric: true, coverImage: "assets/img/covers/preprint.png", coverImage2x: "assets/img/covers/preprint@2x.png", coverWidth: 92, coverHeight: 139,
+      coverAlt: "Generic preprint icon — manuscript under review, not yet published", coverUrl: "", coverCredit: "",
+            authors: [], authorsComplete: false,
       title: "Unsupervised Approach for Augmenting Low-Resource UNESCO Multilingual COVID-19 Audio Dataset for Speech Recognition Tasks (from ~30 Minutes to 6 Hours)",
       venue: "Under review at Computer Speech & Language", venueShort: "CSL (under review)", summary: "", links: {}, axes: ["speech"] },
     { id: "mtap-adaboost", year: 2024, date: "2024-02", status: "under-review", type: "Journal",
-      authors: [], authorsComplete: false,
+      coverGeneric: true, coverImage: "assets/img/covers/preprint.png", coverImage2x: "assets/img/covers/preprint@2x.png", coverWidth: 92, coverHeight: 139,
+      coverAlt: "Generic preprint icon — manuscript under review, not yet published", coverUrl: "https://www.researchgate.net/publication/378498085_Analyzing_Multilingual_Conversations_During_COVID-19_An_Imbalanced_Class-Ensemble_Learning_Approach_with_Reweighted_AdaBoost-SVM_for_Code-Switched_Text_Classification", coverCredit: "",
+            authors: [], authorsComplete: false,
       title: "Analyzing Multilingual Conversations During COVID-19: An Imbalanced Class-Ensemble Learning Approach with Reweighted AdaBoost-SVM for Code-Switched Text Classification",
       venue: "Under review at Multimedia Tools and Applications", venueShort: "MTAP (under review)",
       summary: "Hybrid architecture combining Bi-LSTM and a reweighted AdaBoost-SVM ensemble with cost-sensitive learning, for opinion classification in imbalanced, multilingual and dialectal data.",
