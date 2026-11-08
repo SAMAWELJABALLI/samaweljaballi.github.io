@@ -146,8 +146,8 @@
     var p = S.person;
     var portrait = p.photo
       ? '<picture class="portrait">' +
-          (p.photoWebp ? '<source type="image/webp" srcset="' + (p.photoSmallWebp ? esc(p.photoSmallWebp) + " 360w, " : "") + esc(p.photoWebp) + ' 640w" sizes="(max-width: 760px) 100vw, 360px">' : "") +
-          '<img class="portrait-img" src="' + esc(p.photo) + '"' + (p.photoSmall ? ' srcset="' + esc(p.photoSmall) + " 360w, " + esc(p.photo) + ' 640w" sizes="(max-width: 760px) 100vw, 360px"' : "") +
+          (p.photoWebp ? '<source type="image/webp" srcset="' + (p.photoSmallWebp ? esc(p.photoSmallWebp) + " 420w, " : "") + esc(p.photoWebp) + ' 800w" sizes="(max-width: 760px) 100vw, 360px">' : "") +
+          '<img class="portrait-img" src="' + esc(p.photo) + '"' + (p.photoSmall ? ' srcset="' + esc(p.photoSmall) + " 420w, " + esc(p.photo) + ' 800w" sizes="(max-width: 760px) 100vw, 360px"' : "") +
           ' width="' + (p.photoWidth || 640) + '" height="' + (p.photoHeight || 640) + '" alt="' + esc(p.photoAlt || "Portrait of " + p.name) + '"' +
           ' style="object-position:' + esc(p.photoPosition || "50% 25%") + '" decoding="async" fetchpriority="high">' +
         "</picture>"
@@ -276,7 +276,7 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109h" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109j" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
