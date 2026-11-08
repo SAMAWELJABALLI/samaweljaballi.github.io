@@ -303,7 +303,7 @@ window.SITE = {
   teaching: [
     { year: "2026–2027",
       institutions: [
-        { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER",
+        { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
             { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "INFORMATIQUE 0", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
