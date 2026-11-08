@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Samawel Jaballi — NLP Researcher & Lecturer, University of Bordeaux / LaBRI</title>
+  <meta name="description" content="Academic portfolio of Samawel Jaballi, PhD — ATER at the University of Bordeaux and researcher at LaBRI. Research in natural language processing, low-resource and dialectal languages, multilingual speech and multimodal learning; teaching and academic service.">
+  <meta name="author" content="Samawel Jaballi">
+  <meta property="og:title" content="Samawel Jaballi — Academic portfolio">
+  <meta property="og:description" content="Research, teaching and academic service in natural language processing — University of Bordeaux / LaBRI.">
+  <meta property="og:type" content="profile">
+  <meta name="theme-color" content="#3f6470">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>
+    /* Apply saved / system theme before paint */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("sj-theme"); } catch (e) {}
+      if (!t) t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Illustrated Atlantic-coast backdrop (replaced by a photo if SITE.backdrop is set) -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-photo" id="backdropPhoto"></div>
+    <svg class="scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="sky-top"/>
+          <stop offset=".62" class="sky-mid"/>
+          <stop offset="1" class="sky-low"/>
+        </linearGradient>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="sea-top"/>
+          <stop offset="1" class="sea-low"/>
+        </linearGradient>
+        <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" class="glow-in"/>
+          <stop offset="1" class="glow-out"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="1000" fill="url(#sky)"/>
+      <g class="stars">
+        <circle cx="180" cy="90" r="1.6"/><circle cx="320" cy="170" r="1.2"/><circle cx="520" cy="60" r="1.4"/>
+        <circle cx="760" cy="140" r="1.1"/><circle cx="980" cy="70" r="1.5"/><circle cx="1180" cy="190" r="1.2"/>
+        <circle cx="1400" cy="110" r="1.6"/><circle cx="1520" cy="230" r="1"/><circle cx="90" cy="260" r="1.1"/>
+        <circle cx="640" cy="240" r="1"/><circle cx="880" cy="300" r=".9"/><circle cx="1290" cy="40" r="1.1"/>
+      </g>
+      <circle class="sun-glow" cx="1180" cy="430" r="260" fill="url(#glow)"/>
+      <circle class="sun" cx="1180" cy="430" r="58"/>
+      <path class="cloud" d="M120 300c40-30 110-30 150 0 30-18 80-14 100 12H90c4-6 16-10 30-12z"/>
+      <path class="cloud" d="M980 230c30-22 86-22 116 0 24-12 60-10 76 10H956c4-5 12-8 24-10z"/>
+      <rect y="560" width="1600" height="190" fill="url(#sea)"/>
+      <g class="waves">
+        <path d="M0 600h1600" /><path d="M0 640h1600" /><path d="M0 690h1600" />
+      </g>
+      <path class="dune-far" d="M0 640c180-70 380-110 600-80 160 22 260 70 420 64 200-8 380-90 580-70v446H0z"/>
+      <path class="dune-mid" d="M0 760c220-60 420-40 640 0 200 36 380 20 560-30 150-42 280-40 400-10v280H0z"/>
+      <g class="pines">
+        <path d="M120 760l18-70 18 70zM150 768l24-96 24 96zM190 764l16-60 16 60zM1380 740l20-80 20 80zM1416 750l26-104 26 104zM1460 746l16-58 16 58zM1500 752l20-80 20 80z"/>
+        <path d="M134 770v24M174 770v26M206 768v22M1400 744v26M1442 752v28M1476 748v22M1520 754v24" class="trunk"/>
+      </g>
+      <path class="dune-near" d="M0 860c260-50 520-30 800 0s560 20 800-30v170H0z"/>
+    </svg>
+    <div class="backdrop-veil"></div>
+  </div>
+
+  <!-- Persistent navigation.
+       Desktop: floating pill that appears once the board's tab bar scrolls away.
+       Mobile: sticky bar (always visible, in the page flow) with the current section and a Menu button. -->
+  <header class="dock" id="dock">
+    <a class="dock-brand" href="#home" aria-label="Samawel Jaballi — back to top"><span class="mono" aria-hidden="true">SJ</span><span class="dock-name">Samawel Jaballi</span></a>
+    <nav class="dock-nav" aria-label="Sections"><ul id="dockNav"></ul></nav>
+    <p class="dock-current" id="dockCurrent" aria-hidden="true">Home</p>
+    <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to night mode"><span class="theme-ico" aria-hidden="true"></span></button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuSheet">
+      <span class="menu-ico" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-lbl">Menu</span>
+    </button>
+    <div class="menu-sheet" id="menuSheet" hidden>
+      <nav aria-label="All sections"><ul id="menuList"></ul></nav>
+    </div>
+  </header>
+
+  <main id="main" class="board" tabindex="-1">
+    <noscript><p class="noscript">This site uses JavaScript to display its content. Please enable it, or download the <a href="files/Samawel_Jaballi_CV.pdf">CV (PDF)</a>.</p></noscript>
+    <div id="app"></div>
+  </main>
+
+  <div class="scrubber" aria-hidden="true"><span class="scrubber-fill" id="scrubberFill"></span></div>
+
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
