@@ -268,12 +268,20 @@
     parts.push("https://doi.org/" + p.links.doi);
     return parts.join(" ");
   }
+  function coverHtml(p) {
+    if (!p.coverImage || p.status !== "published") return '<div class="ref-cover none" aria-hidden="true"></div>';
+    var img = '<img src="' + esc(p.coverImage) + '"' + (p.coverImage2x ? ' srcset="' + esc(p.coverImage) + " 1x, " + esc(p.coverImage2x) + ' 2x"' : "") +
+      ' width="' + (p.coverWidth || 92) + '" height="' + (p.coverHeight || 139) + '" alt="' + esc(p.coverAlt || "Cover of the volume") + '"' +
+      ' loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'.ref\').classList.add(\'no-cover\')">';
+    return '<div class="ref-cover">' + (p.coverUrl ? a(p.coverUrl, img, "cover-link", ' title="Open the official page of this volume"') : img) +
+      (p.coverCredit ? '<span class="cover-credit">' + esc(p.coverCredit) + "</span>" : "") + "</div>";
+  }
   function pubItem(p) {
     var st = STATUS[p.status];
     var cite = citation(p);
-    return '<li class="ref" id="pub-' + p.id + '">' +
-      '<div class="ref-side"><span class="status ' + st.cls + '">' + st.label + '</span><span class="ref-type">' + esc(p.type) + "</span></div>" +
+    return '<li class="ref' + (p.coverImage && p.status === "published" ? " has-cover" : "") + '" id="pub-' + p.id + '">' + coverHtml(p) +
       '<div class="ref-body">' +
+        '<p class="ref-meta"><span class="status ' + st.cls + '">' + st.label + '</span><span class="ref-type">' + esc(p.type) + "</span></p>" +
         '<p class="ref-title">' + esc(p.title) + "</p>" +
         (p.authors.length ? '<p class="ref-auth">' + authorsHtml(p.authors) + "</p>" : "") +
         '<p class="ref-venue">' + esc(p.venue) + " · " + esc(fmtDate(p.date)) +

@@ -880,3 +880,35 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 .contact-card .btn.light { word-break: normal; overflow-wrap: normal; }
 .contact-card .btn.light .email { overflow-wrap: anywhere; }
 @media (max-width: 400px) { .btn.big { font-size: 14.5px; padding: 12px 16px; } }
+
+/* =====================================================================
+   v6 — publication covers (official proceedings / journal volume covers)
+   ===================================================================== */
+.ref { grid-template-columns: 88px 1fr; gap: 18px; align-items: start; }
+.ref-cover { width: 88px; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.ref-cover.none { min-height: 1px; }
+.ref-cover img {
+  display: block; width: 88px; height: auto; border-radius: 5px; background: var(--surface-2);
+  box-shadow: 0 1px 2px rgba(20, 40, 50, .18), 0 6px 14px -8px rgba(20, 40, 50, .45);
+  outline: 1px solid rgba(20, 40, 50, .08); outline-offset: -1px;
+}
+:root[data-theme="night"] .ref-cover img { box-shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 18px -8px rgba(0,0,0,.8); outline-color: rgba(255,255,255,.1); }
+.cover-link { display: block; border-radius: 6px; transition: transform .18s ease; }
+.cover-link:hover, .cover-link:focus-visible { transform: translateY(-2px); }
+.cover-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+.cover-credit { font-size: 9.5px; line-height: 1.2; color: var(--muted); text-align: center; }
+.ref.no-cover .ref-cover { visibility: hidden; }
+.ref-meta { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-bottom: 6px; }
+.ref-meta .ref-type { font-size: 12px; color: var(--muted); font-weight: 600; }
+.ref-title { margin-top: 0; }
+@media (max-width: 760px) {
+  .ref { grid-template-columns: 60px 1fr; gap: 12px; }
+  .ref-cover { width: 60px; }
+  .ref-cover img { width: 60px; border-radius: 4px; }
+  .ref-cover.none { display: none; }
+  .ref:not(.has-cover) { grid-template-columns: 1fr; }
+  .cover-credit { font-size: 8.5px; }
+  .ref-title { font-size: 15.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .cover-link { transition: none; } }
+@media (max-width: 760px) { .lchip.doi { font-size: 11px; overflow-wrap: anywhere; } }
