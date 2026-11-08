@@ -822,3 +822,61 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
   .area { font-size: 12px; padding: 4px 9px; min-height: 30px; }
 }
 .ref-venue .pubyear { font-style: normal; color: var(--muted); }
+
+/* =====================================================================
+   v5 — SVG icons (Lucide) for quick access, brand logos (Simple Icons)
+   ===================================================================== */
+.ico { width: 24px; height: 24px; flex-shrink: 0; display: block; }
+.quick a { gap: 10px; min-height: 48px; padding: 4px 18px 4px 4px; }
+.qi {
+  width: 40px; height: 40px; border-radius: 50%; display: inline-grid; place-items: center;
+  background: var(--mark); color: #2b2412; font-size: 0; transition: transform .18s ease, box-shadow .18s ease;
+}
+.quick a:hover .qi, .quick a:focus-visible .qi { transform: scale(1.06); box-shadow: 0 0 0 4px rgba(243, 207, 122, .28); }
+.quick a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.ql { line-height: 1.2; }
+.btn .ico { width: 20px; height: 20px; }
+
+/* brand logos */
+.brands { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; margin: 0; padding: 0; }
+.brand {
+  position: relative; display: inline-flex; align-items: center; gap: 8px; min-width: 44px; min-height: 44px;
+  justify-content: center; text-decoration: none; color: var(--ink); border-radius: 14px; transition: background-color .18s ease;
+}
+.brand-chip {
+  width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: #fff;
+  border: 1px solid rgba(20, 40, 50, .1); box-shadow: 0 1px 2px rgba(20, 40, 50, .06); transition: transform .18s ease, box-shadow .18s ease;
+}
+:root[data-theme="night"] .brand-chip { background: #f3f6fa; border-color: rgba(255,255,255,.2); }
+.brand-svg { width: 22px; height: 22px; display: block; }
+.brand:hover .brand-chip, .brand:focus-visible .brand-chip { transform: translateY(-2px); box-shadow: 0 6px 14px -6px rgba(20, 40, 50, .35); }
+.brand:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.brands.full { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px 10px; width: 100%; }
+.brands.full .brand { justify-content: flex-start; padding: 3px 8px 3px 3px; width: 100%; }
+.brands.full .brand:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+.brand-name { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* tooltip (compact mode) */
+.brands.compact .brand::after {
+  content: attr(data-tip); position: absolute; left: 50%; bottom: calc(100% + 4px); transform: translate(-50%, 4px);
+  background: var(--ink); color: var(--sky-mid); font-size: 12px; font-weight: 600; white-space: nowrap; padding: 4px 9px; border-radius: 8px;
+  opacity: 0; pointer-events: none; transition: opacity .15s ease, transform .15s ease; z-index: 5;
+}
+:root[data-theme="night"] .brands.compact .brand::after { color: #13202e; }
+.brands.compact .brand:hover::after, .brands.compact .brand:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+.w-links .brands.compact { gap: 2px 4px; }
+@media (max-width: 760px) {
+  .qi { width: 38px; height: 38px; }
+  .quick a { padding: 3px 12px 3px 3px; min-height: 46px; }
+  .brands.full { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 360px) { .brands.full { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { .qi, .brand-chip { transition: none; } }
+/* v5b — tooltip clipping & email wrapping */
+.w.w-links { overflow: visible; }
+.brands.compact li:first-child .brand::after { left: 0; transform: translate(0, 4px); }
+.brands.compact li:first-child .brand:hover::after, .brands.compact li:first-child .brand:focus-visible::after { transform: translate(0, 0); }
+.brands.compact li:last-child .brand::after { left: auto; right: 0; transform: translate(0, 4px); }
+.brands.compact li:last-child .brand:hover::after, .brands.compact li:last-child .brand:focus-visible::after { transform: translate(0, 0); }
+.contact-card .btn.light { word-break: normal; overflow-wrap: normal; }
+.contact-card .btn.light .email { overflow-wrap: anywhere; }
+@media (max-width: 400px) { .btn.big { font-size: 14.5px; padding: 12px 16px; } }

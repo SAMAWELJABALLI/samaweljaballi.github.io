@@ -41,12 +41,12 @@ window.SITE = {
   },
 
   profiles: [
-    { label: "Google Scholar", short: "Scholar", url: "https://scholar.google.com/citations?user=E26mCFgAAAAJ" },
-    { label: "DBLP", short: "DBLP", url: "https://dblp.org/pid/329/2078.html" },
-    { label: "ORCID", short: "ORCID", url: "https://orcid.org/0000-0002-6096-6048" },
-    { label: "GitHub", short: "GitHub", url: "https://github.com/SAMAWELJABALLI" },
-    { label: "LinkedIn", short: "LinkedIn", url: "https://www.linkedin.com/in/samaweljaballi" },
-    { label: "Credly (certificates)", short: "Credly", url: "https://www.credly.com/users/samawel-jaballi" }
+    { icon: "googlescholar", label: "Google Scholar", short: "Scholar", url: "https://scholar.google.com/citations?user=E26mCFgAAAAJ" },
+    { icon: "dblp", label: "DBLP", short: "DBLP", url: "https://dblp.org/pid/329/2078.html" },
+    { icon: "orcid", label: "ORCID", short: "ORCID", url: "https://orcid.org/0000-0002-6096-6048" },
+    { icon: "github", label: "GitHub", short: "GitHub", url: "https://github.com/SAMAWELJABALLI" },
+    { icon: "linkedin", label: "LinkedIn", short: "LinkedIn", url: "https://www.linkedin.com/in/samaweljaballi" },
+    { icon: "credly", label: "Credly (certificates)", short: "Credly", url: "https://www.credly.com/users/samawel-jaballi" }
   ],
 
   /* Main journal card — rotating highlights. */
@@ -262,7 +262,7 @@ window.SITE = {
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
             { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", term: "Semester 1", level: "Bachelor's degree (Licence)", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming (Info 0)", term: "Semester 1", level: "Bachelor's degree — 1st year (L1)", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] },
+            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming (Informatique 0)", term: "Semester 1", level: "Bachelor's degree — 1st year (L1)", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1 (Informatique 1) — Introduction to Python", term: "Semester 1", level: "Bachelor's degree — 1st year (L1)", roles: ["CM", "TP"], tools: ["Python"], objectives: "", topics: [], hours: null, resources: [] },
             { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs in OCaml", term: "Semester 2", level: "", roles: [], tools: ["OCaml"], objectives: "", topics: ["Trees", "Graphs"], hours: null, resources: [] },
             { code: "4TIN603U", title: "Compilation", term: "Semester 2", level: "", roles: ["TD"], roleNote: "Machine-based tutorial sessions with integrated lectures", tools: [], objectives: "", topics: [], hours: null, resources: [] },

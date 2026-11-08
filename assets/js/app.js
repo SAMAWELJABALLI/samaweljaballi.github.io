@@ -22,7 +22,7 @@
   function isExt(url) { return /^https?:/.test(url); }
   function a(url, label, cls, extra) {
     var e = isExt(url);
-    return '<a class="' + (cls || "") + '" href="' + esc(url) + '"' + (e ? ' target="_blank" rel="noopener"' : "") + (extra || "") + ">" + label +
+    return '<a class="' + (cls || "") + '" href="' + esc(url) + '"' + (e ? ' target="_blank" rel="noopener noreferrer"' : "") + (extra || "") + ">" + label +
       (e ? '<span class="sr-only"> (opens in a new tab)</span>' : "") + "</a>";
   }
   var LINKS = [["paper", "Article"], ["pdf", "PDF"], ["preprint", "Preprint"], ["code", "Code"], ["data", "Data"], ["slides", "Slides"], ["video", "Video"], ["program", "Programme"]];
@@ -43,6 +43,22 @@
   var AWARD = { award: "Award", nomination: "Nomination", shortlist: "Shortlisted", grant: "Grant" };
   function axisName(id) { var x = S.axes.filter(function (y) { return y.id === id; })[0]; return x ? x.title : id; }
   function initials(n) { return n.split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 2).toUpperCase(); }
+  function uiIcon(name) {
+    return '<svg class="ico" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + window.ICONS.ui[name] + "</svg>";
+  }
+  function brandSvg(slug) {
+    var b = window.ICONS.brands[slug];
+    return b ? '<svg class="brand-svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false" style="color:' + b.hex + '"><path fill="currentColor" d="' + b.path + '"/></svg>' : "";
+  }
+  /* compact: logo only + tooltip; full: logo + platform name */
+  function profileLinks(mode) {
+    return '<ul class="brands ' + mode + '">' + S.profiles.filter(function (l) { return l.url && l.icon; }).map(function (l) {
+      var name = l.label.replace(/\s*\(.*\)$/, "");
+      return '<li><a class="brand" href="' + esc(l.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(name) + ' profile (opens in a new tab)"' +
+        (mode === "compact" ? ' data-tip="' + esc(name) + '"' : "") + '><span class="brand-chip">' + brandSvg(l.icon) + "</span>" +
+        (mode === "full" ? '<span class="brand-name">' + esc(name) + "</span>" : "") + "</a></li>";
+    }).join("") + "</ul>";
+  }
   function authorsHtml(list) {
     return list.map(function (n) { return /Jaballi/.test(n) ? '<strong class="me">' + esc(n) + "</strong>" : esc(n); }).join(", ");
   }
@@ -100,10 +116,10 @@
         "</div>" +
       "</div>" +
       '<ul class="quick" aria-label="Quick access">' +
-        '<li><a href="#publications"><span class="qi" aria-hidden="true">❡</span>Publications</a></li>' +
-        '<li><a href="#teaching"><span class="qi" aria-hidden="true">✎</span>Teaching</a></li>' +
-        '<li><a href="#projects"><span class="qi" aria-hidden="true">◇</span>Projects</a></li>' +
-        '<li><a href="#contact"><span class="qi" aria-hidden="true">✉</span>Contact</a></li>' +
+        '<li><a href="#publications"><span class="qi">' + uiIcon("publications") + '</span><span class="ql">Publications</span></a></li>' +
+        '<li><a href="#teaching"><span class="qi">' + uiIcon("teaching") + '</span><span class="ql">Teaching</span></a></li>' +
+        '<li><a href="#projects"><span class="qi">' + uiIcon("projects") + '</span><span class="ql">Projects</span></a></li>' +
+        '<li><a href="#contact"><span class="qi">' + uiIcon("contact") + '</span><span class="ql">Contact</span></a></li>' +
       "</ul>" +
       '<div class="news" role="region" aria-roledescription="carousel" aria-label="Latest news">' +
         '<p class="news-h">Latest</p>' +
@@ -140,7 +156,6 @@
       ? '<p class="w-big">' + esc(fmtDate(nextEvent.date)) + '</p><p class="w-strong">' + esc(nextEvent.role) + '</p><p class="w-text">' + esc(nextEvent.title) +
         (nextEvent.detail ? " — " + esc(nextEvent.detail) : "") + '</p><a class="w-link" href="' + nextEvent.href + '">Details<span aria-hidden="true"> →</span></a>'
       : '<p class="w-text">No upcoming event is listed.</p><a class="w-link" href="#activities">Past activities<span aria-hidden="true"> →</span></a>';
-    var prof = S.profiles.map(function (l) { return "<li>" + a(l.url, esc(l.short)) + "</li>"; }).join("");
     var photos = S.photos.map(function (ph) {
       return '<figure class="w photo"><img src="' + esc(ph.src) + '" alt="' + esc(ph.alt) + '" loading="lazy" decoding="async"><figcaption><span>' + esc(ph.caption) + "</span>" +
         (ph.credit ? "<small>" + esc(ph.credit) + "</small>" : "") + "</figcaption></figure>";
@@ -160,7 +175,7 @@
       "</div>" +
       '<div class="w-stack">' +
         '<article class="w w-light reveal" aria-labelledby="w-next"><div class="w-head"><h2 id="w-next" class="w-title">Next on the calendar</h2></div>' + ev + "</article>" +
-        '<article class="w w-links reveal" aria-labelledby="w-find"><div class="w-head"><h2 id="w-find" class="w-title">Find my work</h2></div><ul class="w-chips">' + prof + "</ul></article>" +
+        '<article class="w w-links reveal" aria-labelledby="w-find"><div class="w-head"><h2 id="w-find" class="w-title">Find my work</h2></div>' + profileLinks("compact") + "</article>" +
       "</div>" + photos +
     "</section>";
   }
@@ -459,12 +474,12 @@
       "</div>" +
       '<div class="contact-grid" id="contact" tabindex="-1">' +
         '<div class="contact-card dark"><p class="eyebrow">Contact</p><p class="contact-lead">The best way to reach me is by email.</p>' +
-          '<a class="btn light big" href="mailto:' + esc(c.email) + '"><span aria-hidden="true">✉ </span>' + esc(c.email) + "</a>" +
+          '<a class="btn light big" href="mailto:' + esc(c.email) + '">' + uiIcon("contact") + '<span class="email">' + esc(c.email).replace("@", "@<wbr>") + "</span>" + "</a>" +
           '<address>' + c.lines.map(esc).join("<br>") + "</address></div>" +
         '<div class="contact-card"><p class="eyebrow">Student projects & supervision</p><p>' + esc(S.studentNote) + '</p>' +
           '<a class="btn ghost" href="mailto:' + esc(c.email) + '?subject=' + encodeURIComponent("Student project enquiry") + '">Write about a project</a></div>' +
-        '<div class="contact-card"><p class="eyebrow">Profiles</p><ul class="w-chips">' + S.profiles.map(function (l) { return "<li>" + a(l.url, esc(l.label)) + "</li>"; }).join("") +
-          '</ul><a class="btn ghost" href="' + esc(S.person.cv) + '">Download CV (PDF)</a></div>' +
+        '<div class="contact-card"><p class="eyebrow">Profiles</p>' + profileLinks("full") +
+          '<a class="btn ghost" href="' + esc(S.person.cv) + '">Download CV (PDF)</a></div>' +
       "</div>");
   }
 
@@ -491,7 +506,7 @@
 
   function footer() {
     return '<footer class="foot"><p>© ' + new Date().getFullYear() + " " + esc(S.person.name) + " · Last updated " + esc(fmtDate(S.lastUpdated)) + "</p>" +
-      '<p>Layout inspired by the free “Personal Diary Website Template” by Kedhareswer Naidu (21st.dev).</p><a class="to-top" href="#home">Back to top <span aria-hidden="true">↑</span></a></footer>';
+      '<a class="to-top" href="#home">Back to top <span aria-hidden="true">↑</span></a></footer>';
   }
 
   /* ================= render ================= */
