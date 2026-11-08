@@ -284,7 +284,7 @@ window.SITE = {
      TEACHING — one block per academic year (newest first), then per
      institution. Courses are grouped by `semester` (1 or 2) on the site.
      Each course (empty fields are not displayed):
-       code, title, officialName (official course name, e.g. "INFORMATIQUE 0")
+       code, title, officialName (official course name, e.g. "Informatique 1")
        semester:    1 | 2
        levels:      ["L1"] … ["M1", "M2"] — only confirmed levels
        levelText:   level outside the L/M system (e.g. engineering school)
@@ -305,7 +305,7 @@ window.SITE = {
       institutions: [
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
-            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "INFORMATIQUE 0", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "Principes de base de l'algorithmique et de la programmation", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "", title: "Master's Programming Projects", semester: 2, scheduled: true, levels: ["M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, scheduled: true, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
