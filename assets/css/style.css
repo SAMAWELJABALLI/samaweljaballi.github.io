@@ -975,35 +975,14 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 .fchips .tool { display: inline-flex; align-items: center; gap: 5px; background: color-mix(in srgb, var(--research) 10%, transparent); border: 1.5px dashed var(--research); color: var(--research); font-weight: 700; }
 .tool-ico { width: 12px; height: 12px; flex-shrink: 0; }
 
-/* v8 — preprint pictogram: no card, no shadow, transparent, larger */
-.ref-cover.pp { gap: 4px; }
-.ref-cover.pp img.pp-ico {
-  width: 68px; height: auto; aspect-ratio: 100 / 116; object-fit: contain; background: none; box-shadow: none; outline: none; border-radius: 0;
-  filter: drop-shadow(0 1px 0 rgba(255,255,255,.0));
-}
-:root[data-theme="night"] .ref-cover.pp img.pp-ico { filter: drop-shadow(0 0 1px rgba(255,255,255,.55)); }
-.pp-link, .ref-cover.pp > img { display: flex; flex-direction: column; align-items: center; gap: 4px; text-decoration: none; }
-.pp-link { border-radius: 8px; padding: 2px; transition: transform .18s ease; }
+/* v8e — preprint figures reuse the cover frame defined by `.ref-cover img`
+   (88 × 133 on desktop, 60 × 91 on mobile). Only the decoration differs. */
+.ref-cover.pp img.pp-ico { object-fit: contain; background: transparent; box-shadow: none; outline: none; border-radius: 0; }
+:root[data-theme="night"] .ref-cover.pp img.pp-ico { filter: drop-shadow(0 0 1px rgba(255,255,255,.5)); }
+.pp-link { display: flex; flex-direction: column; align-items: center; gap: 5px; text-decoration: none; border-radius: 8px; transition: transform .18s ease; }
 .pp-link:hover, .pp-link:focus-visible { transform: translateY(-2px); }
 .pp-link:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-.pp-lbl { display: flex; flex-direction: column; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--ink-2); line-height: 1.2; }
-.pp-oa { font-size: 10px; color: #c2362c; font-weight: 700; }
+.pp-lbl { display: flex; flex-direction: column; align-items: center; text-align: center; font-size: 11px; font-weight: 700; letter-spacing: .04em; color: var(--ink-2); line-height: 1.2; }
+.pp-oa { display: block; font-size: 10px; color: #c2362c; font-weight: 700; }
 :root[data-theme="night"] .pp-oa { color: #ff8a80; }
-@media (max-width: 760px) { .ref-cover.pp img.pp-ico { width: 52px; } .pp-lbl { font-size: 10px; } }
-
-/* v8b — preprint images at proceedings-cover width (88 px desktop / 60 px mobile) */
-.ref-cover.pp { width: 88px; gap: 5px; }
-.ref-cover.pp img.pp-ico { width: 88px; max-width: none; height: auto; aspect-ratio: auto; object-fit: contain; padding: 0; margin: 0; background: transparent; box-shadow: none; outline: none; border-radius: 0; }
-.ref-cover.pp img.pp-ico:not(.oa) { width: 80px; }
-.pp-link { padding: 0; }
-@media (max-width: 760px) {
-  .ref-cover.pp { width: 60px; }
-  .ref-cover.pp img.pp-ico { width: 60px; }
-  .ref-cover.pp img.pp-ico:not(.oa) { width: 56px; }
-}
-.pp-lbl { text-align: center; }
-.pp-oa { display: block; text-align: center; line-height: 1.15; }
-@media (max-width: 760px) { .pp-oa { font-size: 9.5px; } }
-/* v8c — plain preprint pictogram fills the same frame as proceedings covers */
-.ref-cover.pp img.pp-ico:not(.oa) { width: 88px; height: 133px; }
-@media (max-width: 760px) { .ref-cover.pp img.pp-ico:not(.oa) { width: 60px; height: 91px; } }
+@media (max-width: 760px) { .pp-lbl { font-size: 10px; } .pp-oa { font-size: 9.5px; } }
