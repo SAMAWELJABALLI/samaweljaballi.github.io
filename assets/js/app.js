@@ -269,7 +269,14 @@
     return parts.join(" ");
   }
   function coverHtml(p) {
-    if (!p.coverImage || (p.status !== "published" && !p.coverGeneric)) return '<div class="ref-cover none" aria-hidden="true"></div>';
+    if (p.coverGeneric) {
+      var oa = p.openAccess === true;
+      var pic = '<img class="pp-ico" src="assets/img/covers/' + (oa ? "preprint-oa.svg" : "preprint.svg") + '" width="100" height="116" alt="' +
+        (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
+        '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
+      return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
+    }
+    if (!p.coverImage || p.status !== "published") return '<div class="ref-cover none" aria-hidden="true"></div>';
     var img = '<img src="' + esc(p.coverImage) + '"' + (p.coverImage2x ? ' srcset="' + esc(p.coverImage) + " 1x, " + esc(p.coverImage2x) + ' 2x"' : "") +
       ' width="' + (p.coverWidth || 92) + '" height="' + (p.coverHeight || 139) + '" alt="' + esc(p.coverAlt || "Cover of the volume") + '"' +
       ' loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.closest(\'.ref\').classList.add(\'no-cover\')">';
