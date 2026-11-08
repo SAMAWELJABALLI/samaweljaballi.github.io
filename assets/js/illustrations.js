@@ -143,5 +143,26 @@
     return base(s);
   })();
 
+  /* classes, an inheritance link and object instances */
+  I.oop = (function () {
+    var s = "";
+    function cls(x, y, w, fill) {
+      return box(x, y, w, 36, paper, 4) + '<rect x="' + x + '" y="' + y + '" width="' + w + '" height="11" rx="4" fill="' + fill + '" stroke="' + ink + '" stroke-width="2"/>' +
+        '<path d="M' + x + " " + (y + 23) + "h" + w + '" stroke="' + ink + '" stroke-width="1.5"/>' +
+        '<rect x="' + (x + 7) + '" y="' + (y + 15) + '" width="' + (w - 22) + '" height="4" rx="2" fill="' + soft + '"/>' +
+        '<rect x="' + (x + 7) + '" y="' + (y + 28) + '" width="' + (w - 18) + '" height="4" rx="2" fill="' + soft + '"/>';
+    }
+    s += cls(34, 8, 66, acc);                                   /* base class */
+    s += cls(34, 62, 66, soft);                                 /* derived class */
+    s += '<path d="M67 62V53" stroke="' + ink + '" stroke-width="2"/>';
+    s += '<path d="M67 45l-7 8h14z" fill="' + paper + '" stroke="' + ink + '" stroke-width="2" stroke-linejoin="round"/>'; /* inheritance */
+    s += cls(196, 30, 70, acc);                                 /* associated class */
+    s += '<path d="M100 80h36c22 0 30-32 52-32h8" fill="none" stroke="' + ink + '" stroke-width="2"/>';
+    s += '<path d="M188 44l8 4-8 4" fill="none" stroke="' + ink + '" stroke-width="2" stroke-linejoin="round"/>';
+    [[150, 20], [174, 14], [292, 16]].forEach(function (p, k) { s += node(p[0], p[1], 6, k === 2 ? acc : paper); }); /* objects */
+    s += '<path d="M155 24l42 10M179 18l18 13M287 21l-12 10" stroke="' + ink + '" stroke-width="1.5" stroke-dasharray="3 3"/>';
+    return base(s);
+  })();
+
   window.COURSE_ILLUSTRATIONS = I;
 })();

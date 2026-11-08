@@ -276,7 +276,7 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109b" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109d" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
@@ -374,13 +374,14 @@
     var levels = (c.levels || []).filter(function (l) { return LEVEL[l]; });
     var lvlHtml = levels.length
       ? '<span class="lvl-badge" title="' + esc(levels.map(function (l) { return LEVEL[l]; }).join(" / ")) + '"><b>' + levels.join(" · ") + '</b><span class="lvl-txt">' +
-        esc(levels.length > 1 ? (levels[0][0] === "M" ? "Master's" : "Bachelor's") + " — Years " + levels.map(function (l) { return l.slice(1); }).join(" & ") : LEVEL[levels[0]]) + "</span></span>"
+        esc(levels.length > 1 ? (levels[0][0] === "M" ? "Master's" : "Bachelor's") + " — Years " + levels.map(function (l) { return l.slice(1); }).join(" & ") : LEVEL[levels[0]]) + (c.track ? " · " + esc(c.track) : "") + "</span></span>"
       : (c.levelText ? '<span class="lvl-badge plain"><span class="lvl-txt">' + esc(c.levelText) + "</span></span>" : "");
     var ill = window.COURSE_ILLUSTRATIONS && c.illustration && window.COURSE_ILLUSTRATIONS[c.illustration];
     return '<article class="course">' +
       (ill ? '<div class="course-ill">' + ill + "</div>" : "") +
       '<div class="course-body">' +
         '<div class="course-top">' + lvlHtml + (c.code ? '<span class="code">' + esc(c.code) + "</span>" : "") + "</div>" +
+        (c.scheduled ? '<p class="sched"><span class="sched-dot" aria-hidden="true"></span>Scheduled teaching</p>' : "") +
         (c.officialName ? '<p class="official">' + esc(c.officialName) + "</p>" : "") +
         '<h5 class="h4 course-title">' + esc(c.title) + "</h5>" +
         '<ul class="fchips" aria-label="Language and teaching format">' +

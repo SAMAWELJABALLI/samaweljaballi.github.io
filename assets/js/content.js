@@ -293,17 +293,23 @@ window.SITE = {
        roles:       any of "CM", "TD", "TP", "Supervision" (only if documented)
        roleNote:    short precision on the role
        illustration: "ds" | "py-basics" | "py-functions" | "trees-graphs" |
-                    "compilation" | "projects" | "warehouse" | "ml" | "databases"
+                    "compilation" | "projects" | "warehouse" | "ml" | "databases" | "oop"
        description, objectives: ["…"], topics, hours, page
        resources:   [{ label, url, kind: "slides" | "exercises" | "solutions" | "notebook" | "project" | "other" }]
-     A year with `draft: true` is NOT displayed.
+       scheduled:   true for upcoming teaching (shows a "Scheduled teaching" badge)
+       track:       programme/track shown with the level (e.g. "MIAGE track")
+     A year with `draft: true` is NOT displayed (useful to prepare a future year).
      ------------------------------------------------------------------- */
   teaching: [
-    { year: "2026–2027", draft: true,   // ← fill in, then delete `draft: true`
+    { year: "2026–2027",
       institutions: [
-        { institution: "", unit: "", role: "",
+        { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER",
           courses: [
-            { code: "", title: "", officialName: "", semester: 1, levels: [], languages: [], roles: [], roleNote: "", illustration: "", description: "", objectives: [], topics: [], hours: null, page: "", resources: [] }
+            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "INFORMATIQUE 0", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Master's Programming Projects", semester: 2, scheduled: true, levels: ["M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, scheduled: true, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
+            { code: "", title: "Object-Oriented Programming", semester: 2, scheduled: true, levels: ["L3"], track: "MIAGE track", languages: ["C++"], roles: ["CM", "TP"], illustration: "oop", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2025–2026",
@@ -311,7 +317,6 @@ window.SITE = {
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
             { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", semester: 1, levels: ["L2"], languages: ["C"], roles: ["CM", "TP"], illustration: "ds", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "INFORMATIQUE 0", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
             { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
             { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TD"], roleNote: "Tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [] },
