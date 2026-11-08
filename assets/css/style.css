@@ -1038,3 +1038,42 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
   .w-profile { align-self: start; min-height: 0; }
   .w-profile .w-actions { margin-top: 10px; }
 }
+
+/* v10 — Activities: event thumbnails (3:2, uniform) */
+.act.has-thumb { display: grid; grid-template-columns: 180px minmax(0, 1fr); column-gap: 18px; align-items: start; }
+.act.has-thumb .act-body { min-width: 0; }
+.act-thumb { --th-accent: var(--research); position: relative; display: block; width: 180px; aspect-ratio: 3 / 2; height: auto; border-radius: var(--r-sm); overflow: hidden;
+  border: 1px solid var(--line); background: var(--surface-2); box-shadow: 0 1px 3px rgba(20, 40, 50, .08); text-decoration: none; color: var(--ink); transition: transform .15s ease, box-shadow .15s ease; }
+a.act-thumb:hover { transform: translateY(-2px); box-shadow: 0 8px 20px -10px rgba(20, 40, 50, .35); }
+a.act-thumb:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.k-events .act-thumb { --th-accent: var(--muted); }
+.k-stays .act-thumb { --th-accent: var(--teaching); }
+.act-thumb .th-img { display: block; width: 100%; height: 100%; }
+.act-thumb .th-img.fit-contain { object-fit: contain; padding: 14px 18px; box-sizing: border-box; background: var(--surface); }
+.act-thumb .th-img.fit-cover { object-fit: cover; object-position: center; }
+.th-card { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; gap: 2px; padding: 12px 16px 12px 20px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--th-accent) 16%, var(--surface)) 0%, var(--surface) 75%); }
+.th-card::before { content: ""; position: absolute; left: 0; top: 14px; bottom: 14px; width: 4px; border-radius: 0 4px 4px 0; background: var(--th-accent); }
+.th-name { font-size: 22px; font-weight: 700; line-height: 1.05; letter-spacing: -.01em; color: var(--ink); overflow-wrap: anywhere; }
+.th-year { font-size: 15px; font-weight: 600; color: var(--th-accent); font-variant-numeric: tabular-nums; }
+.th-sub { margin-top: 4px; font-size: 11.5px; line-height: 1.25; color: var(--muted); font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+:root[data-theme="night"] .th-year { filter: brightness(1.4); }
+@media (max-width: 760px) {
+  .act.has-thumb { grid-template-columns: 108px minmax(0, 1fr); column-gap: 12px; }
+  .act-thumb { width: 108px; border-radius: 10px; }
+  .th-card { padding: 6px 8px 6px 11px; gap: 0; }
+  .th-card::before { top: 9px; bottom: 9px; width: 3px; }
+  .th-name { font-size: 14px; }
+  .th-year { font-size: 12px; }
+  .th-sub { font-size: 9.5px; margin-top: 2px; -webkit-line-clamp: 2; }
+  .act-thumb .th-img.fit-contain { padding: 8px 10px; }
+}
+/* v10b — mobile: thumbnail beside the meta line, text full width below */
+@media (max-width: 760px) {
+  .act.has-thumb { row-gap: 8px; align-items: center; }
+  .act.has-thumb .act-body { display: contents; }
+  .act.has-thumb .act-thumb { grid-column: 1; grid-row: 1; }
+  .act.has-thumb .act-meta { grid-column: 2; grid-row: 1; flex-direction: column; gap: 2px; align-self: center; }
+  .act.has-thumb .act-title, .act.has-thumb .act-event, .act.has-thumb .lchips { grid-column: 1 / -1; }
+  .act.has-thumb .act-title { margin-top: 2px; }
+}

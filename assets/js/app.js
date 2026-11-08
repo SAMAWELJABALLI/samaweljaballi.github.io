@@ -276,7 +276,7 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261110b" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261110d" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
@@ -447,11 +447,22 @@
 
   /* ================= ACTIVITIES (chronology) ================= */
   var KGROUP = { "Conference talk": "talks", "Invited talk": "talks", "Seminar": "talks", "Workshop": "talks", "Outreach": "talks", "Event attended": "events", "Research stay": "stays" };
+  function eventThumb(t) {
+    var m = (S.eventMeta || {})[t.eventKey];
+    if (!m) return "";
+    var inner = m.image
+      ? '<img class="th-img fit-' + esc(m.fit || "contain") + '" src="' + esc(m.image) + '" width="180" height="120" alt="' + esc(m.imageAlt || "") + '" loading="lazy" decoding="async">'
+      : '<span class="th-card" aria-hidden="true"><span class="th-name">' + esc(m.name) + '</span><span class="th-year">' + esc(m.year) + '</span>' +
+        (m.sub ? '<span class="th-sub">' + esc(m.sub) + "</span>" : "") + "</span>";
+    var label = m.name + " " + m.year;
+    if (m.url) return '<a class="act-thumb" href="' + esc(m.url) + '" target="_blank" rel="noopener noreferrer" aria-label="' + esc(label) + ' — official page (opens in a new tab)"' + (m.credit ? ' title="' + esc(m.credit) + '"' : "") + ">" + inner + "</a>";
+    return '<span class="act-thumb no-link"' + (m.image ? "" : ' role="img" aria-label="' + esc(label) + '"') + ">" + inner + "</span>";
+  }
   function activityItem(t) {
-    return '<li class="act k-' + KGROUP[t.kind] + '"><span class="act-dot" aria-hidden="true"></span>' +
+    return '<li class="act has-thumb k-' + KGROUP[t.kind] + '"><span class="act-dot" aria-hidden="true"></span>' + eventThumb(t) + '<div class="act-body">' +
       '<div class="act-meta"><span class="act-kind">' + esc(t.kind) + "</span><span>" + esc(fmtDate(t.date)) + "</span><span>" + esc(t.place) + "</span></div>" +
       '<p class="act-title' + (t.isDescription ? " desc" : "") + '">' + esc(t.title) + "</p>" +
-      '<p class="act-event">' + esc(t.event) + ' · <span class="muted">' + esc(t.role) + "</span></p>" + linkChips(t.links, false) + "</li>";
+      '<p class="act-event">' + esc(t.event) + ' · <span class="muted">' + esc(t.role) + "</span></p>" + linkChips(t.links, false) + "</div></li>";
   }
   function activitiesPanel() {
     var years = Array.from(new Set(activities.map(function (t) { return t.date.slice(0, 4); }))).sort().reverse();
