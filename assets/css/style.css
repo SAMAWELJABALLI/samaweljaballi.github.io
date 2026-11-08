@@ -1009,3 +1009,6 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
 @media (min-width: 981px) {
   .w-profile .portrait { flex: 1 1 auto; aspect-ratio: auto; min-height: 300px; }
 }
+/* v9c — portrait in the navigation-bar badge */
+.mono.has-photo { padding: 0; overflow: hidden; background: var(--mark); box-shadow: 0 0 0 2px var(--mark); }
+.mono.has-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; border-radius: 50%; display: block; }

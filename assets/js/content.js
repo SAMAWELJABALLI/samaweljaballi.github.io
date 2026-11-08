@@ -32,6 +32,7 @@ window.SITE = {
     photoWebp: "assets/img/portrait.webp",
     photoSmallWebp: "assets/img/portrait-360.webp",
     photoAvatar: "assets/img/portrait-avatar.jpg",
+    photoBadge: "assets/img/portrait-badge.jpg",   // small face crop for the navigation-bar circle
     photoWidth: 640, photoHeight: 646,
     photoPosition: "56% 22%",
     photoAlt: "Samawel Jaballi, smiling, in a light blue shirt and striped tie, standing beside a research poster at a scientific conference",

@@ -276,7 +276,7 @@
   function coverHtml(p) {
     if (p.coverGeneric) {
       var oa = p.openAccess === true;
-      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109a" width="88" height="133" alt="' +
+      var pic = '<img class="pp-ico oa" src="assets/img/covers/preprint-oa.svg?v=20261109b" width="88" height="133" alt="' +
         (oa ? "Preprint, open access" : "Preprint") + (p.coverUrl ? "" : " — manuscript under review") + '" loading="lazy" decoding="async">' +
         '<span class="pp-lbl">Preprint' + (oa ? '<span class="pp-oa">Open Access</span>' : "") + "</span>";
       return '<div class="ref-cover pp">' + (p.coverUrl ? a(p.coverUrl, pic, "pp-link", ' title="Open the preprint"') : pic) + "</div>";
@@ -547,6 +547,13 @@
 
   /* ================= render ================= */
   app.innerHTML = hero() + widgets() + pillars() + research() + publications() + teaching() + service() + activitiesPanel() + collaborations() + about() + footer();
+  /* navigation-bar badge: portrait instead of initials when available */
+  if (S.person.photoBadge || S.person.photoAvatar) {
+    document.querySelectorAll(".dock-brand .mono").forEach(function (m) {
+      m.classList.add("has-photo");
+      m.innerHTML = '<img src="' + esc(S.person.photoBadge || S.person.photoAvatar) + '" width="30" height="30" alt="" decoding="async">';
+    });
+  }
   document.getElementById("dockNav").innerHTML = NAV.map(function (n) { return '<li><a href="#' + n[0] + '" data-nav="' + n[0] + '">' + n[1] + "</a></li>"; }).join("");
   document.getElementById("menuList").innerHTML = NAV.map(function (n, i) { return '<li><a href="#' + n[0] + '" data-nav="' + n[0] + '"><span class="mi-n" aria-hidden="true">' + String(i + 1).padStart(2, "0") + "</span>" + n[1] + "</a></li>"; }).join("");
   runPubs(); runActs();
