@@ -918,3 +918,56 @@ dl.res dd { margin: 2px 0 0; display: flex; flex-wrap: wrap; gap: 5px; }
    preprint icon is drawn on its own neutral card of the same ratio. */
 .ref-cover img { width: 88px; height: 133px; object-fit: cover; object-position: center top; }
 @media (max-width: 760px) { .ref-cover img { width: 60px; height: 91px; } }
+
+/* =====================================================================
+   v7 — Teaching: semesters, level badges, illustrated course cards
+   ===================================================================== */
+:root {
+  --ill-bg: #f5ead6; --ill-dune: #cfe0e2; --ill-dune2: #b9d2d4;
+  --ill-ink: #2c5764; --ill-accent: #e9b65a; --ill-soft: #a9cdd2; --ill-paper: #fffaf1;
+}
+:root[data-theme="night"] {
+  --ill-bg: #1d2c3e; --ill-dune: #23394b; --ill-dune2: #2b4558;
+  --ill-ink: #b9d4de; --ill-accent: #e3b765; --ill-soft: #3f6577; --ill-paper: #2a3d52;
+}
+.inst-h { font-size: 15px; font-weight: 600; margin: 4px 0 6px; }
+.inst-h .muted { font-weight: 500; font-size: 14px; }
+.sem { margin-top: 18px; }
+.sem-h {
+  display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 700; letter-spacing: -.01em; margin-bottom: 14px;
+}
+.sem-h::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+.sem-ico { width: 38px; height: 38px; border-radius: 12px; display: inline-grid; place-items: center; background: color-mix(in srgb, var(--teaching) 14%, transparent); color: var(--teaching); }
+.sem-n { order: 3; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.sem-h::after { order: 2; }
+
+.course-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.course { padding: 0; overflow: hidden; gap: 0; background: var(--surface); border-radius: 18px; box-shadow: 0 1px 2px rgba(20,40,50,.05); }
+.course:hover { transform: translateY(-2px); box-shadow: 0 14px 28px -18px rgba(20,40,50,.45); }
+.course-ill { aspect-ratio: 320 / 110; border-bottom: 1px solid var(--line); line-height: 0; }
+.course-ill .ill { width: 100%; height: 100%; display: block; }
+.course-body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.course .course-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 26px; }
+.lvl-badge { display: inline-flex; align-items: baseline; gap: 7px; padding: 3px 10px; border-radius: 999px; background: color-mix(in srgb, var(--mark) 45%, transparent); color: var(--ink); font-size: 12px; }
+.lvl-badge b { font-size: 13px; font-weight: 800; letter-spacing: .02em; }
+.lvl-badge .lvl-txt { font-weight: 600; color: var(--ink-2); }
+.lvl-badge.plain { background: color-mix(in srgb, var(--teaching) 12%, transparent); }
+:root[data-theme="night"] .lvl-badge { background: color-mix(in srgb, var(--mark) 22%, transparent); }
+.course .code { margin-left: auto; }
+.official { font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: var(--research); margin-top: 2px; }
+.course-title { font-size: 17px; line-height: 1.3; margin-top: 0; }
+.fchips { margin-top: 4px; padding-top: 0; }
+.fchips .lang { background: transparent; border: 1.5px solid var(--ink); color: var(--ink); }
+.fchips li { font-size: 12px; padding: 4px 10px; }
+.course-note { margin-top: 2px; }
+.course-desc { margin-top: 2px; }
+
+@media (max-width: 1080px) { .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) {
+  .course-grid { grid-template-columns: 1fr; gap: 12px; }
+  .course-ill { aspect-ratio: 320 / 84; }
+  .sem-h { font-size: 19px; gap: 10px; }
+  .sem-ico { width: 34px; height: 34px; }
+  .course-title { font-size: 16.5px; }
+}
+@media (max-width: 640px) { .course-ill { aspect-ratio: auto; height: 92px; } }

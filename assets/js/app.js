@@ -351,6 +351,7 @@
 
   /* ================= TEACHING ================= */
   var RES_KIND = [["slides", "Course materials"], ["exercises", "Exercises"], ["notebook", "Notebooks"], ["solutions", "Solutions"], ["project", "Projects"], ["other", "Other resources"]];
+  var LEVEL = { L1: "Bachelor's — Year 1", L2: "Bachelor's — Year 2", L3: "Bachelor's — Year 3", M1: "Master's — Year 1", M2: "Master's — Year 2" };
   function courseCard(c) {
     var res = c.resources || [];
     var groups = RES_KIND.map(function (k) {
@@ -358,17 +359,29 @@
       return items.length ? "<div><dt>" + k[1] + "</dt><dd>" + items.map(function (r) { return a(r.url, esc(r.label), "lchip"); }).join("") + "</dd></div>" : "";
     }).join("");
     var obj = Array.isArray(c.objectives) ? c.objectives.filter(Boolean) : (c.objectives ? [c.objectives] : []);
-    return '<article class="course"><div class="course-top">' + (c.code ? '<span class="code">' + esc(c.code) + "</span>" : "<span></span>") + '<span class="muted">' + esc(c.term) + "</span></div>" +
-      '<h5 class="h4">' + esc(c.title) + "</h5>" +
-      (c.description ? '<p class="course-desc">' + esc(c.description) + "</p>" : "") +
-      (obj.length ? '<div class="course-obj"><p class="res-h">Learning objectives</p><ul>' + obj.map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul></div>" : "") +
-      (c.topics && c.topics.length ? '<p class="kw-line">Topics: ' + c.topics.map(esc).join(" · ") + "</p>" : "") +
-      '<ul class="fchips" aria-label="Role and tools">' + (c.roles || []).map(function (f) { return '<li class="f">' + esc(ROLE[f] || f) + "</li>"; }).join("") +
-      (c.tools || []).map(function (f) { return '<li class="tool">' + esc(f) + "</li>"; }).join("") + "</ul>" +
-      (c.roleNote ? '<p class="course-note">' + esc(c.roleNote) + "</p>" : "") +
-      (c.hours ? '<p class="course-note">' + esc(c.hours) + " hours</p>" : "") +
-      (groups || c.page ? '<dl class="res">' + groups + "</dl>" + (c.page ? a(c.page, "Course page", "w-link") : "") : "") +
-    "</article>";
+    var levels = (c.levels || []).filter(function (l) { return LEVEL[l]; });
+    var lvlHtml = levels.length
+      ? '<span class="lvl-badge" title="' + esc(levels.map(function (l) { return LEVEL[l]; }).join(" / ")) + '"><b>' + levels.join(" · ") + '</b><span class="lvl-txt">' +
+        esc(levels.length > 1 ? (levels[0][0] === "M" ? "Master's" : "Bachelor's") + " — Years " + levels.map(function (l) { return l.slice(1); }).join(" & ") : LEVEL[levels[0]]) + "</span></span>"
+      : (c.levelText ? '<span class="lvl-badge plain"><span class="lvl-txt">' + esc(c.levelText) + "</span></span>" : "");
+    var ill = window.COURSE_ILLUSTRATIONS && c.illustration && window.COURSE_ILLUSTRATIONS[c.illustration];
+    return '<article class="course">' +
+      (ill ? '<div class="course-ill">' + ill + "</div>" : "") +
+      '<div class="course-body">' +
+        '<div class="course-top">' + lvlHtml + (c.code ? '<span class="code">' + esc(c.code) + "</span>" : "") + "</div>" +
+        (c.officialName ? '<p class="official">' + esc(c.officialName) + "</p>" : "") +
+        '<h5 class="h4 course-title">' + esc(c.title) + "</h5>" +
+        '<ul class="fchips" aria-label="Language and teaching format">' +
+          (c.languages || []).map(function (f) { return '<li class="lang">' + esc(f) + "</li>"; }).join("") +
+          (c.roles || []).map(function (f) { return '<li class="f">' + esc(ROLE[f] || f) + "</li>"; }).join("") + "</ul>" +
+        (c.roleNote ? '<p class="course-note">' + esc(c.roleNote) + "</p>" : "") +
+        (c.termNote ? '<p class="course-note">' + esc(c.termNote) + "</p>" : "") +
+        (c.description ? '<p class="course-desc">' + esc(c.description) + "</p>" : "") +
+        (obj.length ? '<div class="course-obj"><p class="res-h">Learning objectives</p><ul>' + obj.map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul></div>" : "") +
+        (c.topics && c.topics.length ? '<p class="kw-line">Topics: ' + c.topics.map(esc).join(" · ") + "</p>" : "") +
+        (c.hours ? '<p class="course-note">' + esc(c.hours) + " hours</p>" : "") +
+        (groups ? '<dl class="res">' + groups + "</dl>" : "") + (c.page ? a(c.page, "Course page", "w-link") : "") +
+      "</div></article>";
   }
   function teaching() {
     var tabs = teachYears.map(function (y, i) {
@@ -376,21 +389,22 @@
       return '<button type="button" role="tab" class="seg" id="tt-' + i + '" aria-controls="tp-' + i + '" aria-selected="' + (i === 0) + '"' + (i ? ' tabindex="-1"' : "") + ">" +
         esc(y.year) + '<span class="seg-sub">' + esc(insts) + "</span></button>";
     }).join("");
+    var calIco = '<svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
     var panes = teachYears.map(function (y, i) {
       var body = y.institutions.map(function (inst) {
-        var order = [], groups = {};
-        inst.courses.forEach(function (c) { var k = c.level || ""; if (!groups[k]) { groups[k] = []; order.push(k); } groups[k].push(c); });
-        order.sort(function (x, z) { return (x === "") - (z === ""); });
-        return '<div class="inst"><h4 class="inst-h">' + esc(inst.institution) + ' <span class="muted">· ' + esc(inst.role) + "</span></h4>" +
-          '<p class="inst-unit">' + esc(inst.unit) + "</p>" +
-          order.map(function (k) { return '<div class="lvl-group">' + (k ? '<p class="lvl-h">' + esc(k) + "</p>" : (order.length > 1 ? '<p class="lvl-h">Further courses</p>' : "")) + '<div class="course-grid">' + groups[k].map(courseCard).join("") + "</div></div>"; }).join("") + "</div>";
+        var sems = [1, 2].map(function (n) {
+          var list = inst.courses.filter(function (c) { return (c.semester || 1) === n; });
+          if (!list.length) return "";
+          return '<div class="sem"><h4 class="sem-h"><span class="sem-ico">' + calIco + "</span>Semester " + n + '<span class="sem-n">' + list.length + " course" + (list.length > 1 ? "s" : "") + "</span></h4>" +
+            '<div class="course-grid">' + list.map(courseCard).join("") + "</div></div>";
+        }).join("");
+        return '<div class="inst"><p class="inst-h">' + esc(inst.institution) + ' <span class="muted">· ' + esc(inst.role) + " · " + esc(inst.unit) + "</span></p>" + sems + "</div>";
       }).join("");
       return '<div class="tpane" role="tabpanel" id="tp-' + i + '" aria-labelledby="tt-' + i + '"' + (i ? " hidden" : "") + ">" + body + "</div>";
     }).join("");
-    var nRes = allCourses.reduce(function (n, x) { return n + (x.c.resources || []).length; }, 0);
     return panel("teaching", "02 · Teaching", "Teaching & resources", esc(S.person.teachingStatement),
       '<div class="segs years" role="tablist" aria-label="Academic years">' + tabs + "</div>" + panes +
-      '<p class="legend">Each course shows my role: <b>Lectures (CM)</b>, <b>Tutorials (TD)</b>, <b>Labs (TP)</b> or <b>Project supervision</b>.</p>');
+      '<p class="legend">Each course shows its level, language and my role: <b>Lectures (CM)</b>, <b>Tutorials (TD)</b>, <b>Labs (TP)</b> or <b>Project supervision</b>.</p>');
   }
 
   /* ================= SERVICE (supervision + academic service) ================= */

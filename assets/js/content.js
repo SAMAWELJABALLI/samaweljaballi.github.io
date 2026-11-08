@@ -266,18 +266,19 @@ window.SITE = {
 
   /* -------------------------------------------------------------------
      TEACHING — one block per academic year (newest first), then per
-     institution. Each course (empty fields are not displayed):
-       code, title, term
-       level:       explicit level, e.g. "Bachelor's degree — 1st year (L1)",
-                    "Master's degree — 1st year (M1)"; "" if not confirmed
+     institution. Courses are grouped by `semester` (1 or 2) on the site.
+     Each course (empty fields are not displayed):
+       code, title, officialName (official course name, e.g. "INFORMATIQUE 0")
+       semester:    1 | 2
+       levels:      ["L1"] … ["M1", "M2"] — only confirmed levels
+       levelText:   level outside the L/M system (e.g. engineering school)
+       languages:   ["Python"], ["C"], ["OCaml"] …
        roles:       any of "CM", "TD", "TP", "Supervision" (only if documented)
-       description: one or two sentences
-       objectives:  ["…", "…"]
-       topics, tools: ["…"]
-       hours:       number, only if documented
-       page:        public course page (optional)
-       resources:   [{ label: "Lab 1", url: "files/teaching/…/lab1.pdf",
-                       kind: "slides" | "exercises" | "solutions" | "notebook" | "project" | "other" }]
+       roleNote:    short precision on the role
+       illustration: "ds" | "py-basics" | "py-functions" | "trees-graphs" |
+                    "compilation" | "projects" | "warehouse" | "ml" | "databases"
+       description, objectives: ["…"], topics, hours, page
+       resources:   [{ label, url, kind: "slides" | "exercises" | "solutions" | "notebook" | "project" | "other" }]
      A year with `draft: true` is NOT displayed.
      ------------------------------------------------------------------- */
   teaching: [
@@ -285,36 +286,36 @@ window.SITE = {
       institutions: [
         { institution: "", unit: "", role: "",
           courses: [
-            { code: "", title: "", term: "", level: "", roles: [], description: "", objectives: [], topics: [], tools: [], hours: null, page: "", resources: [] }
+            { code: "", title: "", officialName: "", semester: 1, levels: [], languages: [], roles: [], roleNote: "", illustration: "", description: "", objectives: [], topics: [], hours: null, page: "", resources: [] }
           ] }
       ] },
     { year: "2025–2026",
       institutions: [
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
-            { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", term: "Semester 1", level: "Bachelor's degree (Licence)", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming (Informatique 0)", term: "Semester 1", level: "Bachelor's degree — 1st year (L1)", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "4TPU146U", title: "Computer Science 1 (Informatique 1) — Introduction to Python", term: "Semester 1", level: "Bachelor's degree — 1st year (L1)", roles: ["CM", "TP"], tools: ["Python"], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs in OCaml", term: "Semester 2", level: "", roles: [], tools: ["OCaml"], objectives: "", topics: ["Trees", "Graphs"], hours: null, resources: [] },
-            { code: "4TIN603U", title: "Compilation", term: "Semester 2", level: "", roles: ["TD"], roleNote: "Machine-based tutorial sessions with integrated lectures", tools: [], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "4TIN802U", title: "Master's Programming Project", term: "Semester 2", level: "Master's degree", roles: ["Supervision"], roleNote: "Supervision of student programming projects", tools: [], objectives: "", topics: [], hours: null, resources: [] }
+            { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", semester: 1, levels: [], levelText: "Bachelor's", languages: ["C"], roles: ["CM", "TP"], illustration: "ds", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "INFORMATIQUE 0", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: [], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
+            { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TD"], roleNote: "Tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Master's Programming Projects", semester: 2, levels: ["M1", "M2"], languages: [], roles: ["Supervision"], roleNote: "Supervision of master's programming projects, including course 4TIN802U. Languages depend on each project.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2023–2024",
       institutions: [
         { institution: "Private Polytechnic School of Monastir", unit: "Software Engineering programme", role: "Part-time lecturer",
           courses: [
-            { code: "", title: "Data Warehousing", term: "Semester 2 · evening course", level: "Engineering degree — 5th year", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "", title: "Machine Learning", term: "Semester 2", level: "Engineering degree — 4th year", roles: ["CM", "TP"], tools: [], objectives: "", topics: [], hours: null, resources: [] }
+            { code: "", title: "Data Warehousing", semester: 2, levels: [], levelText: "Engineering — Year 5", termNote: "Evening course", languages: [], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Machine Learning", semester: 2, levels: [], levelText: "Engineering — Year 4", languages: [], roles: ["CM", "TP"], illustration: "ml", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2022–2023",
       institutions: [
         { institution: "Faculty of Sciences, University of Monastir", unit: "Department of Computer Science", role: "Part-time lecturer",
           courses: [
-            { code: "", title: "Advanced Python Programming", term: "Semester 1", level: "Bachelor's degree (Licence)", roles: ["TP"], tools: ["Python"], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "", title: "Relational Databases", term: "Semester 1", level: "Bachelor's degree (Licence)", roles: ["TP"], tools: ["SQL"], objectives: "", topics: [], hours: null, resources: [] },
-            { code: "", title: "Data Warehousing", term: "Semester 2", level: "Bachelor's degree — 3rd year (L3)", roles: ["CM", "TP"], tools: ["SQL", "Python"], objectives: "", topics: [], hours: null, resources: [] }
+            { code: "", title: "Advanced Python Programming", semester: 1, levels: [], levelText: "Bachelor's", languages: ["Python"], roles: ["TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Relational Databases", semester: 1, levels: [], levelText: "Bachelor's", languages: ["SQL"], roles: ["TP"], illustration: "databases", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "", title: "Data Warehousing", semester: 2, levels: ["L3"], languages: ["SQL", "Python"], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] }
   ],
