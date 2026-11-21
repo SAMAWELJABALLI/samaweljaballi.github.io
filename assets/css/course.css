@@ -219,3 +219,4 @@
 .cp-kit-t { font-size: 16px; font-weight: 600; }
 .cp-kit-d { font-size: 14px; color: var(--ink-2); }
 @media (max-width: 760px) { .cp-kit { grid-template-columns: 1fr; } .cp-feature { flex-direction: column; } }
+.cp-feature .cp-p { max-width: none; }

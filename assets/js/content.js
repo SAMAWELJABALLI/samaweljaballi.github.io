@@ -468,7 +468,7 @@ window.SITE = {
               ],
               extras: [
                 { label: "DList Visualizer — interactive pointer visualiser (C)", url: "https://dlist-visualizer.ai.studio", kind: "tool", icon: "pointer", badge: "Interactive tool",
-                  description: "An interactive, step-by-step visualiser of the libasde function asde_dlist_insert_before: the C source runs line by line, the current line is highlighted and each step is explained in plain language. The doubly linked list is drawn as cells holding data, with next and previous pointers, the L and p cursors, and NULL shown as ground, so students can see exactly how pointers are rewired in memory (Prev / Next / Reset controls)." }
+                  description: "An interactive, step-by-step visualiser of the libasde function asde_dlist_insert_before: the C source runs line by line, the current line is highlighted and each step is explained in plain language. The doubly linked list is drawn as cells holding data, with next and previous pointers, the L and p cursors, and NULL shown as ground." }
               ],
               topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CI", "TDM"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
@@ -609,7 +609,7 @@ window.SITE = {
                 { label: "C project", url: "files/courses/2025-2026/4tin802u-2025/fiche-c.pdf", kind: "handout", pages: 2, icon: "cpu", badge: "Bonus", description: "Organising a C project, compilation with CMake, memory management and debugging (Valgrind, gdb)." }
               ]
             },
-            { code: "4TIN001U", title: "Master's Internship", officialName: "Stage", semester: 2, levels: ["M2"], languages: [], roles: [], roleNote: "M2 internship — academic referent (follow-up, remote site visit, assessment).", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "4TIN001U", title: "Master's Internship", officialName: "Stage", semester: 2, draft: true, levels: ["M2"], languages: [], roles: [], roleNote: "M2 internship — academic referent (follow-up, remote site visit, assessment).", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2023–2024",
