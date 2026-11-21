@@ -24,6 +24,12 @@
     download: '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/>',
     left: '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
     right: '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+    git: '<line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
+    bot: '<path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>',
+    code: '<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/>',
+    cpu: '<rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>',
+    pointer: '<path d="M14 4.1 12 6"/><path d="m5.1 8-2.9-.8"/><path d="m6 12-1.9 2"/><path d="M7.2 2.2 8 5.1"/><path d="M9.037 9.69a.498.498 0 0 1 .653-.653l11 4.5a.5.5 0 0 1-.074.949l-4.349 1.041a1 1 0 0 0-.74.739l-1.04 4.35a.5.5 0 0 1-.95.074z"/>',
+    external: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3"/>',
     grid: '<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>'
   };
   function ico(name, size) {
@@ -194,12 +200,11 @@
   }
   function fileChip(f, s) {
     if (!f || !f.url) return "";
-    var pages = f.pages ? " · " + f.pages + " p." : "";
     var ctx = s ? ", session " + s.n : "";
     var ext = isExt(f.url);
     return '<li class="cp-file"><a class="cp-file-open" href="' + esc(f.url) + '" target="_blank" rel="noopener"' +
-      ' aria-label="' + esc(f.label + ctx + (/\.pdf$/i.test(f.url) ? ", PDF" : "") + (f.pages ? ", " + f.pages + " pages" : "")) + ' (opens in a new tab)">' +
-      ico("file", 15) + "<span>" + esc(f.label) + pages + "</span></a>" +
+      ' aria-label="' + esc(f.label + ctx + (/\.pdf$/i.test(f.url) ? ", PDF" : "")) + ' (opens in a new tab)">' +
+      ico("file", 15) + "<span>" + esc(f.label) + "</span></a>" +
       (ext ? "" : '<a class="cp-file-dl" href="' + esc(f.url) + '" download aria-label="Download ' + esc(f.label + ctx) + '">' + ico("download", 15) + "</a>") + "</li>";
   }
   function sessionItem(s) {
@@ -210,7 +215,7 @@
       : '<ul class="cp-files">' + fileList + "</ul>";
     var t = s.type && TYPE[s.type] ? s.type : "";
     return '<li class="cp-session" data-type="' + esc(t) + '">' +
-      '<span class="cp-num" aria-hidden="true">' + esc(s.n) + "</span>" +
+      '<span class="cp-num' + (t ? " n-" + t.toLowerCase() : "") + '" aria-hidden="true">' + esc(s.n) + "</span>" +
       '<div class="cp-s-body"><div class="cp-s-head">' +
         '<h4 class="cp-s-title"><span class="sr-only">Session ' + esc(s.n) + '": </span><span lang="fr">' + esc(s.title) + "</span></h4>" +
         (t ? '<span class="cp-type t-' + t.toLowerCase() + '" title="' + esc(TYPE_LONG[t]) + '">' + esc(TYPE[t]) + "</span>" : "") +
@@ -232,7 +237,7 @@
     var present = TYPE_ORDER.filter(function (t) { return all.some(function (s) { return s.type === t; }); });
     var filters = present.length > 1 ? '<div class="cp-filters" role="group" aria-label="Filter sessions by type">' +
       '<button type="button" class="fchip" data-ftype="all" aria-pressed="true">All</button>' +
-      present.map(function (t) { return '<button type="button" class="fchip" data-ftype="' + t + '" aria-pressed="false">' + esc(TYPE[t]) + "</button>"; }).join("") + "</div>" : "";
+      present.map(function (t) { return '<button type="button" class="fchip ft-' + t.toLowerCase() + '" data-ftype="' + t + '" aria-pressed="false">' + esc(TYPE[t]) + "</button>"; }).join("") + "</div>" : "";
     var manyFiles = all.filter(function (s) { return (s.files || []).length > 3; }).length;
     var expand = all.length > 8 && manyFiles ? '<button type="button" class="cp-expand" id="cpExpand" aria-pressed="false">Expand all</button>' : "";
     var body = parts.map(function (p, i) {
@@ -243,11 +248,35 @@
       '<div class="cp-sess-top"><h2 class="cp-h2" id="cp-sess-h">Sessions <span class="cp-count">' + all.length + "</span></h2>" + expand + "</div>" +
       materialsLink() + filters + '<p class="sr-only" id="cpLive" aria-live="polite"></p>' + body + "</section>";
   }
+  function featured() {
+    var tools = (c.extras || []).filter(function (f) { return f.url && f.kind === "tool"; });
+    if (!tools.length) return "";
+    return tools.map(function (f) {
+      return '<section class="card cp-feature" aria-label="' + esc(f.badge || "Featured resource") + '"><div class="cp-feature-ico">' + ico(f.icon || "pointer", 26) + '</div><div class="cp-feature-body">' +
+        (f.badge ? '<span class="cp-badge">' + esc(f.badge) + "</span>" : "") +
+        '<h2 class="cp-feature-t">' + esc(f.label) + "</h2>" + (f.description ? '<p class="cp-p">' + esc(f.description) + "</p>" : "") +
+        (f.credit ? '<p class="cp-credit">' + esc(f.credit) + "</p>" : "") +
+        '<a class="cp-btn primary" href="' + esc(f.url) + '" target="_blank" rel="noopener noreferrer">' + ico("external", 17) + "<span>Open the visualiser</span>" + NEWTAB + "</a></div></section>";
+    }).join("");
+  }
+  function specs() {
+    var sp = (c.specs || []).filter(function (f) { return f.url; });
+    if (!sp.length) return "";
+    return '<section class="panel card cp-extras" aria-labelledby="cp-spec-h"><h2 class="cp-h2" id="cp-spec-h">Project specifications</h2>' +
+      (c.specsCredit ? '<p class="cp-credit">' + esc(c.specsCredit) + "</p>" : "") + '<ul class="cp-files">' + sp.map(function (f) { return fileChip(f, null); }).join("") + "</ul></section>";
+  }
+  function kitCard(f) {
+    return '<li class="cp-kit-card"><span class="cp-kit-ico">' + ico(f.icon || "file", 22) + '</span><div class="cp-kit-body"><div class="cp-kit-head"><h3 class="cp-kit-t">' + esc(f.label) + "</h3>" +
+      (f.badge ? '<span class="cp-badge">' + esc(f.badge) + "</span>" : "") + "</div>" + (f.description ? '<p class="cp-kit-d">' + esc(f.description) + "</p>" : "") +
+      '<ul class="cp-files">' + fileChip({ label: "Open sheet", url: f.url }, null).replace('aria-label="Open sheet', 'aria-label="' + esc(f.label) + ' sheet').replace('Download Open sheet', 'Download ' + esc(f.label) + ' sheet') + "</ul></div></li>";
+  }
   function extras() {
-    var ex = (c.extras || []).filter(function (f) { return f.url; });
+    var ex = (c.extras || []).filter(function (f) { return f.url && f.kind !== "tool"; });
     if (!ex.length) return c.parts || c.sessions ? "" : (c.materialsFrom ? '<section class="panel card cp-sessions">' + materialsLink() + "</section>" : "");
-    return '<section class="panel card cp-extras" aria-labelledby="cp-ex-h"><h2 class="cp-h2" id="cp-ex-h">Course resources</h2><ul class="cp-files">' +
-      ex.map(function (f) { return fileChip(f, null); }).join("") + "</ul></section>";
+    var cards = ex.every(function (f) { return f.description; });
+    return '<section class="panel card cp-extras" aria-labelledby="cp-ex-h"><h2 class="cp-h2" id="cp-ex-h">' + esc(c.extrasTitle || "Course resources") + "</h2>" +
+      (c.extrasIntro ? '<p class="cp-p cp-ex-intro">' + esc(c.extrasIntro) + "</p>" : "") +
+      (cards ? '<ul class="cp-kit">' + ex.map(kitCard).join("") + "</ul>" : '<ul class="cp-files">' + ex.map(function (f) { return fileChip(f, null); }).join("") + "</ul>") + "</section>";
   }
   function crumbs() {
     return '<nav class="cp-crumbs" aria-label="Breadcrumb"><ol>' +
@@ -272,7 +301,7 @@
       ico("chat", 22) + '<span class="cp-fab-lbl" aria-hidden="true">Ask a question</span></a>';
   }
 
-  root.innerHTML = crumbs() + header() + intro() + sessions() + extras() + pager() + footer() + floatChat();
+  root.innerHTML = crumbs() + header() + intro() + featured() + sessions() + specs() + extras() + pager() + footer() + floatChat();
   chrome();
 
   /* ---------- session filters & expand ---------- */

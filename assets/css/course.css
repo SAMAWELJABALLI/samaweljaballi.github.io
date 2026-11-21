@@ -164,3 +164,58 @@
   .cp-btn, .course-open, .cp-fab-lbl { transition: none; }
 }
 @media print { .cp-fab, .cp-pager, .cp-filters, .cp-expand { display: none !important; } }
+
+/* ---------- série 2 : dégradé Teaching par type de séance (du plus foncé au plus clair) ----------
+   Ratios de contraste texte/fond (AA ≥ 4,5) — jour : CI/CM 8,63 · TD 5,60 · TD machine/TP 8,18 · Project 8,73
+                                               nuit : CI/CM 10,10 · TD 5,30 · TD machine/TP 9,13 · Project 5,74 */
+:root {
+  --sess-ci: #6b4226;   --sess-ci-ink: #ffffff;
+  --sess-td: #c08a5e;   --sess-td-ink: #2b1a0d;
+  --sess-tdm: #f1dfcb;  --sess-tdm-ink: #5a3618;
+  --sess-proj: #dcb48e; --sess-proj-ink: #2b1a0d; --sess-proj-line: #8a5a36;
+}
+:root[data-theme="night"] {
+  --sess-ci: #e8b48a;   --sess-ci-ink: #1a1008;
+  --sess-td: #b07a52;   --sess-td-ink: #140c06;
+  --sess-tdm: #4a3524;  --sess-tdm-ink: #f6e2cc;
+  --sess-proj: #7a5236; --sess-proj-ink: #fbe9d6; --sess-proj-line: #e0a77a;
+}
+.cp-type { border: 1.5px solid transparent; }
+.cp-type.t-ci, .cp-type.t-cm { background: var(--sess-ci); color: var(--sess-ci-ink); border-color: var(--sess-ci); }
+.cp-type.t-td { background: var(--sess-td); color: var(--sess-td-ink); border-color: var(--sess-td); }
+.cp-type.t-tdm, .cp-type.t-tp { background: var(--sess-tdm); color: var(--sess-tdm-ink); border-color: var(--sess-tdm-ink); }
+.cp-type.t-project { background: var(--sess-proj); color: var(--sess-proj-ink); border-color: var(--sess-proj-line); }
+.cp-num.n-ci, .cp-num.n-cm { background: var(--sess-ci); color: var(--sess-ci-ink); border-color: var(--sess-ci); }
+.cp-num.n-td { background: var(--sess-td); color: var(--sess-td-ink); border-color: var(--sess-td); }
+.cp-num.n-tdm, .cp-num.n-tp { background: var(--sess-tdm); color: var(--sess-tdm-ink); border-color: var(--sess-tdm-ink); }
+.cp-num.n-project { background: var(--sess-proj); color: var(--sess-proj-ink); border-color: var(--sess-proj-line); }
+.cp-filters .ft-ci, .cp-filters .ft-cm { background: var(--sess-ci); color: var(--sess-ci-ink); border-color: var(--sess-ci); }
+.cp-filters .ft-td { background: var(--sess-td); color: var(--sess-td-ink); border-color: var(--sess-td); }
+.cp-filters .ft-tdm, .cp-filters .ft-tp { background: var(--sess-tdm); color: var(--sess-tdm-ink); border-color: var(--sess-tdm-ink); }
+.cp-filters .ft-project { background: var(--sess-proj); color: var(--sess-proj-ink); border: 1.5px solid var(--sess-proj-line); }
+.cp-filters .fchip[aria-pressed="true"]:not([data-ftype="all"]) { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--ink); }
+/* puces de rôle des cartes (accueil) */
+:root .fchips .f.r-ci, :root .fchips .f.r-cm { background: var(--sess-ci); color: var(--sess-ci-ink); }
+:root .fchips .f.r-td { background: var(--sess-td); color: var(--sess-td-ink); }
+:root .fchips .f.r-tdm, :root .fchips .f.r-tp { background: var(--sess-tdm); color: var(--sess-tdm-ink); box-shadow: inset 0 0 0 1px var(--sess-tdm-ink); }
+
+/* ---------- ressource mise en avant (outil interactif) ---------- */
+.cp-feature { display: flex; gap: 18px; align-items: flex-start; padding: clamp(18px, 2.6vw, 28px); background: color-mix(in srgb, var(--teaching) 10%, var(--surface)); border: 1.5px solid var(--teaching-ink); }
+.cp-feature-ico { flex-shrink: 0; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: var(--sess-ci); color: var(--sess-ci-ink); }
+.cp-feature-body { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.cp-feature-t { font-size: clamp(19px, 2.2vw, 23px); font-weight: 600; line-height: 1.25; }
+.cp-badge { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; background: var(--sess-tdm); color: var(--sess-tdm-ink); border: 1px solid var(--sess-tdm-ink); }
+.cp-credit { font-size: 13px; color: var(--muted); font-style: italic; }
+.cp-sessions + .cp-extras, .cp-extras .cp-credit { margin-top: 0; }
+.cp-extras .cp-credit { margin-top: 6px; }
+.cp-ex-intro { margin-top: 8px; }
+
+/* ---------- Team support kit (cartes) ---------- */
+.cp-kit { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+.cp-kit-card { display: flex; gap: 14px; padding: 16px; border-radius: 18px; background: var(--surface-2); border: 1px solid var(--line); border-top: 3px solid var(--sess-td); }
+.cp-kit-ico { flex-shrink: 0; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: var(--sess-tdm); color: var(--sess-tdm-ink); }
+.cp-kit-body { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.cp-kit-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.cp-kit-t { font-size: 16px; font-weight: 600; }
+.cp-kit-d { font-size: 14px; color: var(--ink-2); }
+@media (max-width: 760px) { .cp-kit { grid-template-columns: 1fr; } .cp-feature { flex-direction: column; } }

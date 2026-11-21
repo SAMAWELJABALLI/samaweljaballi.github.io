@@ -316,7 +316,10 @@ window.SITE = {
                          files: [{ label, url, kind, pages }] }]
                       kind: slides | handout | exercises | solutions | code | data | reminder | other
        parts:         [{ title, sessions: [...] }] — instead of `sessions` when the course is split in parts
-       extras:        [{ label, url, kind, pages }] — course-wide resources
+       extras:        [{ label, url, kind, pages, icon, badge, description, credit }] — course-wide resources;
+                      kind "tool" = featured resource shown under the introduction
+       extrasTitle, extrasIntro: heading and intro line of the extras section (default "Course resources")
+       specs:         [{ label, url, kind: "spec" }] + specsCredit — "Project specifications" section
        materialsFrom: slug of another edition that hosts the materials (shows a link instead of files)
      A year with `draft: true` is NOT displayed (useful to prepare a future year).
      ------------------------------------------------------------------- */
@@ -335,7 +338,7 @@ window.SITE = {
                 "Manipulate images as matrices of pixels"
               ],
               approach: "In integrated lectures, each notion is presented and then programmed straight away in the computer lab. Image processing serves as a visual application field for loops and arrays.",
-              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle, which automatically checks students' code.",
+              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle.",
               team: [
                 { name: "Christophe Casseau", role: "Course coordinator" },
                 { name: "Jean-Pierre Gruselle", role: "Co-coordinator" },
@@ -363,7 +366,7 @@ window.SITE = {
                 "Use basic logic and first notions of graph theory: degrees, paths, connectivity"
               ],
               approach: "In integrated lectures, each notion is presented and then programmed straight away in the computer lab. Image processing serves as a visual application field for loops and arrays.",
-              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle, which automatically checks students' code.",
+              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle.",
               team: [
                 { name: "Christophe Casseau", role: "Course coordinator" },
                 { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
@@ -463,7 +466,11 @@ window.SITE = {
                   { n: 8, title: "Synthèse : choisir une structure, préparer le TP noté", type: "CI", summary: "Each problem calls for a structure: undo and redo (two stacks), round-robin scheduling (queue), duplicate removal (linked list and hash table).", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S08-CI-synthese.pdf", kind: "slides", pages: 68 }] }
                 ] }
               ],
-              extras: [],
+              extras: [
+                { label: "DList Visualizer — interactive pointer visualiser (C)", url: "https://dlist-visualizer.ai.studio", kind: "tool", icon: "pointer", badge: "Interactive tool",
+                  description: "An interactive, step-by-step visualiser of the libasde function asde_dlist_insert_before: the C source runs line by line, the current line is highlighted and each step is explained in plain language. The doubly linked list is drawn as cells holding data, with next and previous pointers, the L and p cursors, and NULL shown as ground, so students can see exactly how pointers are rewired in memory (Prev / Next / Reset controls).",
+                  credit: "Developed by S. Jaballi" }
+              ],
               topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CI", "TDM"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
               slug: "4tpu146u-2025",
@@ -475,7 +482,7 @@ window.SITE = {
                 "Use basic logic and first notions of graph theory: degrees, paths, connectivity"
               ],
               approach: "In integrated lectures, each notion is presented and then programmed straight away in the computer lab. Image processing serves as a visual application field for loops and arrays.",
-              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle, which automatically checks students' code.",
+              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle.",
               team: [
                 { name: "Christophe Casseau", role: "Course coordinator" },
                 { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
@@ -589,11 +596,18 @@ window.SITE = {
                 { n: 4, title: "Projet Carcassonne – Java : lancement du projet", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S04-PROJET-carcassonne-java.pdf", kind: "slides", pages: 32 }] },
                 { n: 5, title: "Git en équipe et Scrum : branches, revues et sprints", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S05-PROJET-git-equipe-scrum.pdf", kind: "slides", pages: 36 }] }
               ],
+              specs: [
+                { label: "Scrabble — project specifications", url: "files/courses/2025-2026/4tin802u-2025/scrabble-specs.pdf", kind: "spec" },
+                { label: "Carcassonne — project specifications", url: "files/courses/2025-2026/4tin802u-2025/carcassonne-specs.pdf", kind: "spec" }
+              ],
+              specsCredit: "4TIN802U teaching team",
+              extrasTitle: "Team support kit",
+              extrasIntro: "Bonus good-practice sheets written to help project teams, beyond the course materials.",
               extras: [
-                { label: "Good-practice sheet — Git", url: "files/courses/2025-2026/4tin802u-2025/fiche-git.pdf", kind: "handout", pages: 2 },
-                { label: "Good-practice sheet — Code assistants (vibe coding)", url: "files/courses/2025-2026/4tin802u-2025/fiche-vibe-coding.pdf", kind: "handout", pages: 2 },
-                { label: "Good-practice sheet — Python project", url: "files/courses/2025-2026/4tin802u-2025/fiche-python.pdf", kind: "handout", pages: 2 },
-                { label: "Good-practice sheet — C project", url: "files/courses/2025-2026/4tin802u-2025/fiche-c.pdf", kind: "handout", pages: 2 }
+                { label: "Git", url: "files/courses/2025-2026/4tin802u-2025/fiche-git.pdf", kind: "handout", pages: 2, icon: "git", badge: "Bonus", description: "Branches, commits, merge requests and resolving conflicts as a team." },
+                { label: "Code assistants (vibe coding)", url: "files/courses/2025-2026/4tin802u-2025/fiche-vibe-coding.pdf", kind: "handout", pages: 2, icon: "bot", badge: "Bonus", description: "Using code assistants well: small requests, tests first, then reviewing and checking the generated code before committing it." },
+                { label: "Python project", url: "files/courses/2025-2026/4tin802u-2025/fiche-python.pdf", kind: "handout", pages: 2, icon: "code", badge: "Bonus", description: "Project structure, conventions, typing, tests and tools (pytest, coverage, logging, Sphinx)." },
+                { label: "C project", url: "files/courses/2025-2026/4tin802u-2025/fiche-c.pdf", kind: "handout", pages: 2, icon: "cpu", badge: "Bonus", description: "Organising a C project, compilation with CMake, memory management and debugging (Valgrind, gdb)." }
               ]
             },
             { code: "4TIN001U", title: "Master's Internship", officialName: "Stage", semester: 2, levels: ["M2"], languages: [], roles: [], roleNote: "M2 internship — academic referent (follow-up, remote site visit, assessment).", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
