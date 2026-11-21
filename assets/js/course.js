@@ -301,7 +301,7 @@
       ico("chat", 22) + '<span class="cp-fab-lbl" aria-hidden="true">Ask a question</span></a>';
   }
 
-  root.innerHTML = crumbs() + header() + intro() + featured() + sessions() + specs() + extras() + pager() + footer() + floatChat();
+  root.innerHTML = crumbs() + header() + intro() + sessions() + featured() + specs() + extras() + pager() + footer() + floatChat();
   chrome();
 
   /* ---------- session filters & expand ---------- */

@@ -468,8 +468,7 @@ window.SITE = {
               ],
               extras: [
                 { label: "DList Visualizer — interactive pointer visualiser (C)", url: "https://dlist-visualizer.ai.studio", kind: "tool", icon: "pointer", badge: "Interactive tool",
-                  description: "An interactive, step-by-step visualiser of the libasde function asde_dlist_insert_before: the C source runs line by line, the current line is highlighted and each step is explained in plain language. The doubly linked list is drawn as cells holding data, with next and previous pointers, the L and p cursors, and NULL shown as ground, so students can see exactly how pointers are rewired in memory (Prev / Next / Reset controls).",
-                  credit: "Developed by S. Jaballi" }
+                  description: "An interactive, step-by-step visualiser of the libasde function asde_dlist_insert_before: the C source runs line by line, the current line is highlighted and each step is explained in plain language. The doubly linked list is drawn as cells holding data, with next and previous pointers, the L and p cursors, and NULL shown as ground, so students can see exactly how pointers are rewired in memory (Prev / Next / Reset controls)." }
               ],
               topics: [], hours: null, resources: [] },
             { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CI", "TDM"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
