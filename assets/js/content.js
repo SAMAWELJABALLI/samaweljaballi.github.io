@@ -481,22 +481,21 @@ window.SITE = {
                 { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
               ],
               moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=20815", note: "University login required" },
-              materialsFrom: "4tpu146u-2026",
               parts: [
                 { title: "Programmation", sessions: [
-                  { n: 1, title: "Premiers pas en Python", type: "CI", files: [] },
-                  { n: 2, title: "Listes et boucles for", type: "CI", files: [] },
-                  { n: 3, title: "Compléments : typage, complexité et exercices de révisions", type: "CI", files: [] },
-                  { n: 4, title: "Accès indexé", type: "CI", files: [] },
-                  { n: 5, title: "Dessin d'images", type: "CI", files: [] },
-                  { n: 6, title: "Manipulations d'images", type: "CI", files: [] },
-                  { n: 7, title: "Boucle conditionnelle, représentation des nombres", type: "CI", files: [] }
+                  { n: 1, title: "Premiers pas en Python", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S01-CI-premiers-pas.pdf", kind: "slides", pages: 80 }] },
+                  { n: 2, title: "Listes et boucles for", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S02-CI-listes-boucles-for.pdf", kind: "slides", pages: 71 }] },
+                  { n: 3, title: "Compléments : typage, complexité et exercices de révisions", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S03-CI-typage-complexite.pdf", kind: "slides", pages: 69 }] },
+                  { n: 4, title: "Accès indexé", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S04-CI-acces-indexe.pdf", kind: "slides", pages: 65 }] },
+                  { n: 5, title: "Dessin d'images", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S05-CI-dessin-images.pdf", kind: "slides", pages: 73 }] },
+                  { n: 6, title: "Manipulations d'images", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S06-CI-manipulations-images.pdf", kind: "slides", pages: 66 }] },
+                  { n: 7, title: "Boucle conditionnelle, représentation des nombres", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S07-CI-while-nombres.pdf", kind: "slides", pages: 64 }] }
                 ] },
                 { title: "Initiation aux graphes et à la logique", sessions: [
-                  { n: 8, title: "Sommets d'un graphe", type: "CI", files: [] },
-                  { n: 9, title: "Logique de base", type: "CI", files: [] },
-                  { n: 10, title: "Formule des poignées de mains, graphes simples", type: "CI", files: [] },
-                  { n: 11, title: "Chaînes et connexité", type: "CI", files: [] }
+                  { n: 8, title: "Sommets d'un graphe", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S08-CI-sommets-graphe.pdf", kind: "slides", pages: 78 }] },
+                  { n: 9, title: "Logique de base", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S09-CI-logique-base.pdf", kind: "slides", pages: 94 }] },
+                  { n: 10, title: "Formule des poignées de mains, graphes simples", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S10-CI-poignees-mains.pdf", kind: "slides", pages: 90 }] },
+                  { n: 11, title: "Chaînes et connexité", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tpu146u-2025/S11-CI-chaines-connexite.pdf", kind: "slides", pages: 77 }] }
                 ] }
               ],
               extras: []
@@ -519,21 +518,20 @@ window.SITE = {
               ],
               moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=24843", note: "University login required" },
               chat: { url: "https://moodle.u-bordeaux.fr/mod/forum/view.php?id=726597", platform: "Moodle forum", note: "Any question about the course is welcome here. Please be respectful; do not share personal data." },
-              materialsFrom: "4tin402u-2026",
               sessions: [
-                { n: 0, title: "Premiers pas en OCaml", type: "CI", files: [] },
-                { n: 1, title: "Types paramétrés et vocabulaire des arbres binaires", type: "CI", files: [] },
-                { n: 2, title: "Arbres parfaits, complets, quasi-parfaits et induction structurelle", type: "CI", files: [] },
-                { n: 3, title: "Parcours d'arbres binaires", type: "CI", files: [] },
-                { n: 4, title: "Arbres binaires et arbres binaires de recherche : construction, recherche, insertion", type: "CI", files: [] },
-                { n: 5, title: "Arbres binaires de recherche : suppression, validation, intervalle et prédécesseur", type: "CI", files: [] },
-                { n: 6, title: "Hauteur des arbres binaires et arbres AVL", type: "CI", files: [] },
-                { n: 7, title: "Arbres rouges et noirs", type: "CI", files: [] },
-                { n: 8, title: "Chemins dans les arbres binaires", type: "CI", files: [] },
-                { n: 9, title: "Tas binaires", type: "CI", files: [] },
-                { n: 10, title: "Arbres planaires", type: "CI", files: [] },
-                { n: 11, title: "Codage de Huffman", type: "CI", files: [] },
-                { n: 12, title: "Tas binomiaux", type: "CI", files: [] }
+                { n: 0, title: "Premiers pas en OCaml", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S00-CI-premiers-pas-ocaml.pdf", kind: "slides", pages: 117 }] },
+                { n: 1, title: "Types paramétrés et vocabulaire des arbres binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S01-CI-types-parametres-vocabulaire.pdf", kind: "slides", pages: 74 }] },
+                { n: 2, title: "Arbres parfaits, complets, quasi-parfaits et induction structurelle", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S02-CI-arbres-parfaits-induction.pdf", kind: "slides", pages: 126 }] },
+                { n: 3, title: "Parcours d'arbres binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S03-CI-parcours.pdf", kind: "slides", pages: 150 }] },
+                { n: 4, title: "Arbres binaires et arbres binaires de recherche : construction, recherche, insertion", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S04-CI-abr-recherche-insertion.pdf", kind: "slides", pages: 157 }] },
+                { n: 5, title: "Arbres binaires de recherche : suppression, validation, intervalle et prédécesseur", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S05-CI-abr-suppression-validation.pdf", kind: "slides", pages: 156 }] },
+                { n: 6, title: "Hauteur des arbres binaires et arbres AVL", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S06-CI-hauteur-avl.pdf", kind: "slides", pages: 145 }] },
+                { n: 7, title: "Arbres rouges et noirs", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S07-CI-rouges-noirs.pdf", kind: "slides", pages: 145 }] },
+                { n: 8, title: "Chemins dans les arbres binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S08-CI-chemins.pdf", kind: "slides", pages: 163 }] },
+                { n: 9, title: "Tas binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S09-CI-tas-binaires.pdf", kind: "slides", pages: 166 }] },
+                { n: 10, title: "Arbres planaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S10-CI-arbres-planaires.pdf", kind: "slides", pages: 192 }] },
+                { n: 11, title: "Codage de Huffman", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S11-CI-huffman.pdf", kind: "slides", pages: 173 }] },
+                { n: 12, title: "Tas binomiaux", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin402u-2025/S12-CI-tas-binomiaux.pdf", kind: "slides", pages: 197 }] }
               ],
               extras: []
             },
