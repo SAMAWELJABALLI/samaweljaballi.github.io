@@ -72,11 +72,12 @@
   var pubs = S.publications.slice().sort(function (x, y) { return y.date.localeCompare(x.date) || x.title.localeCompare(y.title); });
   var peer = pubs.filter(function (p) { return p.status === "published" || p.status === "accepted"; });
   var teachYears = S.teaching.filter(function (y) { return !y.draft; });
+  teachYears.forEach(function (y) { y.institutions.forEach(function (i) { i.courses = i.courses.filter(function (c) { return !c.draft; }); }); });
   var allCourses = [];
   teachYears.forEach(function (y) { y.institutions.forEach(function (i) { i.courses.forEach(function (c) { allCourses.push({ year: y.year, inst: i, c: c }); }); }); });
   var latestTeaching = teachYears[0];
   var latestInst = latestTeaching.institutions[0];
-  var ROLE = { CM: "Lectures (CM)", TD: "Tutorials (TD)", TP: "Labs (TP)", Supervision: "Project supervision" };
+  var ROLE = { CI: "Integrated lectures (CI)", CM: "Lectures (CM)", TD: "Tutorials (TD)", TDM: "Computer lab tutorials (TD machine)", TP: "Labs (TP)", Supervision: "Project supervision" };
   var activities = S.activities.slice().sort(function (x, y) { return y.date.localeCompare(x.date); });
   var upcoming = []
     .concat(activities.map(function (t) { return { date: t.date, title: t.event, role: t.role, detail: t.place, href: "#activities" }; }))
@@ -370,7 +371,7 @@
       var items = res.filter(function (r) { return (r.kind || "other") === k[0] && r.url; });
       return items.length ? "<div><dt>" + k[1] + "</dt><dd>" + items.map(function (r) { return a(r.url, esc(r.label), "lchip"); }).join("") + "</dd></div>" : "";
     }).join("");
-    var obj = Array.isArray(c.objectives) ? c.objectives.filter(Boolean) : (c.objectives ? [c.objectives] : []);
+    var obj = c.slug ? [] : (Array.isArray(c.objectives) ? c.objectives.filter(Boolean) : (c.objectives ? [c.objectives] : []));
     var levels = (c.levels || []).filter(function (l) { return LEVEL[l]; });
     var lvlHtml = levels.length
       ? '<span class="lvl-badge" title="' + esc(levels.map(function (l) { return LEVEL[l]; }).join(" / ")) + '"><b>' + levels.join(" · ") + '</b><span class="lvl-txt">' +
@@ -395,12 +396,13 @@
         (c.topics && c.topics.length ? '<p class="kw-line">Topics: ' + c.topics.map(esc).join(" · ") + "</p>" : "") +
         (c.hours ? '<p class="course-note">' + esc(c.hours) + " hours</p>" : "") +
         (groups ? '<dl class="res">' + groups + "</dl>" : "") + (c.page ? a(c.page, "Course page", "w-link") : "") +
+        (c.slug ? '<a class="course-open" href="course.html?c=' + encodeURIComponent(c.slug) + '" aria-label="Open course page: ' + esc(c.title) + '">Open course<span aria-hidden="true"> →</span></a>' : "") +
       "</div></article>";
   }
   function teaching() {
     var tabs = teachYears.map(function (y, i) {
       var insts = y.institutions.map(function (x) { return x.institution; }).join(" · ");
-      return '<button type="button" role="tab" class="seg" id="tt-' + i + '" aria-controls="tp-' + i + '" aria-selected="' + (i === 0) + '"' + (i ? ' tabindex="-1"' : "") + ">" +
+      return '<button type="button" role="tab" class="seg" data-year="' + esc(y.year.replace(/\u2013/g, "-")) + '" id="tt-' + i + '" aria-controls="tp-' + i + '" aria-selected="' + (i === 0) + '"' + (i ? ' tabindex="-1"' : "") + ">" +
         esc(y.year) + '<span class="seg-sub">' + esc(insts) + "</span></button>";
     }).join("");
     var calIco = '<svg class="ico" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>';
@@ -418,7 +420,7 @@
     }).join("");
     return panel("teaching", "02 · Teaching", "Teaching & resources", esc(S.person.teachingStatement),
       '<div class="segs years" role="tablist" aria-label="Academic years">' + tabs + "</div>" + panes +
-      '<p class="legend">Each course shows its level, language and my role: <b>Lectures (CM)</b>, <b>Tutorials (TD)</b>, <b>Labs (TP)</b> or <b>Project supervision</b>.</p>');
+      '<p class="legend">Each course shows its level, language and my role: <b>Integrated lectures (CI)</b>, <b>Lectures (CM)</b>, <b>Tutorials (TD)</b>, <b>Computer lab tutorials (TD machine)</b>, <b>Labs (TP)</b> or <b>Project supervision</b>.</p>');
   }
 
   /* ================= SERVICE (supervision + academic service) ================= */
@@ -750,8 +752,16 @@
   addEventListener("resize", onScroll);
   onScroll();
 
+  /* #teaching-2025-2026 opens the matching year tab (links back from course pages) */
+  var yearHash = /^#teaching-(\d{4}-\d{4})$/.exec(location.hash);
+  if (yearHash) {
+    var yt = document.querySelector('.segs.years [data-year="' + yearHash[1] + '"]');
+    if (yt) yt.click();
+    var ts = document.getElementById("teaching");
+    if (ts) requestAnimationFrame(function () { ts.scrollIntoView(); });
+  }
   /* honour a hash on load (content is rendered by JS) */
-  if (location.hash.length > 1) {
+  if (!yearHash && location.hash.length > 1) {
     var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
     if (target) requestAnimationFrame(function () { target.scrollIntoView(); });
   }

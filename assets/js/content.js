@@ -291,14 +291,33 @@ window.SITE = {
        levelText:   level outside the L/M system (e.g. engineering school)
        languages:   ["Python"], ["C"], ["OCaml"] …
        tools:       ["dbt"] … (tools, shown separately from languages)
-       roles:       any of "CM", "TD", "TP", "Supervision" (only if documented)
+       roles:       any of "CI", "CM", "TD", "TDM", "TP", "Supervision" (only if documented)
+                    CI = integrated lectures, TDM = computer-lab tutorials (TD machine)
        roleNote:    short precision on the role
        illustration: "ds" | "py-basics" | "py-functions" | "trees-graphs" |
                     "compilation" | "projects" | "warehouse" | "ml" | "databases" | "oop"
-       description, objectives: ["…"], topics, hours, page
+       description, objectives: ["…"], topics, hours (always null), page
        resources:   [{ label, url, kind: "slides" | "exercises" | "solutions" | "notebook" | "project" | "other" }]
        scheduled:   true for upcoming teaching (shows a "Scheduled teaching" badge)
        track:       programme/track shown with the level (e.g. "MIAGE track")
+       draft:       true hides the course (kept in the file, not displayed)
+     Course page (course.html?c=<slug>) — only for courses with a `slug`:
+       slug:          "4tin302u-2025" — URL identifier, unique and permanent
+       intro:         "Overview" paragraph (audience, place in the curriculum, main idea)
+       objectives:    learning objectives (action verbs)
+       approach:      "Teaching approach" paragraph
+       prerequisites: ["…"] (optional)
+       assessment:    assessment, only as documented (no weights)
+       team:          [{ name, role, me: true }] — course coordinator(s) (and lecturer if different), then me
+       moodle:        { url, note: "University login required" } — no url = no button
+       website:       { url, label: "Course website" } — official course page, optional
+       chat:          { url, platform, note } — "Course discussion" button; no url = no button
+       sessions:      [{ n, title, type: "CI"|"CM"|"TD"|"TDM"|"TP"|"Project", summary,
+                         files: [{ label, url, kind, pages }] }]
+                      kind: slides | handout | exercises | solutions | code | data | reminder | other
+       parts:         [{ title, sessions: [...] }] — instead of `sessions` when the course is split in parts
+       extras:        [{ label, url, kind, pages }] — course-wide resources
+       materialsFrom: slug of another edition that hosts the materials (shows a link instead of files)
      A year with `draft: true` is NOT displayed (useful to prepare a future year).
      ------------------------------------------------------------------- */
   teaching: [
@@ -306,39 +325,443 @@ window.SITE = {
       institutions: [
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
-            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "Principes de base de l'algorithmique et de la programmation", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Master's Programming Projects", semester: 2, scheduled: true, levels: ["M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, scheduled: true, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
-            { code: "", title: "Object-Oriented Programming", semester: 2, scheduled: true, levels: ["L3"], track: "MIAGE track", languages: ["C++"], roles: ["CM", "TP"], illustration: "oop", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "4TTV109U", title: "Fundamentals of Algorithms and Programming", officialName: "Principes de base de l'algorithmique et de la programmation", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CI", "TDM"], illustration: "py-basics", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4ttv109u-2026",
+              intro: "A first-year bachelor's course (L1) whose aim is to learn to program and to reason about a simple algorithm, in Python. Content: first steps, lists and for loops, typing and complexity, indexed access, files, image processing and while loops.",
+              objectives: [
+                "Write simple Python programs with variables, functions, lists and loops",
+                "Reason about a simple algorithm and its cost",
+                "Use indexed access and process data read from files",
+                "Manipulate images as matrices of pixels"
+              ],
+              approach: "In integrated lectures, each notion is presented and then programmed straight away in the computer lab. Image processing serves as a visual application field for loops and arrays.",
+              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle, which automatically checks students' code.",
+              team: [
+                { name: "Christophe Casseau", role: "Course coordinator" },
+                { name: "Jean-Pierre Gruselle", role: "Co-coordinator" },
+                { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=28244", note: "University login required" },
+              sessions: [
+                { n: 1, title: "Premiers pas en Python", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S01-CI-premiers-pas.pdf", kind: "slides", pages: 105 }] },
+                { n: 2, title: "Listes et boucles for", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S02-CI-listes-for.pdf", kind: "slides", pages: 143 }] },
+                { n: 3, title: "Compléments : typage, complexité et révisions", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S03-CI-typage-complexite.pdf", kind: "slides", pages: 135 }] },
+                { n: 4, title: "Accès indexé", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S04-CI-acces-indexe.pdf", kind: "slides", pages: 89 }] },
+                { n: 5, title: "Fichiers : lecture, écriture et analyse de données", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S05-CI-fichiers.pdf", kind: "slides", pages: 107 }] },
+                { n: 6, title: "Images PGM et PPM : pixels, matrices et pixel art", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S06-CI-images.pdf", kind: "slides", pages: 108 }] },
+                { n: 7, title: "Boucle conditionnelle while", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4ttv109u-2026/S07-CI-while.pdf", kind: "slides", pages: 143 }] }
+              ],
+              extras: []
+            },
+            { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CI", "TDM"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4tpu146u-2026",
+              intro: "A first-year bachelor's course (L1) whose aim is to learn to program and to reason about a simple algorithm, in Python: first steps, lists and for loops, typing and complexity, indexed access, image processing and while loops. It adds four chapters introducing graphs and logic: vertices, basic logic, the handshake formula, paths and connectivity.",
+              objectives: [
+                "Write simple Python programs with variables, functions, lists and loops",
+                "Reason about a simple algorithm and its cost",
+                "Process images as arrays of pixels",
+                "Use basic logic and first notions of graph theory: degrees, paths, connectivity"
+              ],
+              approach: "In integrated lectures, each notion is presented and then programmed straight away in the computer lab. Image processing serves as a visual application field for loops and arrays.",
+              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle, which automatically checks students' code.",
+              team: [
+                { name: "Christophe Casseau", role: "Course coordinator" },
+                { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=25908", note: "University login required" },
+              parts: [
+                { title: "Programmation", sessions: [
+                  { n: 1, title: "Premiers pas en Python", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S01-CI-premiers-pas.pdf", kind: "slides", pages: 80 }] },
+                  { n: 2, title: "Listes et boucles for", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S02-CI-listes-boucles-for.pdf", kind: "slides", pages: 71 }] },
+                  { n: 3, title: "Compléments : typage, complexité et exercices de révisions", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S03-CI-typage-complexite.pdf", kind: "slides", pages: 69 }] },
+                  { n: 4, title: "Accès indexé", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S04-CI-acces-indexe.pdf", kind: "slides", pages: 65 }] },
+                  { n: 5, title: "Dessin d'images", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S05-CI-dessin-images.pdf", kind: "slides", pages: 73 }] },
+                  { n: 6, title: "Manipulations d'images", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S06-CI-manipulations-images.pdf", kind: "slides", pages: 66 }] },
+                  { n: 7, title: "Boucle conditionnelle, représentation des nombres", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S07-CI-while-nombres.pdf", kind: "slides", pages: 64 }] }
+                ] },
+                { title: "Initiation aux graphes et à la logique", sessions: [
+                  { n: 8, title: "Sommets d'un graphe", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S08-CI-sommets-graphe.pdf", kind: "slides", pages: 78 }] },
+                  { n: 9, title: "Logique de base", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S09-CI-logique-base.pdf", kind: "slides", pages: 94 }] },
+                  { n: 10, title: "Formule des poignées de mains, graphes simples", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S10-CI-poignees-mains.pdf", kind: "slides", pages: 90 }] },
+                  { n: 11, title: "Chaînes et connexité", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tpu146u-2026/S11-CI-chaines-connexite.pdf", kind: "slides", pages: 77 }] }
+                ] }
+              ],
+              extras: []
+            },
+            { code: "", title: "Master's Programming Projects", semester: 2, draft: true, scheduled: true, levels: ["M2"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] },
+            { code: "4TIN402U", title: "Tree Data Structures and Algorithms", officialName: "Algorithmique des structures de données arborescentes", semester: 2, scheduled: true, levels: ["L2"], languages: ["OCaml"], roles: ["CI", "TDM"], illustration: "trees-graphs", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4tin402u-2026",
+              intro: "A second-year bachelor's course (L2) on tree data structures, in OCaml, shared with the course Algorithmique et programmation fonctionnelle (APF). Its thirteen sheets cover the vocabulary and traversals of binary trees, perfect trees and reasoning by induction, binary search trees (search, insertion, deletion, validation), height and AVL trees, red–black trees, binary and binomial heaps, planar trees and Huffman coding.",
+              objectives: [
+                "Define tree structures inductively and reason by structural induction",
+                "Program traversals, search, insertion and deletion on trees in OCaml",
+                "Prove properties on small examples and analyse complexity",
+                "Implement balanced trees (AVL, red–black), heaps and Huffman coding"
+              ],
+              approach: "Each structure is first defined inductively, then programmed and proved on small examples. Teaching the course two years in a row lets the materials and exercises evolve from one cohort to the next.",
+              assessment: "Continuous assessment: tests, a written mid-term exam (DS), a computer-lab exam, a final written exam and VPL exercises on Moodle.",
+              team: [
+                { name: "Stefka Gueorguieva", role: "Course coordinator" },
+                { name: "Marc Zeitoun", role: "Lectures (CM), shared with APF" },
+                { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=24843", note: "University login required" },
+              chat: { url: "https://moodle.u-bordeaux.fr/mod/forum/view.php?id=726597", platform: "Moodle forum", note: "Any question about the course is welcome here. Please be respectful; do not share personal data." },
+              sessions: [
+                { n: 0, title: "Premiers pas en OCaml", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S00-CI-premiers-pas-ocaml.pdf", kind: "slides", pages: 117 }] },
+                { n: 1, title: "Types paramétrés et vocabulaire des arbres binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S01-CI-types-parametres-vocabulaire.pdf", kind: "slides", pages: 74 }] },
+                { n: 2, title: "Arbres parfaits, complets, quasi-parfaits et induction structurelle", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S02-CI-arbres-parfaits-induction.pdf", kind: "slides", pages: 126 }] },
+                { n: 3, title: "Parcours d'arbres binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S03-CI-parcours.pdf", kind: "slides", pages: 150 }] },
+                { n: 4, title: "Arbres binaires et arbres binaires de recherche : construction, recherche, insertion", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S04-CI-abr-recherche-insertion.pdf", kind: "slides", pages: 157 }] },
+                { n: 5, title: "Arbres binaires de recherche : suppression, validation, intervalle et prédécesseur", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S05-CI-abr-suppression-validation.pdf", kind: "slides", pages: 156 }] },
+                { n: 6, title: "Hauteur des arbres binaires et arbres AVL", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S06-CI-hauteur-avl.pdf", kind: "slides", pages: 145 }] },
+                { n: 7, title: "Arbres rouges et noirs", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S07-CI-rouges-noirs.pdf", kind: "slides", pages: 145 }] },
+                { n: 8, title: "Chemins dans les arbres binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S08-CI-chemins.pdf", kind: "slides", pages: 163 }] },
+                { n: 9, title: "Tas binaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S09-CI-tas-binaires.pdf", kind: "slides", pages: 166 }] },
+                { n: 10, title: "Arbres planaires", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S10-CI-arbres-planaires.pdf", kind: "slides", pages: 192 }] },
+                { n: 11, title: "Codage de Huffman", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S11-CI-huffman.pdf", kind: "slides", pages: 173 }] },
+                { n: 12, title: "Tas binomiaux", type: "CI", files: [{ label: "Slides", url: "files/courses/2026-2027/4tin402u-2026/S12-CI-tas-binomiaux.pdf", kind: "slides", pages: 197 }] }
+              ],
+              extras: []
+            },
+            { code: "4TYG602U", title: "Object-Oriented Programming", officialName: "Programmation orientée objet", semester: 2, scheduled: true, levels: ["L3"], track: "MIAGE track", languages: ["C++"], roles: ["TD"], illustration: "oop", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2025–2026",
       institutions: [
         { institution: "University of Bordeaux", unit: "College of Science and Technology — Computer Science Unit", role: "ATER (full-time)",
           courses: [
-            { code: "4TIN302U", title: "Elementary Data Structures & Algorithms", semester: 1, levels: ["L2"], languages: ["C"], roles: ["CM", "TP"], illustration: "ds", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CM", "TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TIN402U", title: "Advanced Data Structures — Trees & Graphs", semester: 2, levels: ["L2"], languages: ["OCaml"], roles: ["CM", "TP"], illustration: "trees-graphs", description: "", objectives: [], topics: ["Trees", "Graphs"], hours: null, resources: [] },
-            { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TD"], roleNote: "Tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "4TIN802U", title: "Master's Programming Projects", semester: 2, levels: ["M1"], languages: ["Java", "Python"], roles: ["Supervision"], roleNote: "Supervision of master's programming projects in Java and Python.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "4TIN302U", slug: "4tin302u-2025", title: "Elementary Data Structures & Algorithms", officialName: "Algorithmique des structures de données élémentaires", semester: 1, levels: ["L2"], languages: ["C"], roles: ["CI", "TD", "TDM"], illustration: "ds",
+              description: "",
+              intro: "A second-year bachelor's course (L2) on elementary data structures, taught in C. It aims at mastering abstract data types (ADTs) and the cost of algorithms. The move from pseudo-code to C links the abstraction (the ADT) to its realisation in memory.",
+              objectives: [
+                "Master the abstract data types stack, queue, linked list and hash table",
+                "Analyse the cost of algorithms: complexity and recursion",
+                "Implement these structures in C, including singly and doubly linked lists",
+                "Choose the appropriate structure for a given problem"
+              ],
+              approach: "The course follows a competency-based approach with constructive alignment. Each chapter sets observable learning outcomes (“by the end of this chapter, you can…”); the exercises work on them one by one, and assessment targets exactly these outcomes. The structures are first used as abstract data types, then implemented in C with the course library libasde.",
+              assessment: "The semester ends with a computer-lab exam on Virtual Programming Lab (VPL), under Moodle.",
+              team: [
+                { name: "Carole Blanc", role: "Course coordinator" },
+                { name: "Samawel Jaballi", role: "Lecturer — integrated lectures, tutorials and computer labs", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=22335", note: "University login required" },
+              parts: [
+                { title: "Utiliser les structures : types abstraits", sessions: [
+                  { n: 1, title: "Les fondations : tableaux, récursivité et complexité", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S01-CI-fondations.pdf", kind: "slides", pages: 71 }] },
+                  { n: 2, title: "Le type abstrait Pile", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S02-CI-pile.pdf", kind: "slides", pages: 68 }] },
+                  { n: 3, title: "Le type abstrait File, et choisir entre pile et file", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S03-CI-file.pdf", kind: "slides", pages: 62 }] },
+                  { n: 4, title: "Le type abstrait Liste chaînée", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S04-CI-liste-chainee.pdf", kind: "slides", pages: 58 }] }
+                ] },
+                { title: "Implémenter les structures en C", sessions: [
+                  { n: 5, title: "Implémentation concrète de la pile et de la file", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S05-CI-implementation-pile-file.pdf", kind: "slides", pages: 48 }] },
+                  { n: 6, title: "Implémentation concrète des listes chaînées : SList et DList", type: "CI", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S06-CI-slist-dlist.pdf", kind: "slides", pages: 55 }] },
+                  { n: 7, title: "Les tables de hachage", type: "CI", summary: "Hash tables and collisions.", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S07-CI-hachage.pdf", kind: "slides", pages: 99 }] }
+                ] },
+                { title: "Synthèse", sessions: [
+                  { n: 8, title: "Synthèse : choisir une structure, préparer le TP noté", type: "CI", summary: "Each problem calls for a structure: undo and redo (two stacks), round-robin scheduling (queue), duplicate removal (linked list and hash table).", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin302u-2025/S08-CI-synthese.pdf", kind: "slides", pages: 68 }] }
+                ] }
+              ],
+              extras: [],
+              topics: [], hours: null, resources: [] },
+            { code: "4TPU146U", title: "Computer Science 1", officialName: "Informatique 1", semester: 1, levels: ["L1"], languages: ["Python"], roles: ["CI", "TDM"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4tpu146u-2025",
+              intro: "A first-year bachelor's course (L1) whose aim is to learn to program and to reason about a simple algorithm, in Python: first steps, lists and for loops, typing and complexity, indexed access, image processing and while loops. It adds four chapters introducing graphs and logic: vertices, basic logic, the handshake formula, paths and connectivity.",
+              objectives: [
+                "Write simple Python programs with variables, functions, lists and loops",
+                "Reason about a simple algorithm and its cost",
+                "Process images as arrays of pixels",
+                "Use basic logic and first notions of graph theory: degrees, paths, connectivity"
+              ],
+              approach: "In integrated lectures, each notion is presented and then programmed straight away in the computer lab. Image processing serves as a visual application field for loops and arrays.",
+              assessment: "Three tests, one every four chapters, then a computer-lab exam on Virtual Programming Lab (VPL), under Moodle, which automatically checks students' code.",
+              team: [
+                { name: "Christophe Casseau", role: "Course coordinator" },
+                { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=20815", note: "University login required" },
+              materialsFrom: "4tpu146u-2026",
+              parts: [
+                { title: "Programmation", sessions: [
+                  { n: 1, title: "Premiers pas en Python", type: "CI", files: [] },
+                  { n: 2, title: "Listes et boucles for", type: "CI", files: [] },
+                  { n: 3, title: "Compléments : typage, complexité et exercices de révisions", type: "CI", files: [] },
+                  { n: 4, title: "Accès indexé", type: "CI", files: [] },
+                  { n: 5, title: "Dessin d'images", type: "CI", files: [] },
+                  { n: 6, title: "Manipulations d'images", type: "CI", files: [] },
+                  { n: 7, title: "Boucle conditionnelle, représentation des nombres", type: "CI", files: [] }
+                ] },
+                { title: "Initiation aux graphes et à la logique", sessions: [
+                  { n: 8, title: "Sommets d'un graphe", type: "CI", files: [] },
+                  { n: 9, title: "Logique de base", type: "CI", files: [] },
+                  { n: 10, title: "Formule des poignées de mains, graphes simples", type: "CI", files: [] },
+                  { n: 11, title: "Chaînes et connexité", type: "CI", files: [] }
+                ] }
+              ],
+              extras: []
+            },
+            { code: "4TIN402U", title: "Tree Data Structures and Algorithms", officialName: "Algorithmique des structures de données arborescentes", semester: 2, levels: ["L2"], languages: ["OCaml"], roles: ["CI", "TDM"], illustration: "trees-graphs", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4tin402u-2025",
+              intro: "A second-year bachelor's course (L2) on tree data structures, in OCaml, shared with the course Algorithmique et programmation fonctionnelle (APF). Its thirteen sheets cover the vocabulary and traversals of binary trees, perfect trees and reasoning by induction, binary search trees (search, insertion, deletion, validation), height and AVL trees, red–black trees, binary and binomial heaps, planar trees and Huffman coding.",
+              objectives: [
+                "Define tree structures inductively and reason by structural induction",
+                "Program traversals, search, insertion and deletion on trees in OCaml",
+                "Prove properties on small examples and analyse complexity",
+                "Implement balanced trees (AVL, red–black), heaps and Huffman coding"
+              ],
+              approach: "Each structure is first defined inductively, then programmed and proved on small examples. Teaching the course two years in a row lets the materials and exercises evolve from one cohort to the next.",
+              assessment: "Continuous assessment: tests, a written mid-term exam (DS), a computer-lab exam, a final written exam and VPL exercises on Moodle.",
+              team: [
+                { name: "Stefka Gueorguieva", role: "Course coordinator" },
+                { name: "Marc Zeitoun", role: "Lectures (CM), shared with APF" },
+                { name: "Samawel Jaballi", role: "Lecturer — integrated lectures and computer labs", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=24843", note: "University login required" },
+              chat: { url: "https://moodle.u-bordeaux.fr/mod/forum/view.php?id=726597", platform: "Moodle forum", note: "Any question about the course is welcome here. Please be respectful; do not share personal data." },
+              materialsFrom: "4tin402u-2026",
+              sessions: [
+                { n: 0, title: "Premiers pas en OCaml", type: "CI", files: [] },
+                { n: 1, title: "Types paramétrés et vocabulaire des arbres binaires", type: "CI", files: [] },
+                { n: 2, title: "Arbres parfaits, complets, quasi-parfaits et induction structurelle", type: "CI", files: [] },
+                { n: 3, title: "Parcours d'arbres binaires", type: "CI", files: [] },
+                { n: 4, title: "Arbres binaires et arbres binaires de recherche : construction, recherche, insertion", type: "CI", files: [] },
+                { n: 5, title: "Arbres binaires de recherche : suppression, validation, intervalle et prédécesseur", type: "CI", files: [] },
+                { n: 6, title: "Hauteur des arbres binaires et arbres AVL", type: "CI", files: [] },
+                { n: 7, title: "Arbres rouges et noirs", type: "CI", files: [] },
+                { n: 8, title: "Chemins dans les arbres binaires", type: "CI", files: [] },
+                { n: 9, title: "Tas binaires", type: "CI", files: [] },
+                { n: 10, title: "Arbres planaires", type: "CI", files: [] },
+                { n: 11, title: "Codage de Huffman", type: "CI", files: [] },
+                { n: 12, title: "Tas binomiaux", type: "CI", files: [] }
+              ],
+              extras: []
+            },
+            { code: "4TIN603U", title: "Compilation", semester: 2, levels: ["L3"], languages: ["OCaml"], roles: ["TDM"], roleNote: "Computer-lab tutorials are taught in OCaml.", illustration: "compilation", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4tin603u-2025",
+              intro: "A third-year bachelor's course (L3) whose objective is to understand and build the stages of a compiler, in OCaml: semantics on paper, then an interpreter; lexical analysis; LR parsing; simplification and typing; generation of three-address code.",
+              objectives: [
+                "Explain the stages of a compiler and the semantics of a language",
+                "Write lexers by hand and with ocamllex",
+                "Build LR parsers with Menhir and Cairn",
+                "Implement simplification, type checking and translation to three-address code"
+              ],
+              approach: "Most of the course consists in explaining the concepts of compilation and making them concrete. Each tutorial alternates a session on paper and an implementation session on the course compiler. The common thread is the mini-ML project, in three parts: interpreter, parsing, typing.",
+              team: [
+                { name: "Vincent Penelle", role: "Course coordinator and lecturer (CM)" },
+                { name: "Samawel Jaballi", role: "Computer lab tutorials (TD machine)", me: true }
+              ],
+              moodle: { url: "https://moodle.u-bordeaux.fr/course/view.php?id=12583", note: "Submission platform · University login required" },
+              website: { url: "https://vpenelle.pages.emi.u-bordeaux.fr/compilation/", label: "Course website" },
+              sessions: [
+                { n: 1, title: "TD 1 — Remise en jambe OCaml et concepts utiles", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S01-TDM-ocaml.pdf", kind: "slides", pages: 70 }] },
+                { n: 2, title: "TD 2 (1/2) — Sémantique : exercices papier", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S02-TDM-semantique-papier.pdf", kind: "slides", pages: 75 }] },
+                { n: 3, title: "TD 2 (2/2) — Interpréteur du langage du cours", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S03-TDM-interpreteur.pdf", kind: "slides", pages: 70 }] },
+                { n: 4, title: "TD 3 (1/2) — Lexeur à la main, introduction à ocamllex", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S04-TDM-lexeurs.pdf", kind: "slides", pages: 66 }] },
+                { n: 5, title: "TD 3 (2/2) — Lexeur du langage du cours, lexeur interpréteur, sérialisation", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S05-TDM-lexeur-du-cours.pdf", kind: "slides", pages: 67 }] },
+                { n: 6, title: "TD 4 (1/3) — Parsing LR avec Menhir et Cairn", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S06-TDM-parsing-lr.pdf", kind: "slides", pages: 71 }] },
+                { n: 7, title: "TD 4 (2/3) — Parseur du langage du cours, partie 1", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S07-TDM-parseur-1.pdf", kind: "slides", pages: 62 }] },
+                { n: 8, title: "TD 4 (3/3) — Parseur du langage du cours, partie 2", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S08-TDM-parseur-2.pdf", kind: "slides", pages: 65 }] },
+                { n: 9, title: "TD 5 (1/2) — Simplification d'AST et vérification de types", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S09-TDM-simplification-typage.pdf", kind: "slides", pages: 62 }] },
+                { n: 10, title: "TD 5 (2/2) — Traduction en code à trois adresses", type: "TDM", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin603u-2025/S10-TDM-code-3-adresses.pdf", kind: "slides", pages: 69 }] },
+                { n: 11, title: "Projet mini-ML : présentation et méthode", type: "Project", summary: "The common thread of the course, in three parts: interpreter, parsing, typing.", files: [{ label: "Project method", url: "files/courses/2025-2026/4tin603u-2025/S11-PROJET-mini-ml.pdf", kind: "handout", pages: 67 }] }
+              ],
+              extras: []
+            },
+            { code: "4TIN802U", title: "Programming Project", officialName: "Projet de programmation", semester: 2, levels: ["M1"], languages: ["Java", "Python"], roles: ["TD"], roleNote: "Taught jointly with Mathieu Hilaire: student teams building Scrabble and Carcassonne in Python and Java.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "4tin802u-2025",
+              intro: "A first-year master's course (M1), taught jointly with Mathieu Hilaire. We supervise project groups on two subjects, Scrabble and Carcassonne; the teams build the game in Python and in Java.",
+              objectives: [
+                "Design and build a complete board game as a team, in Python or Java",
+                "Organise and share the work with Scrum",
+                "Collaborate with Git and deliver at regular milestones",
+                "Apply good programming practices, including with code assistants"
+              ],
+              approach: "Project-based learning, taught in pairs. Supervision covers design, division of work, version control and deliverables; projects are followed on GitLab with weekly milestones. Materials: presentation of each subject at launch, sheets on team Git and Scrum, and good-practice sheets.",
+              assessment: "A mid-term progress report after six weeks, a final report, a code review (quality, compliance with the specifications, optimisation, documentation) and a defence.",
+              team: [
+                { name: "Emmanuel Fleury", role: "Course coordinator" },
+                { name: "Mathieu Hilaire", role: "Lecturer — project supervision" },
+                { name: "Samawel Jaballi", role: "Lecturer — project supervision", me: true }
+              ],
+              sessions: [
+                { n: 1, title: "Projet Scrabble – Python : lancement du projet", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S01-PROJET-scrabble-python.pdf", kind: "slides", pages: 32 }] },
+                { n: 2, title: "Projet Scrabble – Java : lancement du projet", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S02-PROJET-scrabble-java.pdf", kind: "slides", pages: 32 }] },
+                { n: 3, title: "Projet Carcassonne – Python : lancement du projet", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S03-PROJET-carcassonne-python.pdf", kind: "slides", pages: 32 }] },
+                { n: 4, title: "Projet Carcassonne – Java : lancement du projet", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S04-PROJET-carcassonne-java.pdf", kind: "slides", pages: 32 }] },
+                { n: 5, title: "Git en équipe et Scrum : branches, revues et sprints", type: "Project", files: [{ label: "Slides", url: "files/courses/2025-2026/4tin802u-2025/S05-PROJET-git-equipe-scrum.pdf", kind: "slides", pages: 36 }] }
+              ],
+              extras: [
+                { label: "Good-practice sheet — Git", url: "files/courses/2025-2026/4tin802u-2025/fiche-git.pdf", kind: "handout", pages: 2 },
+                { label: "Good-practice sheet — Code assistants (vibe coding)", url: "files/courses/2025-2026/4tin802u-2025/fiche-vibe-coding.pdf", kind: "handout", pages: 2 },
+                { label: "Good-practice sheet — Python project", url: "files/courses/2025-2026/4tin802u-2025/fiche-python.pdf", kind: "handout", pages: 2 },
+                { label: "Good-practice sheet — C project", url: "files/courses/2025-2026/4tin802u-2025/fiche-c.pdf", kind: "handout", pages: 2 }
+              ]
+            },
+            { code: "4TIN001U", title: "Master's Internship", officialName: "Stage", semester: 2, levels: ["M2"], languages: [], roles: [], roleNote: "M2 internship — academic referent (follow-up, remote site visit, assessment).", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [] }
           ] }
       ] },
     { year: "2023–2024",
       institutions: [
         { institution: "Private Polytechnic School of Monastir", unit: "Software Engineering programme", role: "Part-time lecturer",
           courses: [
-            { code: "", title: "Data Warehousing", semester: 2, levels: [], levelText: "Engineering — Year 5", termNote: "Evening course", languages: ["Python", "SQL"], tools: ["dbt"], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Machine Learning", semester: 2, levels: [], levelText: "Engineering — Year 4", languages: ["Advanced Python"], roles: ["CM", "TP"], illustration: "ml", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "", title: "Data Warehousing", officialName: "Data Warehouse", semester: 2, levels: [], levelText: "Engineering — Year 5", termNote: "Evening course", languages: ["Python", "SQL"], tools: ["dbt"], roles: ["CI", "TDM"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "dw-polytech-2023",
+              intro: "An evening course for final-year students of the software-engineering programme (Engineering — Year 5). It follows the chain of a modern data warehouse as practised in industry: dimensional modelling, fact and dimension tables, ingestion, analytical SQL, transformation with dbt, tests and documentation, industrialisation.",
+              objectives: [
+                "Design a dimensional model with fact and dimension tables",
+                "Ingest data and control its quality with Python",
+                "Write analytical SQL queries",
+                "Build, test and document transformations with dbt",
+                "Industrialise a data-warehouse pipeline"
+              ],
+              approach: "Integrated lectures and computer-lab tutorials, over eleven chapters. The course ends with a capstone project that implements the whole chain end to end.",
+              team: [
+                { name: "Samawel Jaballi", role: "Course coordinator and lecturer", me: true }
+              ],
+              sessions: [
+                { n: 1, title: "Fondamentaux du Data Warehouse", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S01-CI-fondamentaux.pdf", kind: "slides", pages: 68 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S01-TDM-fondamentaux.pdf", kind: "exercises", pages: 30 }] },
+                { n: 2, title: "Modélisation dimensionnelle", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S02-CI-modelisation.pdf", kind: "slides", pages: 55 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S02-TDM-modelisation.pdf", kind: "exercises", pages: 26 }] },
+                { n: 3, title: "Dimensions et historisation", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S03-CI-dimensions.pdf", kind: "slides", pages: 46 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S03-TDM-dimensions.pdf", kind: "exercises", pages: 26 }] },
+                { n: 4, title: "Tables de faits", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S04-CI-faits.pdf", kind: "slides", pages: 45 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S04-TDM-faits.pdf", kind: "exercises", pages: 29 }] },
+                { n: 5, title: "Ingestion avec Python", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S05-CI-ingestion.pdf", kind: "slides", pages: 48 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S05-TDM-ingestion.pdf", kind: "exercises", pages: 23 }] },
+                { n: 6, title: "SQL analytique", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S06-CI-sql-analytique.pdf", kind: "slides", pages: 46 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S06-TDM-sql-analytique.pdf", kind: "exercises", pages: 25 }] },
+                { n: 7, title: "dbt pour l'analytics engineering", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S07-CI-dbt.pdf", kind: "slides", pages: 47 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S07-TDM-dbt.pdf", kind: "exercises", pages: 22 }] },
+                { n: 8, title: "Tests, documentation et qualité", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S08-CI-tests-docs.pdf", kind: "slides", pages: 46 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S08-TDM-tests-docs.pdf", kind: "exercises", pages: 23 }] },
+                { n: 9, title: "Industrialisation", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S09-CI-industrialisation.pdf", kind: "slides", pages: 61 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S09-TDM-industrialisation.pdf", kind: "exercises", pages: 15 }] },
+                { n: 10, title: "Projet", type: "Project", summary: "Capstone project implementing the whole chain end to end.", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S10-CI-projet.pdf", kind: "slides", pages: 52 }, { label: "Lab", url: "files/courses/2023-2024/dw-polytech-2023/S10-TDM-projet.pdf", kind: "exercises", pages: 16 }] },
+                { n: 11, title: "Révisions", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/dw-polytech-2023/S11-CI-revisions.pdf", kind: "slides", pages: 44 }] }
+              ],
+              extras: []
+            },
+            { code: "", title: "Machine Learning", semester: 2, levels: [], levelText: "Engineering — Year 4", languages: ["Advanced Python"], roles: ["CI", "TDM"], illustration: "ml", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "ml-polytech-2023",
+              intro: "A course for fourth-year students of the software-engineering programme (Engineering — Year 4), from statistical foundations to current architectures, in nine chapters. Each chapter has its lab in Python, from data preprocessing to model evaluation.",
+              objectives: [
+                "Formalise a learning problem and the bias–variance trade-off",
+                "Preprocess data and build pipelines",
+                "Evaluate models rigorously: cross-validation, ROC and PR curves, imbalanced data",
+                "Use linear models, k-NN, naive Bayes, SVMs, trees and ensemble methods",
+                "Apply unsupervised learning (PCA, k-means, EM), neural networks, CNNs and transformers"
+              ],
+              approach: "Integrated lectures and computer-lab tutorials: each chapter has its lab in Python. Research informs the course: evaluation on imbalanced data and ensemble methods (AdaBoost), central to my PhD, have their place in it.",
+              team: [
+                { name: "Samawel Jaballi", role: "Course coordinator and lecturer", me: true }
+              ],
+              sessions: [
+                { n: 1, title: "Introduction au Machine Learning", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S01-CI-introduction.pdf", kind: "slides", pages: 74 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S01-TDM-introduction.pdf", kind: "exercises", pages: 30 }] },
+                { n: 2, title: "Données, prétraitement et pipelines", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S02-CI-pretraitement.pdf", kind: "slides", pages: 79 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S02-TDM-pretraitement.pdf", kind: "exercises", pages: 28 }] },
+                { n: 3, title: "Modèles linéaires et optimisation", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S03-CI-modeles-lineaires.pdf", kind: "slides", pages: 100 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S03-TDM-modeles-lineaires.pdf", kind: "exercises", pages: 28 }] },
+                { n: 4, title: "Évaluation et sélection de modèle", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S04-CI-evaluation.pdf", kind: "slides", pages: 77 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S04-TDM-evaluation.pdf", kind: "exercises", pages: 29 }] },
+                { n: 5, title: "kNN, Bayes naïf, SVM et noyaux", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S05-CI-knn-bayes-svm.pdf", kind: "slides", pages: 100 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S05-TDM-knn-bayes-svm.pdf", kind: "exercises", pages: 28 }] },
+                { n: 6, title: "Arbres et méthodes d'ensemble", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S06-CI-arbres-ensembles.pdf", kind: "slides", pages: 116 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S06-TDM-arbres-ensembles.pdf", kind: "exercises", pages: 27 }] },
+                { n: 7, title: "Apprentissage non supervisé", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S07-CI-non-supervise.pdf", kind: "slides", pages: 85 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S07-TDM-non-supervise.pdf", kind: "exercises", pages: 27 }] },
+                { n: 8, title: "Réseaux de neurones et PyTorch", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S08-CI-reseaux-neurones.pdf", kind: "slides", pages: 96 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S08-TDM-reseaux-neurones.pdf", kind: "exercises", pages: 29 }] },
+                { n: 9, title: "CNN, transfer learning et transformers", type: "CI", files: [{ label: "Slides", url: "files/courses/2023-2024/ml-polytech-2023/S09-CI-cnn-transformers.pdf", kind: "slides", pages: 85 }, { label: "Lab", url: "files/courses/2023-2024/ml-polytech-2023/S09-TDM-cnn-transformers.pdf", kind: "exercises", pages: 27 }] }
+              ],
+              extras: [
+                { label: "Project", url: "files/courses/2023-2024/ml-polytech-2023/projet-presentation.pdf", kind: "handout", pages: 38 },
+                { label: "Revision", url: "files/courses/2023-2024/ml-polytech-2023/revisions.pdf", kind: "slides", pages: 136 }
+              ]
+            }
           ] }
       ] },
     { year: "2022–2023",
       institutions: [
         { institution: "Faculty of Sciences, University of Monastir", unit: "Department of Computer Science", role: "Part-time lecturer",
           courses: [
-            { code: "", title: "Advanced Python Programming", semester: 1, levels: ["L3"], languages: ["Python"], roles: ["TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Relational Databases", semester: 1, levels: ["L2"], languages: ["SQL"], roles: ["TP"], illustration: "databases", description: "", objectives: [], topics: [], hours: null, resources: [] },
-            { code: "", title: "Data Warehousing", semester: 2, levels: ["L3"], languages: ["SQL", "Python"], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [] }
+            { code: "", title: "Advanced Python Programming", officialName: "Programmation Python avancée", semester: 1, levels: ["L3"], languages: ["Python"], roles: ["TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "pyav-fsm-2022",
+              intro: "A third-year bachelor's course (L3). I taught all the lab sessions: development environment, data structures, functions, decorators, iterators, object-oriented programming, dataclasses. Students move from an elementary use of the language to structured, reusable code.",
+              objectives: [
+                "Set up a professional Python development environment",
+                "Use advanced data structures, functions, closures and decorators",
+                "Write iterators, generators and object-oriented code with dataclasses and typing",
+                "Handle exceptions, files and tests, and measure performance"
+              ],
+              approach: "Each lab session comes with a short course reminder. This was my first teaching experience, as part of my doctoral training (teaching credits required by the EDSTI doctoral school, University of Monastir). Course materials: S. Jaballi.",
+              team: [
+                { name: "Mohsen Maraoui", role: "Course coordinator" },
+                { name: "Samawel Jaballi", role: "Labs (TP)", me: true }
+              ],
+              sessions: [
+                { n: 1, title: "Environnement et outils du développeur Python", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S01-TP-environnement.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S01-rappel-environnement.pdf", kind: "reminder", pages: 14 }] },
+                { n: 2, title: "Structures de données avancées", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S02-TP-structures.pdf", kind: "exercises", pages: 27 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S02-rappel-structures.pdf", kind: "reminder", pages: 14 }] },
+                { n: 3, title: "Fonctions avancées", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S03-TP-fonctions.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S03-rappel-fonctions.pdf", kind: "reminder", pages: 14 }] },
+                { n: 4, title: "Fermetures et décorateurs", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S04-TP-decorateurs.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S04-rappel-decorateurs.pdf", kind: "reminder", pages: 15 }] },
+                { n: 5, title: "Itérateurs et générateurs", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S05-TP-iterateurs.pdf", kind: "exercises", pages: 27 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S05-rappel-iterateurs.pdf", kind: "reminder", pages: 14 }] },
+                { n: 6, title: "Classes, propriétés et méthodes spéciales", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S06-TP-poo1.pdf", kind: "exercises", pages: 26 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S06-rappel-poo1.pdf", kind: "reminder", pages: 15 }] },
+                { n: 7, title: "Héritage, polymorphisme et composition", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S07-TP-poo2.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S07-rappel-poo2.pdf", kind: "reminder", pages: 15 }] },
+                { n: 8, title: "dataclasses, Enum et typage", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S08-TP-dataclasses.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S08-rappel-dataclasses.pdf", kind: "reminder", pages: 15 }] },
+                { n: 9, title: "Exceptions et gestionnaires de contexte", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S09-TP-exceptions.pdf", kind: "exercises", pages: 24 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S09-rappel-exceptions.pdf", kind: "reminder", pages: 15 }] },
+                { n: 10, title: "Fichiers et données : pathlib, CSV, JSON, re", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S10-TP-fichiers.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S10-rappel-fichiers.pdf", kind: "reminder", pages: 15 }] },
+                { n: 11, title: "Tests et qualité : pytest, doctest, couverture, refactorisation", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S11-TP-tests.pdf", kind: "exercises", pages: 25 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S11-rappel-tests.pdf", kind: "reminder", pages: 15 }] },
+                { n: 12, title: "Performance : mesurer, profiler, vectoriser", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S12-TP-performance.pdf", kind: "exercises", pages: 23 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S12-rappel-performance.pdf", kind: "reminder", pages: 14 }] },
+                { n: 13, title: "Concurrence : threads, processus, asyncio", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S13-TP-concurrence.pdf", kind: "exercises", pages: 26 }, { label: "Course reminder", url: "files/courses/2022-2023/pyav-fsm-2022/S13-rappel-concurrence.pdf", kind: "reminder", pages: 15 }] },
+                { n: 14, title: "Mini-projet : lancement et jalon 1", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/pyav-fsm-2022/S14-TP-miniprojet.pdf", kind: "exercises", pages: 26 }, { label: "Project brief", url: "files/courses/2022-2023/pyav-fsm-2022/S14-TP-miniprojet-sujet.pdf", kind: "handout", pages: 14 }] }
+              ],
+              extras: []
+            },
+            { code: "", title: "Relational Databases", officialName: "Bases de données relationnelles", semester: 1, levels: ["L2"], languages: ["SQL"], roles: ["TP"], illustration: "databases", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "bdr-fsm-2022",
+              intro: "A second-year bachelor's course (L2). I taught all the SQL lab sessions: constraints, selection, joins, aggregation, subqueries, views and indexes.",
+              objectives: [
+                "Create tables and enforce integrity constraints",
+                "Write selections, inner and outer joins, aggregations and subqueries",
+                "Use views, indexes, transactions and access rights",
+                "Design a relational schema up to third normal form"
+              ],
+              approach: "Each lab session comes with a short course reminder. This was my first teaching experience, as part of my doctoral training (teaching credits required by the EDSTI doctoral school, University of Monastir). Course materials: S. Jaballi.",
+              team: [
+                { name: "Samir Belaid", role: "Course coordinator" },
+                { name: "Samawel Jaballi", role: "Labs (TP)", me: true }
+              ],
+              sessions: [
+                { n: 1, title: "Introduction ; création et insertion", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S01-TP-introduction.pdf", kind: "exercises", pages: 18 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S01-rappel-introduction.pdf", kind: "reminder", pages: 10 }] },
+                { n: 2, title: "Contraintes et mises à jour", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S02-TP-contraintes.pdf", kind: "exercises", pages: 20 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S02-rappel-contraintes.pdf", kind: "reminder", pages: 11 }] },
+                { n: 3, title: "Sélection", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S03-TP-selection.pdf", kind: "exercises", pages: 20 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S03-rappel-selection.pdf", kind: "reminder", pages: 11 }] },
+                { n: 4, title: "Jointures internes", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S04-TP-jointures-internes.pdf", kind: "exercises", pages: 20 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S04-rappel-jointures-internes.pdf", kind: "reminder", pages: 10 }] },
+                { n: 5, title: "Jointures externes", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S05-TP-jointures-externes.pdf", kind: "exercises", pages: 19 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S05-rappel-jointures-externes.pdf", kind: "reminder", pages: 10 }] },
+                { n: 6, title: "Agrégation et groupement", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S06-TP-agregation.pdf", kind: "exercises", pages: 19 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S06-rappel-agregation.pdf", kind: "reminder", pages: 10 }] },
+                { n: 7, title: "Opérations diverses", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S07-TP-operations.pdf", kind: "exercises", pages: 19 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S07-rappel-operations.pdf", kind: "reminder", pages: 11 }] },
+                { n: 8, title: "Sous-requêtes", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S08-TP-sous-requetes.pdf", kind: "exercises", pages: 20 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S08-rappel-sous-requetes.pdf", kind: "reminder", pages: 10 }] },
+                { n: 9, title: "Bilan de mi-parcours : algèbre relationnelle et SQL", type: "TP", files: [{ label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S09-rappel-bilan.pdf", kind: "reminder", pages: 10 }] },
+                { n: 10, title: "Vues et index", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S10-TP-vues-index.pdf", kind: "exercises", pages: 18 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S10-rappel-vues-index.pdf", kind: "reminder", pages: 10 }] },
+                { n: 11, title: "Transactions et droits", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S11-TP-transactions-droits.pdf", kind: "exercises", pages: 17 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S11-rappel-transactions-droits.pdf", kind: "reminder", pages: 11 }] },
+                { n: 12, title: "Conception", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S12-TP-conception.pdf", kind: "exercises", pages: 19 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S12-rappel-conception.pdf", kind: "reminder", pages: 10 }] },
+                { n: 13, title: "Projet (1) : présentation et conception", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S13-TP-projet-1.pdf", kind: "exercises", pages: 19 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S13-rappel-projet-1.pdf", kind: "reminder", pages: 10 }] },
+                { n: 14, title: "Projet (2) : requêtes avancées et soutenance", type: "TP", files: [{ label: "Lab with solutions", url: "files/courses/2022-2023/bdr-fsm-2022/S14-TP-projet-2.pdf", kind: "exercises", pages: 21 }, { label: "Course reminder", url: "files/courses/2022-2023/bdr-fsm-2022/S14-rappel-projet-2.pdf", kind: "reminder", pages: 9 }] }
+              ],
+              extras: []
+            },
+            { code: "", title: "Data Warehousing", officialName: "Entrepôts de données", semester: 2, levels: ["L2"], languages: ["SQL", "Python"], roles: ["CM", "TP"], illustration: "warehouse", description: "", objectives: [], topics: [], hours: null, resources: [],
+              slug: "dw-fsm-2022",
+              intro: "A second-year bachelor's course (L2) on data warehouses, with lectures and labs: star schema, dimensions, facts, extraction and loading, analytical SQL.",
+              objectives: [
+                "Model a data warehouse with a star schema, dimensions and facts",
+                "Extract, transform and load data with Python and pandas",
+                "Write analytical SQL, including ROLLUP, CUBE and window functions",
+                "Carry out OLAP operations and report results through a mini-project"
+              ],
+              approach: "It was my first complete design of a course: I planned the progression and linked each notion of the lecture with its implementation in the lab. This was my first teaching experience, as part of my doctoral training (teaching credits required by the EDSTI doctoral school, University of Monastir). Course materials: S. Jaballi.",
+              team: [
+                { name: "Samawel Jaballi", role: "Course coordinator and lecturer", me: true }
+              ],
+              sessions: [
+                { n: 1, title: "Introduction à l'informatique décisionnelle", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S01-CM-introduction.pdf", kind: "slides", pages: 33 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S01-TP-introduction.pdf", kind: "solutions", pages: 18 }] },
+                { n: 2, title: "Le modèle multidimensionnel", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S02-CM-modele.pdf", kind: "slides", pages: 31 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S02-TP-modele.pdf", kind: "solutions", pages: 18 }] },
+                { n: 3, title: "Les dimensions", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S03-CM-dimensions.pdf", kind: "slides", pages: 29 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S03-TP-dimensions.pdf", kind: "solutions", pages: 17 }] },
+                { n: 4, title: "Tables de faits et mesures", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S04-CM-faits.pdf", kind: "slides", pages: 28 }, { label: "Lab sheet", url: "files/courses/2022-2023/dw-fsm-2022/S04-TP-faits-etudiant.pdf", kind: "exercises", pages: 7 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S04-TP-faits.pdf", kind: "solutions", pages: 17 }] },
+                { n: 5, title: "Extraction et transformation avec Python", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S05-CM-extraction.pdf", kind: "slides", pages: 30 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S05-TP-extraction.pdf", kind: "solutions", pages: 17 }] },
+                { n: 6, title: "Chargement et qualité des données", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S06-CM-chargement.pdf", kind: "slides", pages: 24 }, { label: "Lab sheet", url: "files/courses/2022-2023/dw-fsm-2022/S06-TP-chargement-etudiant.pdf", kind: "exercises", pages: 7 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S06-TP-chargement.pdf", kind: "solutions", pages: 15 }] },
+                { n: 7, title: "SQL pour l'analyse", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S07-CM-sql-analyse.pdf", kind: "slides", pages: 24 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S07-TP-sql-analyse.pdf", kind: "solutions", pages: 16 }] },
+                { n: 8, title: "Fonctions de fenêtrage", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S08-CM-fenetres.pdf", kind: "slides", pages: 24 }, { label: "Lab sheet", url: "files/courses/2022-2023/dw-fsm-2022/S08-TP-fenetres-etudiant.pdf", kind: "exercises", pages: 7 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S08-TP-fenetres.pdf", kind: "solutions", pages: 17 }] },
+                { n: 9, title: "Opérations OLAP et restitution", type: "CM", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S09-CM-olap.pdf", kind: "slides", pages: 21 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S09-TP-olap.pdf", kind: "solutions", pages: 17 }] },
+                { n: 10, title: "Mini-projet : du besoin au schéma en étoile", type: "Project", files: [{ label: "Lecture slides", url: "files/courses/2022-2023/dw-fsm-2022/S10-CM-projet.pdf", kind: "slides", pages: 23 }, { label: "Lab sheet", url: "files/courses/2022-2023/dw-fsm-2022/S10-TP-projet-etudiant.pdf", kind: "exercises", pages: 9 }, { label: "Lab with solutions", url: "files/courses/2022-2023/dw-fsm-2022/S10-TP-projet.pdf", kind: "solutions", pages: 18 }] },
+                { n: 11, title: "Révisions : synthèse et exercices types", type: "CM", files: [{ label: "Slides", url: "files/courses/2022-2023/dw-fsm-2022/S11-CM-revisions.pdf", kind: "slides", pages: 28 }] }
+              ],
+              extras: []
+            }
           ] }
       ] }
   ],
@@ -450,10 +873,10 @@ window.SITE = {
      ------------------------------------------------------------------- */
   collaborators: [
     { name: "Mounir Zrigui", org: "RLANTIS, University of Monastir", context: "Joint PhD co-supervisor (2022–2025); co-supervision of master's theses on multimodal radiology report generation, hallucination in medical AI and code-switched topic modeling." },
-    { name: "Nicolas Henri", org: "LaBRI, University of Bordeaux", context: "Joint PhD supervisor (2022–2025): multilingual public opinion, speech and topic analysis." },
-    { name: "Pavel Kral", org: "NTIS Research Centre, University of West Bohemia (Pilsen)", context: "Invited research stay (Jul. – Aug. 2025): cross-lingual aspect-based sentiment analysis and adaptation of a Czech transformer model to informal French." },
+    { name: "Henri Nicolas", org: "LaBRI, University of Bordeaux", context: "Joint PhD supervisor (2022–2025): multilingual public opinion, speech and topic analysis." },
+    { name: "Pavel Král", org: "NTIS Research Centre, University of West Bohemia (Pilsen)", context: "Invited research stay (Jul. – Aug. 2025): cross-lingual aspect-based sentiment analysis and adaptation of a Czech transformer model to informal French." },
     { name: "Ricky Lim", org: "Ravensbourne University London", context: "Co-supervision of an MSc thesis on embedding representations for informal digital French (2025–2026)." },
-    { name: "Frederic Ferraty", org: "Statistics & Optimization Team, Institut de Mathématiques de Toulouse", context: "Research internship supervision (2022): the NLQCTA linguistic–quantitative corpus." }
+    { name: "Frédéric Ferraty", org: "Statistics & Optimization Team, Institut de Mathématiques de Toulouse", context: "Research internship supervision (2022): the NLQCTA linguistic–quantitative corpus." }
   ],
   openTopics: [
     { title: "Maghrebi Arabic & Arabizi", text: "Normalization, transliteration and cross-script transfer for dialectal and code-switched text." },
@@ -466,8 +889,8 @@ window.SITE = {
 
   experience: [
     { period: "Sep. 2025 – present", title: "ATER — Temporary Teaching and Research Fellow (full-time)", org: "University of Bordeaux & LaBRI", text: "Teaching in the Computer Science Unit; research on dialect normalization, multimodal self-supervised analysis and sentiment analysis with enriched signals." },
-    { period: "Jul. – Aug. 2025", title: "Invited Researcher", org: "NTIS Research Centre, University of West Bohemia · Pilsen, Czech Republic", text: "Invited by Pavel Kral to scope a survey on cross-lingual aspect-based sentiment analysis and to design a proof of concept adapting a Czech transformer model to informal French.", mobility: true },
-    { period: "Feb. 2022 – Jun. 2025", title: "Doctoral Researcher (joint PhD)", org: "LaBRI, University of Bordeaux & RLANTIS, University of Monastir", text: "Topic trend extraction, multilingual speech processing, acoustic and contextual representation learning, and code-switched sentiment analysis. Supervised by Nicolas Henri and Mounir Zrigui." },
+    { period: "Jul. – Aug. 2025", title: "Invited Researcher", org: "NTIS Research Centre, University of West Bohemia · Pilsen, Czech Republic", text: "Invited by Pavel Král to scope a survey on cross-lingual aspect-based sentiment analysis and to design a proof of concept adapting a Czech transformer model to informal French.", mobility: true },
+    { period: "Feb. 2022 – Jun. 2025", title: "Doctoral Researcher (joint PhD)", org: "LaBRI, University of Bordeaux & RLANTIS, University of Monastir", text: "Topic trend extraction, multilingual speech processing, acoustic and contextual representation learning, and code-switched sentiment analysis. Supervised by Henri Nicolas and Mounir Zrigui." },
     { period: "Jan. – Jun. 2024", title: "Part-time University Lecturer", org: "Private Polytechnic School of Monastir", text: "Data Warehousing and Machine Learning for Software Engineering students." },
     { period: "2022 – 2023", title: "Part-time University Lecturer", org: "Faculty of Sciences, University of Monastir", text: "Python programming, relational databases and data warehousing." },
     { period: "May – Oct. 2022", title: "Data Engineer Intern", org: "Statistics & Optimization Team, Institut de Mathématiques de Toulouse", text: "Data pipeline for a linguistic–quantitative corpus combining over 8,000 French press articles with longitudinal public-health data. Supervised by Frederic Ferraty.", mobility: true },
