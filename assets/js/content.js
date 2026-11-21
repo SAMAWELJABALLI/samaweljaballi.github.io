@@ -398,7 +398,7 @@ window.SITE = {
                 "Prove properties on small examples and analyse complexity",
                 "Implement balanced trees (AVL, red–black), heaps and Huffman coding"
               ],
-              approach: "Each structure is first defined inductively, then programmed and proved on small examples. Teaching the course two years in a row lets the materials and exercises evolve from one cohort to the next.",
+              approach: "Each structure is first defined inductively, then programmed and proved on small examples.",
               assessment: "Continuous assessment: tests, a written mid-term exam (DS), a computer-lab exam, a final written exam and VPL exercises on Moodle.",
               team: [
                 { name: "Stefka Gueorguieva", role: "Course coordinator" },
@@ -440,7 +440,7 @@ window.SITE = {
                 "Implement these structures in C, including singly and doubly linked lists",
                 "Choose the appropriate structure for a given problem"
               ],
-              approach: "The course follows a competency-based approach with constructive alignment. Each chapter sets observable learning outcomes (“by the end of this chapter, you can…”); the exercises work on them one by one, and assessment targets exactly these outcomes. The structures are first used as abstract data types, then implemented in C with the course library libasde.",
+              approach: "The course follows a competency-based approach with constructive alignment: exercises work on the learning outcomes one by one, and assessment targets exactly these outcomes. Data structures are first used as abstract data types, then implemented in C with the course library libasde.",
               assessment: "The semester ends with a computer-lab exam on Virtual Programming Lab (VPL), under Moodle.",
               team: [
                 { name: "Carole Blanc", role: "Course coordinator" },
@@ -509,7 +509,7 @@ window.SITE = {
                 "Prove properties on small examples and analyse complexity",
                 "Implement balanced trees (AVL, red–black), heaps and Huffman coding"
               ],
-              approach: "Each structure is first defined inductively, then programmed and proved on small examples. Teaching the course two years in a row lets the materials and exercises evolve from one cohort to the next.",
+              approach: "Each structure is first defined inductively, then programmed and proved on small examples.",
               assessment: "Continuous assessment: tests, a written mid-term exam (DS), a computer-lab exam, a final written exam and VPL exercises on Moodle.",
               team: [
                 { name: "Stefka Gueorguieva", role: "Course coordinator" },
@@ -544,7 +544,7 @@ window.SITE = {
                 "Build LR parsers with Menhir and Cairn",
                 "Implement simplification, type checking and translation to three-address code"
               ],
-              approach: "Most of the course consists in explaining the concepts of compilation and making them concrete. Each tutorial alternates a session on paper and an implementation session on the course compiler. The common thread is the mini-ML project, in three parts: interpreter, parsing, typing.",
+              approach: "Each tutorial alternates a session on paper and an implementation session on the course compiler. The common thread is the mini-ML project, in three parts: interpreter, parsing, typing.",
               team: [
                 { name: "Vincent Penelle", role: "Course coordinator and lecturer (CM)" },
                 { name: "Samawel Jaballi", role: "Computer lab tutorials (TD machine)", me: true }
@@ -568,14 +568,14 @@ window.SITE = {
             },
             { code: "4TIN802U", title: "Programming Project", officialName: "Projet de programmation", semester: 2, levels: ["M1"], languages: ["Java", "Python"], roles: ["TD"], roleNote: "Taught jointly with Mathieu Hilaire: student teams building Scrabble and Carcassonne in Python and Java.", illustration: "projects", description: "", objectives: [], topics: [], hours: null, resources: [],
               slug: "4tin802u-2025",
-              intro: "A first-year master's course (M1), taught jointly with Mathieu Hilaire. We supervise project groups on two subjects, Scrabble and Carcassonne; the teams build the game in Python and in Java.",
+              intro: "A first-year master's project course (M1) on two subjects, Scrabble and Carcassonne; student teams build the game in Python and in Java.",
               objectives: [
                 "Design and build a complete board game as a team, in Python or Java",
                 "Organise and share the work with Scrum",
                 "Collaborate with Git and deliver at regular milestones",
                 "Apply good programming practices, including with code assistants"
               ],
-              approach: "Project-based learning, taught in pairs. Supervision covers design, division of work, version control and deliverables; projects are followed on GitLab with weekly milestones. Materials: presentation of each subject at launch, sheets on team Git and Scrum, and good-practice sheets.",
+              approach: "Project-based learning, taught in pairs: supervision covers design, division of work, version control and deliverables. Projects are followed on GitLab with weekly milestones.",
               assessment: "A mid-term progress report after six weeks, a final report, a code review (quality, compliance with the specifications, optimisation, documentation) and a defence.",
               team: [
                 { name: "Emmanuel Fleury", role: "Course coordinator" },
@@ -634,7 +634,7 @@ window.SITE = {
             },
             { code: "", title: "Machine Learning", semester: 2, levels: [], levelText: "Engineering — Year 4", languages: ["Advanced Python"], roles: ["CI", "TDM"], illustration: "ml", description: "", objectives: [], topics: [], hours: null, resources: [],
               slug: "ml-polytech-2023",
-              intro: "A course for fourth-year students of the software-engineering programme (Engineering — Year 4), from statistical foundations to current architectures, in nine chapters. Each chapter has its lab in Python, from data preprocessing to model evaluation.",
+              intro: "A course for fourth-year students of the software-engineering programme (Engineering — Year 4), from statistical foundations to current architectures, in nine chapters.",
               objectives: [
                 "Formalise a learning problem and the bias–variance trade-off",
                 "Preprocess data and build pipelines",
@@ -642,7 +642,7 @@ window.SITE = {
                 "Use linear models, k-NN, naive Bayes, SVMs, trees and ensemble methods",
                 "Apply unsupervised learning (PCA, k-means, EM), neural networks, CNNs and transformers"
               ],
-              approach: "Integrated lectures and computer-lab tutorials: each chapter has its lab in Python. Research informs the course: evaluation on imbalanced data and ensemble methods (AdaBoost), central to my PhD, have their place in it.",
+              approach: "Integrated lectures and computer-lab tutorials: each chapter has its lab in Python.",
               team: [
                 { name: "Samawel Jaballi", role: "Course coordinator and lecturer", me: true }
               ],
@@ -670,14 +670,14 @@ window.SITE = {
           courses: [
             { code: "", title: "Advanced Python Programming", officialName: "Programmation Python avancée", semester: 1, levels: ["L3"], languages: ["Python"], roles: ["TP"], illustration: "py-functions", description: "", objectives: [], topics: [], hours: null, resources: [],
               slug: "pyav-fsm-2022",
-              intro: "A third-year bachelor's course (L3). I taught all the lab sessions: development environment, data structures, functions, decorators, iterators, object-oriented programming, dataclasses. Students move from an elementary use of the language to structured, reusable code.",
+              intro: "A third-year bachelor's course (L3). Lab sessions cover the development environment, data structures, functions, decorators, iterators, object-oriented programming, dataclasses. Students move from an elementary use of the language to structured, reusable code.",
               objectives: [
                 "Set up a professional Python development environment",
                 "Use advanced data structures, functions, closures and decorators",
                 "Write iterators, generators and object-oriented code with dataclasses and typing",
                 "Handle exceptions, files and tests, and measure performance"
               ],
-              approach: "Each lab session comes with a short course reminder. This was my first teaching experience, as part of my doctoral training (teaching credits required by the EDSTI doctoral school, University of Monastir). Course materials: S. Jaballi.",
+              approach: "Each lab session comes with a short course reminder.",
               team: [
                 { name: "Mohsen Maraoui", role: "Course coordinator" },
                 { name: "Samawel Jaballi", role: "Labs (TP)", me: true }
@@ -702,14 +702,14 @@ window.SITE = {
             },
             { code: "", title: "Relational Databases", officialName: "Bases de données relationnelles", semester: 1, levels: ["L2"], languages: ["SQL"], roles: ["TP"], illustration: "databases", description: "", objectives: [], topics: [], hours: null, resources: [],
               slug: "bdr-fsm-2022",
-              intro: "A second-year bachelor's course (L2). I taught all the SQL lab sessions: constraints, selection, joins, aggregation, subqueries, views and indexes.",
+              intro: "A second-year bachelor's course (L2). SQL lab sessions cover constraints, selection, joins, aggregation, subqueries, views and indexes.",
               objectives: [
                 "Create tables and enforce integrity constraints",
                 "Write selections, inner and outer joins, aggregations and subqueries",
                 "Use views, indexes, transactions and access rights",
                 "Design a relational schema up to third normal form"
               ],
-              approach: "Each lab session comes with a short course reminder. This was my first teaching experience, as part of my doctoral training (teaching credits required by the EDSTI doctoral school, University of Monastir). Course materials: S. Jaballi.",
+              approach: "Each lab session comes with a short course reminder.",
               team: [
                 { name: "Samir Belaid", role: "Course coordinator" },
                 { name: "Samawel Jaballi", role: "Labs (TP)", me: true }
@@ -741,7 +741,7 @@ window.SITE = {
                 "Write analytical SQL, including ROLLUP, CUBE and window functions",
                 "Carry out OLAP operations and report results through a mini-project"
               ],
-              approach: "It was my first complete design of a course: I planned the progression and linked each notion of the lecture with its implementation in the lab. This was my first teaching experience, as part of my doctoral training (teaching credits required by the EDSTI doctoral school, University of Monastir). Course materials: S. Jaballi.",
+              approach: "Each notion presented in the lecture is implemented in the following lab session.",
               team: [
                 { name: "Samawel Jaballi", role: "Course coordinator and lecturer", me: true }
               ],
