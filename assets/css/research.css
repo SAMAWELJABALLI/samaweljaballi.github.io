@@ -28,7 +28,15 @@
 .rp-bib pre { margin: 0; padding: 16px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); overflow-x: auto; font-size: 13px; line-height: 1.5; color: var(--ink); }
 .rp-bib .cp-expand { position: absolute; top: 10px; right: 10px; }
 .rp-note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+/* Preprint section */
+.rp-pp-title { margin-top: 8px; font-size: 16.5px; font-weight: 700; color: var(--ink); max-width: 52em; }
+.rp-pp-title cite { font-style: normal; }
+.rp-pp-files { display: flex; flex-wrap: wrap; gap: 14px 24px; margin-top: 14px; }
+.rp-pp-item { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; }
+.rp-pp-item .cp-btn { min-height: 42px; padding: 8px 16px; font-size: 14.5px; }
+.rp-note.rp-pp-note { margin-top: 0; }
 @media (max-width: 760px) {
+  .rp-pp-files { flex-direction: column; gap: 14px; }
   .rp-dl { grid-template-columns: 1fr; gap: 2px; }
   .rp-dl dd { margin-bottom: 10px; }
   .rp-people { grid-template-columns: 1fr; }

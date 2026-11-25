@@ -244,7 +244,7 @@
           (p.approach ? "<div><dt>Approach</dt><dd>" + esc(p.approach) + "</dd></div>" : "") +
           (p.role ? "<div><dt>Role</dt><dd>" + esc(p.role) + "</dd></div>" : "") +
         "</dl>" +
-        (p.resources && p.resources.length ? '<div class="lchips">' + p.resources.map(function (r) { return a(r.url, esc(r.label), "lchip"); }).join("") + "</div>" : "") +
+        (p.resources && p.resources.length ? '<div class="lchips">' + p.resources.map(function (r) { return r.newTab && !isExt(r.url) ? '<a class="lchip" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer">' + esc(r.label) + '<span class="sr-only"> (opens in a new tab)</span></a>' : a(r.url, esc(r.label), "lchip"); }).join("") + "</div>" : "") +
         (p.page ? '<a class="course-open project-more" href="' + esc(p.page) + '" aria-label="Learn more: ' + esc(p.title) + '">Learn more<span aria-hidden="true"> →</span></a>' : "") +
       "</article>";
     }).join("");

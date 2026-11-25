@@ -235,6 +235,7 @@ window.SITE = {
      PROJECTS — stage: "ongoing" | "completed"
      Statuses are quoted from the repositories / CV; nothing is inferred.
      page: optional presentation page (e.g. "research/formal.html"): the title and a "Learn more" button link to it.
+     resources: [{ label, url, newTab }] — newTab: true opens a site-hosted file (e.g. a preprint PDF) in a new tab.
      ------------------------------------------------------------------- */
   projects: [
     { id: "formal", stage: "ongoing", period: "2026", title: "FORMAL — pair provenance and cross-script transfer in Maghrebi Arabic",
@@ -243,21 +244,21 @@ window.SITE = {
       approach: "A lightweight projection removes the leading directions of paired embedding differences. The study asks where the pairs should come from, comparing human renderings of 998 Algerian Arabizi sentences with rule-based, dictionary-based and neural transliterations, on three frozen encoders and four classification tasks, under a pre-registered protocol with a single test evaluation.",
       role: "Author of the manuscript and of the research code",
       axes: ["dialect"],
-      resources: [{ label: "Code, protocols & archived results (MIT licence)", url: "https://github.com/SAMAWELJABALLI/formal-cross-script-transfer" }] },
+      resources: [{ label: "Code, protocols & archived results (MIT licence)", url: "https://github.com/SAMAWELJABALLI/formal-cross-script-transfer" }, { label: "Preprint (PDF)", url: "research/pdf/formal-manuscript.pdf", newTab: true }] },
     { id: "selectnorm", stage: "ongoing", period: "2026", title: "SelectNorm — per-input normalization for Arabizi with frozen encoders",
       status: "Submitted — paper submitted to an international conference", page: "research/selectnorm.html",
       problem: "Transliterating Arabizi into Arabic script repairs some inputs and damages others (French and English tokens, negation, rare spellings, dialect differences), so unconditional normalization can help one corpus and hurt another.",
       approach: "Decides per input whether to classify the original or the normalized view, by factorizing the expected benefit into disagreement detection, which needs no labels, and conditional advantage, with a cost-aware decision rule. Evaluated with four frozen encoders on Tunisian, Algerian and Moroccan test sets.",
       role: "",
       axes: ["dialect"],
-      resources: [{ label: "Research code & archived evidence", url: "https://github.com/SAMAWELJABALLI/-SelectNorm" }] },
+      resources: [{ label: "Research code & archived evidence", url: "https://github.com/SAMAWELJABALLI/-SelectNorm" }, { label: "Preprint (PDF)", url: "research/pdf/selectnorm-manuscript.pdf", newTab: true }] },
     { id: "diafuse", stage: "ongoing", period: "2026", title: "DiaFuse-PRC — cross-script and cross-dialect sentiment transfer in Maghrebi Arabic",
       status: "Submitted — manuscript submitted to an international journal, under review", page: "research/diafuse-prc.html",
       problem: "Sentiment models trained on Arabic-script Tunisian data and synthetic transliterations must hold up on human-written Arabizi and on other Maghrebi varieties.",
       approach: "Variety-aware fusion of several encoders with hierarchical class–variety prototypes, rebalanced contrastive learning, linguistic consistency and variety-wise calibration, evaluated along a fixed chain of increasingly shifted test sets (Tunisian, Algerian, Moroccan).",
       role: "",
       axes: ["dialect"],
-      resources: [{ label: "Research code & model cards", url: "https://github.com/SAMAWELJABALLI/DiaFuse-PRC" }] },
+      resources: [{ label: "Research code & model cards", url: "https://github.com/SAMAWELJABALLI/DiaFuse-PRC" }, { label: "Preprint (PDF)", url: "research/pdf/diafuse-prc-manuscript.pdf", newTab: true }] },
     { id: "phd", stage: "completed", period: "2022 – 2025", title: "Multilingual public opinion on social media (joint PhD)",
       status: "Completed — joint PhD, University of Bordeaux & University of Monastir",
       problem: "Extracting, transcribing and analysing public opinion expressed in informal, multilingual and code-switched content, in text and speech.",
