@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORMAL — Pair Provenance-Aware Spectral Subspace Analysis for Cross-Script Transfer: A Maghrebi Arabic–Arabizi Case Study · Samawel Jaballi</title>
+  <meta name="description" content="FORMAL: how the provenance of training pairs shapes a spectral correction for cross-script transfer between Arabic-script Maghrebi Arabic and Arabizi. Manuscript submitted to an international journal; under review.">
+  <meta name="author" content="Samawel Jaballi">
+  <link rel="canonical" href="https://samaweljaballi.github.io/research/formal.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://samaweljaballi.github.io/research/formal.html">
+  <meta property="og:title" content="FORMAL — Pair Provenance-Aware Spectral Subspace Analysis for Cross-Script Transfer: A Maghrebi Arabic–Arabizi Case Study">
+  <meta property="og:description" content="FORMAL: how the provenance of training pairs shapes a spectral correction for cross-script transfer between Arabic-script Maghrebi Arabic and Arabizi. Manuscript submitted to an international journal; under review.">
+  <meta property="og:image" content="https://samaweljaballi.github.io/assets/research/formal/formal-fig1-method.png">
+  <meta name="theme-color" content="#3f6470">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css?v=20261125a">
+  <link rel="stylesheet" href="../assets/css/course.css?v=20261125a">
+  <link rel="stylesheet" href="../assets/css/research.css?v=20261125a">
+  <script>
+    /* Apply saved / system theme before paint */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("sj-theme"); } catch (e) {}
+      if (!t) t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body class="course-page research-page" data-base="../" data-section="research">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Illustrated Atlantic-coast backdrop (replaced by a photo if SITE.backdrop is set) -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-photo" id="backdropPhoto"></div>
+    <svg class="scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="sky-top"/>
+          <stop offset=".62" class="sky-mid"/>
+          <stop offset="1" class="sky-low"/>
+        </linearGradient>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="sea-top"/>
+          <stop offset="1" class="sea-low"/>
+        </linearGradient>
+        <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" class="glow-in"/>
+          <stop offset="1" class="glow-out"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="1000" fill="url(#sky)"/>
+      <g class="stars">
+        <circle cx="180" cy="90" r="1.6"/><circle cx="320" cy="170" r="1.2"/><circle cx="520" cy="60" r="1.4"/>
+        <circle cx="760" cy="140" r="1.1"/><circle cx="980" cy="70" r="1.5"/><circle cx="1180" cy="190" r="1.2"/>
+        <circle cx="1400" cy="110" r="1.6"/><circle cx="1520" cy="230" r="1"/><circle cx="90" cy="260" r="1.1"/>
+        <circle cx="640" cy="240" r="1"/><circle cx="880" cy="300" r=".9"/><circle cx="1290" cy="40" r="1.1"/>
+      </g>
+      <circle class="sun-glow" cx="1180" cy="430" r="260" fill="url(#glow)"/>
+      <circle class="sun" cx="1180" cy="430" r="58"/>
+      <path class="cloud" d="M120 300c40-30 110-30 150 0 30-18 80-14 100 12H90c4-6 16-10 30-12z"/>
+      <path class="cloud" d="M980 230c30-22 86-22 116 0 24-12 60-10 76 10H956c4-5 12-8 24-10z"/>
+      <rect y="560" width="1600" height="190" fill="url(#sea)"/>
+      <g class="waves">
+        <path d="M0 600h1600" /><path d="M0 640h1600" /><path d="M0 690h1600" />
+      </g>
+      <path class="dune-far" d="M0 640c180-70 380-110 600-80 160 22 260 70 420 64 200-8 380-90 580-70v446H0z"/>
+      <path class="dune-mid" d="M0 760c220-60 420-40 640 0 200 36 380 20 560-30 150-42 280-40 400-10v280H0z"/>
+      <g class="pines">
+        <path d="M120 760l18-70 18 70zM150 768l24-96 24 96zM190 764l16-60 16 60zM1380 740l20-80 20 80zM1416 750l26-104 26 104zM1460 746l16-58 16 58zM1500 752l20-80 20 80z"/>
+        <path d="M134 770v24M174 770v26M206 768v22M1400 744v26M1442 752v28M1476 748v22M1520 754v24" class="trunk"/>
+      </g>
+      <path class="dune-near" d="M0 860c260-50 520-30 800 0s560 20 800-30v170H0z"/>
+    </svg>
+    <div class="backdrop-veil"></div>
+  </div>
+
+  <!-- Persistent navigation.
+       Desktop: floating pill that appears once the board's tab bar scrolls away.
+       Mobile: sticky bar (always visible, in the page flow) with the current section and a Menu button. -->
+  <header class="dock" id="dock">
+    <a class="dock-brand" href="../index.html#home" aria-label="Samawel Jaballi — back to top"><span class="mono" aria-hidden="true">SJ</span><span class="dock-name">Samawel Jaballi</span></a>
+    <nav class="dock-nav" aria-label="Sections"><ul id="dockNav"></ul></nav>
+    <p class="dock-current" id="dockCurrent" aria-hidden="true">Home</p>
+    <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to night mode"><span class="theme-ico" aria-hidden="true"></span></button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuSheet">
+      <span class="menu-ico" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-lbl">Menu</span>
+    </button>
+    <div class="menu-sheet" id="menuSheet" hidden>
+      <nav aria-label="All sections"><ul id="menuList"></ul></nav>
+    </div>
+  </header>
+
+  <main id="main" class="board" tabindex="-1">
+    <nav class="cp-crumbs" aria-label="Breadcrumb"><ol>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><span aria-current="page">FORMAL</span></li>
+    </ol></nav>
+
+    <section class="panel card rp-hero" aria-labelledby="rp-title">
+      <p class="rp-short">FORMAL · 2026</p>
+      <h1 class="cp-title" id="rp-title">Pair Provenance-Aware Spectral Subspace Analysis for Cross-Script Transfer: A Maghrebi Arabic–Arabizi Case Study</h1>
+      <p class="rp-status"><span class="rp-badge">Submitted</span><span class="rp-status-t">Manuscript submitted to an international journal; under review.</span></p>
+      <p class="rp-summary">Multilingual sentence encoders place Arabic-script and Latin-script (Arabizi) renderings of Maghrebi Arabic in partly separate regions, so classifiers trained on Arabic script lose 7.2 to 24.2 macro-F1 points on Arabizi. The study keeps a lightweight spectral correction fixed and varies where its training pairs come from: human Arabic-script renderings of 998 Algerian Arabizi sentences, or rule-based and dictionary transliterations of the same sentences. Pair provenance decides which script directions are removed, while corpus match limits what their removal can transfer.</p>
+      <div class="rp-actions">
+        <a class="cp-btn primary" href="https://github.com/SAMAWELJABALLI/formal-cross-script-transfer" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg><span>Code (GitHub)</span><span class="sr-only"> (opens in a new tab)</span></a>
+        <!-- TODO preprint URL: replace the disabled button below by
+        <a class="cp-btn" href="PREPRINT_URL" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><span>Preprint</span><span class="sr-only"> (opens in a new tab)</span></a> -->
+        <span class="cp-btn rp-disabled" aria-disabled="true"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><span>Preprint — coming soon</span></span>
+        <a class="cp-btn" href="../index.html#research"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg><span>Back to Research</span></a>
+      </div>
+      <p class="rp-note">Code: MIT licence. Archived predictions, statistics, tables, figures and protocols: CC BY 4.0. No corpus text is distributed; no DOI yet.</p>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-overview">
+      <h2 class="cp-h2" id="rp-overview">Overview</h2>
+      <h3 class="cp-h3">Problem</h3><p class="cp-p">Multilingual sentence encoders place Arabic-script and Latin-script (Arabizi) renderings of Maghrebi Arabic in partly separate regions, so classifiers trained on Arabic script lose accuracy on Arabizi. A lightweight correction removes the leading eigenvectors of paired embedding differences, but the effect of the origin of the pairs had not been examined.</p>
+      <h3 class="cp-h3">Approach</h3><p class="cp-p">The projection <i>P<sub>k</sub></i> = <i>I</i> − <i>U<sub>k</sub>U<sub>k</sub></i><sup>⊤</sup> (<i>k</i> = 16) removes the top eigenvectors of the scatter of paired embedding differences. The operator, the Arabizi side of the pairs, the encoder, the classifier protocol and the test data are fixed; only the source of the Arabic-script side changes: human renderings, rule-based or dictionary transliterations. Exploratory controls add neural transliterations and Tunisian pairs (TArC).</p>
+      <figure class="rp-figure"><img src="../assets/research/formal/formal-fig1-method.png" width="2000" height="1528" alt="Flow diagram in four bands: linguistic input (human Arabizi sentences paired with human, rule, dictionary or neural Arabic-script renderings), representation (frozen encoder and pair differences), spectral correction (top-k eigenvectors and projection P_k) and downstream evaluation (logistic regression, cross-script macro-F1, grouped paired bootstrap)." loading="lazy" decoding="async"><figcaption>Method and experimental design. Only the Arabic-script side of the training pairs (blue) changes between conditions; the Arabizi side, the 998 sentences, the frozen encoder, <i>k</i> = 16, the classifier protocol, the resamples and the test data are fixed.<span class="rp-src">Figure 1 of the manuscript.</span></figcaption></figure>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-protocol">
+      <h2 class="cp-h2" id="rp-protocol">Evaluation protocol</h2>
+      <dl class="rp-dl"><dt>Encoders</dt><dd>Three frozen encoders with pinned revisions: multilingual-E5-small, LaBSE and XLM-R base.</dd><dt>Tasks</dt><dd>Four classification tasks: NArabizi sentiment (two classes) and topic (five classes) for Algerian; TSAC sentiment for Tunisian; MYC sentiment for Moroccan.</dd><dt>Pairs</dt><dd>998 NArabizi training sentences (Algerian Arabizi) with human, rule-based or dictionary Arabic-script renderings.</dd><dt>Classifier</dt><dd>Logistic regression; regularisation selected on in-script development macro-F1; five 90% training resamples.</dd><dt>Pre-registration</dt><dd>Confirmatory hypotheses H1–H3 pre-registered, with SHA-256 records of the protocol and of the code.</dd><dt>Test set</dt><dd>Single test evaluation. Grouped paired bootstrap (2,000 draws), Holm correction over the 12 cells; the 12-cell mean is the confirmatory estimand. Controls specified after the test run are labelled exploratory.</dd></dl>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-results">
+      <h2 class="cp-h2" id="rp-results">Main results</h2>
+      <table class="rp-table"><thead><tr><th scope="col">Confirmatory hypothesis (test, 12-cell mean of cross-script macro-F1 differences)</th><th scope="col">Δ [95% CI]</th><th scope="col">Verdict</th></tr></thead><tbody>
+      <tr><td>H1 human pairs &gt; no removal</td><td class="num">+5.35 [+3.50, +7.31]</td><td>confirmed</td></tr>
+      <tr><td>H2 human pairs &gt; rule-transliteration pairs</td><td class="num">+4.43 [+2.73, +6.01]</td><td>confirmed</td></tr>
+      <tr><td>H3 human pairs &gt; dictionary-transliteration pairs</td><td class="num">+1.91 [+0.77, +2.96]</td><td>confirmed</td></tr>
+      </tbody></table>
+      <ul class="cp-list" style="margin-top:12px">
+        <li>A corpus-aware re-analysis places most of the gain in the corpus that supplied the pairs.</li>
+        <li>Lower transliteration error moves synthetic subspaces towards the human subspace without improving transfer.</li>
+        <li>Transliterating the input with a dictionary or neural transliterator matches or exceeds every projection.</li>
+      </ul>
+      <figure class="rp-figure"><img src="../assets/research/formal/formal-fig3-results.png" width="2000" height="1048" alt="Forest plot of per-cell test differences in cross-script F1 with 95% intervals, for H1 (human pairs versus no removal), H2 (human versus rule pairs) and H3 (human versus dictionary pairs), with aggregate means at the bottom." loading="lazy" decoding="async"><figcaption>Per-cell test differences in cross-script F1 with 95% grouped-bootstrap intervals (*: Holm-significant over 12 cells). Black diamonds: dependency-aware aggregates. NArabizi cells share both dialect and corpus with the pairs.<span class="rp-src">Figure 3 of the manuscript.</span></figcaption></figure>
+      <p class="rp-note">Source: abstract of the manuscript and archived results of the repository (README, Main findings).</p>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-team">
+      <h2 class="cp-h2" id="rp-team">Role and collaborations</h2>
+      <p class="cp-p">Author of the manuscript and of the research code. Collaborations:</p>
+      <ul class="rp-people"><li class="cp-person"><span class="cp-avatar" aria-hidden="true">EH</span><span class="cp-pname"><b>Ehtesham Hashmi</b><span class="cp-prole">Department of Information Security and Communication Technology (IIK), NTNU, Norway</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">SZ</span><span class="cp-pname"><b>Salah Zrigui</b><span class="cp-prole">Inria, Université Grenoble Alpes, France</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">HN</span><span class="cp-pname"><b>Henri Nicolas</b><span class="cp-prole">LaBRI, University of Bordeaux, France</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">MZ</span><span class="cp-pname"><b>Mounir Zrigui</b><span class="cp-prole">RLANTIS, University of Monastir, Tunisia</span></span></li></ul>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-cite">
+      <h2 class="cp-h2" id="rp-cite">Cite this work</h2>
+      <!-- TODO author list and order: complete once the manuscript is de-anonymised -->
+      <div class="rp-bib"><pre id="bib-formal">@unpublished{jaballi2026formal,
+  author = {Jaballi, Samawel and others},
+  title  = {Pair Provenance-Aware Spectral Subspace Analysis for Cross-Script Transfer: A Maghrebi Arabic--Arabizi Case Study},
+  year   = {2026},
+  note   = {Submitted}
+}</pre><button type="button" class="cp-expand" data-copy="bib-formal">Copy BibTeX</button></div>
+    </section>
+
+    <nav class="cp-pager" aria-label="Back">
+      <span class="cp-pg-empty" aria-hidden="true"></span>
+      <a class="cp-all" href="../index.html#research"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg><span>All research</span></a>
+      <span class="cp-pg-empty" aria-hidden="true"></span>
+    </nav>
+    <footer class="foot"><p>© <span id="footYear">2026</span> Samawel Jaballi</p><a class="to-top" href="#main">Back to top <span aria-hidden="true">↑</span></a></footer>
+  </main>
+
+  <div class="scrubber" aria-hidden="true"><span class="scrubber-fill" id="scrubberFill"></span></div>
+  <script src="../assets/js/content.js?v=20261125a"></script>
+  <script src="../assets/js/page.js?v=20261125a"></script>
+</body>
+</html>

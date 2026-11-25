@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DiaFuse-PRC — DiaFuse-PRC: An Explainable Analysis of Dialect-Aware Multi-Encoder Fusion with Prototype-Guided Contrastive Learning for Cross-Script Sentiment Transfer · Samawel Jaballi</title>
+  <meta name="description" content="DiaFuse-PRC: cross-script and cross-dialect sentiment transfer for Maghrebi Arabizi, evaluated along a controlled chain of test sets. Manuscript submitted to an international journal; under review.">
+  <meta name="author" content="Samawel Jaballi">
+  <link rel="canonical" href="https://samaweljaballi.github.io/research/diafuse-prc.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://samaweljaballi.github.io/research/diafuse-prc.html">
+  <meta property="og:title" content="DiaFuse-PRC — DiaFuse-PRC: An Explainable Analysis of Dialect-Aware Multi-Encoder Fusion with Prototype-Guided Contrastive Learning for Cross-Script Sentiment Transfer">
+  <meta property="og:description" content="DiaFuse-PRC: cross-script and cross-dialect sentiment transfer for Maghrebi Arabizi, evaluated along a controlled chain of test sets. Manuscript submitted to an international journal; under review.">
+  <meta property="og:image" content="https://samaweljaballi.github.io/assets/research/diafuse-prc/diafuse-fig3-architecture.png">
+  <meta name="theme-color" content="#3f6470">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../assets/fonts/outfit-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../assets/css/style.css?v=20261125a">
+  <link rel="stylesheet" href="../assets/css/course.css?v=20261125a">
+  <link rel="stylesheet" href="../assets/css/research.css?v=20261125a">
+  <script>
+    /* Apply saved / system theme before paint */
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem("sj-theme"); } catch (e) {}
+      if (!t) t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "night" : "day";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body class="course-page research-page" data-base="../" data-section="research">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Illustrated Atlantic-coast backdrop (replaced by a photo if SITE.backdrop is set) -->
+  <div class="backdrop" aria-hidden="true">
+    <div class="backdrop-photo" id="backdropPhoto"></div>
+    <svg class="scene" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="sky-top"/>
+          <stop offset=".62" class="sky-mid"/>
+          <stop offset="1" class="sky-low"/>
+        </linearGradient>
+        <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" class="sea-top"/>
+          <stop offset="1" class="sea-low"/>
+        </linearGradient>
+        <radialGradient id="glow" cx=".5" cy=".5" r=".5">
+          <stop offset="0" class="glow-in"/>
+          <stop offset="1" class="glow-out"/>
+        </radialGradient>
+      </defs>
+      <rect width="1600" height="1000" fill="url(#sky)"/>
+      <g class="stars">
+        <circle cx="180" cy="90" r="1.6"/><circle cx="320" cy="170" r="1.2"/><circle cx="520" cy="60" r="1.4"/>
+        <circle cx="760" cy="140" r="1.1"/><circle cx="980" cy="70" r="1.5"/><circle cx="1180" cy="190" r="1.2"/>
+        <circle cx="1400" cy="110" r="1.6"/><circle cx="1520" cy="230" r="1"/><circle cx="90" cy="260" r="1.1"/>
+        <circle cx="640" cy="240" r="1"/><circle cx="880" cy="300" r=".9"/><circle cx="1290" cy="40" r="1.1"/>
+      </g>
+      <circle class="sun-glow" cx="1180" cy="430" r="260" fill="url(#glow)"/>
+      <circle class="sun" cx="1180" cy="430" r="58"/>
+      <path class="cloud" d="M120 300c40-30 110-30 150 0 30-18 80-14 100 12H90c4-6 16-10 30-12z"/>
+      <path class="cloud" d="M980 230c30-22 86-22 116 0 24-12 60-10 76 10H956c4-5 12-8 24-10z"/>
+      <rect y="560" width="1600" height="190" fill="url(#sea)"/>
+      <g class="waves">
+        <path d="M0 600h1600" /><path d="M0 640h1600" /><path d="M0 690h1600" />
+      </g>
+      <path class="dune-far" d="M0 640c180-70 380-110 600-80 160 22 260 70 420 64 200-8 380-90 580-70v446H0z"/>
+      <path class="dune-mid" d="M0 760c220-60 420-40 640 0 200 36 380 20 560-30 150-42 280-40 400-10v280H0z"/>
+      <g class="pines">
+        <path d="M120 760l18-70 18 70zM150 768l24-96 24 96zM190 764l16-60 16 60zM1380 740l20-80 20 80zM1416 750l26-104 26 104zM1460 746l16-58 16 58zM1500 752l20-80 20 80z"/>
+        <path d="M134 770v24M174 770v26M206 768v22M1400 744v26M1442 752v28M1476 748v22M1520 754v24" class="trunk"/>
+      </g>
+      <path class="dune-near" d="M0 860c260-50 520-30 800 0s560 20 800-30v170H0z"/>
+    </svg>
+    <div class="backdrop-veil"></div>
+  </div>
+
+  <!-- Persistent navigation.
+       Desktop: floating pill that appears once the board's tab bar scrolls away.
+       Mobile: sticky bar (always visible, in the page flow) with the current section and a Menu button. -->
+  <header class="dock" id="dock">
+    <a class="dock-brand" href="../index.html#home" aria-label="Samawel Jaballi — back to top"><span class="mono" aria-hidden="true">SJ</span><span class="dock-name">Samawel Jaballi</span></a>
+    <nav class="dock-nav" aria-label="Sections"><ul id="dockNav"></ul></nav>
+    <p class="dock-current" id="dockCurrent" aria-hidden="true">Home</p>
+    <button class="theme-btn" type="button" data-theme-toggle aria-label="Switch to night mode"><span class="theme-ico" aria-hidden="true"></span></button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="menuSheet">
+      <span class="menu-ico" aria-hidden="true"><span></span><span></span><span></span></span><span class="menu-lbl">Menu</span>
+    </button>
+    <div class="menu-sheet" id="menuSheet" hidden>
+      <nav aria-label="All sections"><ul id="menuList"></ul></nav>
+    </div>
+  </header>
+
+  <main id="main" class="board" tabindex="-1">
+    <nav class="cp-crumbs" aria-label="Breadcrumb"><ol>
+      <li><a href="../index.html#research">Research</a></li>
+      <li><a href="../index.html#projects">Projects</a></li>
+      <li><span aria-current="page">DiaFuse-PRC</span></li>
+    </ol></nav>
+
+    <section class="panel card rp-hero" aria-labelledby="rp-title">
+      <p class="rp-short">DiaFuse-PRC · 2026</p>
+      <h1 class="cp-title" id="rp-title">DiaFuse-PRC: An Explainable Analysis of Dialect-Aware Multi-Encoder Fusion with Prototype-Guided Contrastive Learning for Cross-Script Sentiment Transfer</h1>
+      <p class="rp-status"><span class="rp-badge">Submitted</span><span class="rp-status-t">Manuscript submitted to an international journal; under review.</span></p>
+      <p class="rp-summary">Arabizi sentiment classifiers are often trained on Arabic-script text and its synthetic Latin-script transliterations, then tested on human Arabizi from other corpora, where script, spelling, corpus and dialect all change. The study evaluates DiaFuse-PRC, a fusion of three frozen encoders with class–variety prototypes, along a controlled seven-stage test chain. Tunisian-trained models lose more on Moroccan Arabizi along a dialect-associated contrast than along the script.</p>
+      <div class="rp-actions">
+        <a class="cp-btn primary" href="https://github.com/SAMAWELJABALLI/DiaFuse-PRC" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.3-3.1-.2-.4-.6-1.6 0-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.6.3 2.8.1 3.2.8.8 1.3 1.9 1.3 3.2 0 4.6-2.8 5.6-5.5 5.9.5.4.9 1.1.9 2.2v3.3c0 .3.1.7.8.6A12 12 0 0 0 12 .3"/></svg><span>Code (GitHub)</span><span class="sr-only"> (opens in a new tab)</span></a>
+        <!-- TODO preprint URL: replace the disabled button below by
+        <a class="cp-btn" href="PREPRINT_URL" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><span>Preprint</span><span class="sr-only"> (opens in a new tab)</span></a> -->
+        <span class="cp-btn rp-disabled" aria-disabled="true"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><span>Preprint — coming soon</span></span>
+        <a class="cp-btn" href="../index.html#research"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg><span>Back to Research</span></a>
+      </div>
+      <p class="rp-note">No licence has been chosen for the code yet: default copyright applies. No data are distributed; no DOI yet.</p>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-overview">
+      <h2 class="cp-h2" id="rp-overview">Overview</h2>
+      <h3 class="cp-h3">Problem</h3><p class="cp-p">Sentiment models trained on Arabic-script Tunisian data and on synthetic transliterations of it must hold up on human-written Arabizi and on other Maghrebi varieties.</p>
+      <h3 class="cp-h3">Approach</h3><p class="cp-p">DiaFuse-PRC fuses three frozen encoders (XLM-R, mE5, LaBSE) through an input-dependent gate, with hierarchical class–variety prototypes, rebalanced contrastive learning, transliteration consistency and variety-wise calibration.</p>
+      <figure class="rp-figure"><img src="../assets/research/diafuse-prc/diafuse-fig3-architecture.png" width="2000" height="916" alt="Architecture diagram: an input passes through three frozen encoders (XLM-R, mE5, LaBSE) with layer mixtures; a gate that also reads a surface descriptor fuses them into a representation z feeding a classifier and a projection head with prototypes; a lower training-signal pathway adds transliterated views, consistency, hard mixup and contrastive losses." loading="lazy" decoding="async"><figcaption>DiaFuse-PRC. Representation pathway (top): three frozen encoders, per-layer pooling, layer mixtures and an input-dependent gate that also reads a surface descriptor, producing the fused representation that feeds the classifier and the projection head. Training-signal pathway (bottom): transliterated views, consistency and prototype-guided contrastive losses.<span class="rp-src">Figure 3 of the manuscript.</span></figcaption></figure>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-protocol">
+      <h2 class="cp-h2" id="rp-protocol">Evaluation protocol</h2>
+      <dl class="rp-dl"><dt>Training data</dt><dd>Arabic-script Tunisian sentences (TSAC) and synthetic Latin-script transliterations of them only.</dd><dt>Test chain</dt><dd>Seven stages adding one shift each: S0 TSAC Arabic script; S1 seen transliteration generator; S2 unseen generator; S3 human TSAC-Latin; S4 TUNIZI; S5 NArabizi (Algerian); S6 MYC (Moroccan).</dd><dt>Controls</dt><dd>Script-controlled counterparts of the external test sets: S5<sup>AR</sup>, S6<sup>AR</sup> and S6<sup>syn</sup>.</dd><dt>Encoders</dt><dd>XLM-R, mE5 and LaBSE, frozen; a fully fine-tuned XLM-R-large baseline is included among the twelve Tunisian-trained systems.</dd><dt>Runs</dt><dd>Three seeds with default hyper-parameters; the archived run is reduced and provisional.</dd><dt>Pre-registration</dt><dd>The follow-up DiaFuse-PRC++ is pre-registered in the repository and not yet executed.</dd></dl>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-results">
+      <h2 class="cp-h2" id="rp-results">Main results</h2>
+      <ul class="cp-list">
+        <li>On Moroccan Arabizi, the loss along the dialect-associated contrast exceeds the loss along the script: 27.5 against 15.1 macro-F1 points for DiaFuse-PRC; the ordering is significant for all twelve Tunisian-trained systems.</li>
+        <li>DiaFuse-PRC averages 66.1 macro-F1 over the four human stages: equal to static concatenation, below the best single encoder (67.1) and a fully fine-tuned baseline (69.7).</li>
+        <li>Post-hoc analyses: the gate routed every input to one encoder; the encoders' errors leave 12.1 points of oracle headroom beyond a seed-noise control, but combining them without target labels gains only 0.6 points over the best encoder.</li>
+        <li>A linear probe on the best frozen encoder reaches 69.8 macro-F1 on Moroccan labels, whereas the same probe trained on Tunisian data reaches 50.1.</li>
+      </ul>
+      <figure class="rp-figure"><img src="../assets/research/diafuse-prc/diafuse-fig5-test-chain.png" width="2000" height="1259" alt="Line chart of macro-F1 (40 to 100) along the test stages S0 to S6 for six systems; all systems drop on the unseen generator S2 and on the Moroccan stage S6; DiaFuse-PRC is close to static concatenation; the target-label reference is shown as diamonds." loading="lazy" decoding="async"><figcaption>Macro-F1 along the test chain for six systems (mean over three seeds; error bars: seed standard deviation). The dashed line separates the synthetic stages, which keep the content of S0, from the human stages. The target-label reference (diamonds) is trained on target labels.<span class="rp-src">Figure 5 of the manuscript.</span></figcaption></figure>
+      <p class="rp-note">Source: abstract of the manuscript (three-seed run with default hyper-parameters).</p>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-team">
+      <h2 class="cp-h2" id="rp-team">Role and collaborations</h2>
+      <p class="cp-p">Collaborations:</p>
+      <ul class="rp-people"><li class="cp-person"><span class="cp-avatar" aria-hidden="true">IG</span><span class="cp-pname"><b>Imane Guellil</b><span class="cp-prole">University of Birmingham, United Kingdom</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">CH</span><span class="cp-pname"><b>Chadi Helwe</b><span class="cp-prole">Lebanese American University, Lebanon</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">SZ</span><span class="cp-pname"><b>Salah Zrigui</b><span class="cp-prole">Inria, Université Grenoble Alpes, France</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">HN</span><span class="cp-pname"><b>Henri Nicolas</b><span class="cp-prole">LaBRI, University of Bordeaux, France</span></span></li><li class="cp-person"><span class="cp-avatar" aria-hidden="true">MZ</span><span class="cp-pname"><b>Mounir Zrigui</b><span class="cp-prole">RLANTIS, University of Monastir, Tunisia</span></span></li></ul>
+    </section>
+
+    <section class="panel card rp-section" aria-labelledby="rp-cite">
+      <h2 class="cp-h2" id="rp-cite">Cite this work</h2>
+      <!-- TODO author list and order: complete once the manuscript is de-anonymised -->
+      <div class="rp-bib"><pre id="bib-diafuse-prc">@unpublished{jaballi2026diafuse,
+  author = {Jaballi, Samawel and others},
+  title  = {{DiaFuse-PRC}: An Explainable Analysis of Dialect-Aware Multi-Encoder Fusion with Prototype-Guided Contrastive Learning for Cross-Script Sentiment Transfer},
+  year   = {2026},
+  note   = {Submitted}
+}</pre><button type="button" class="cp-expand" data-copy="bib-diafuse-prc">Copy BibTeX</button></div>
+    </section>
+
+    <nav class="cp-pager" aria-label="Back">
+      <span class="cp-pg-empty" aria-hidden="true"></span>
+      <a class="cp-all" href="../index.html#research"><svg class="ico" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg><span>All research</span></a>
+      <span class="cp-pg-empty" aria-hidden="true"></span>
+    </nav>
+    <footer class="foot"><p>© <span id="footYear">2026</span> Samawel Jaballi</p><a class="to-top" href="#main">Back to top <span aria-hidden="true">↑</span></a></footer>
+  </main>
+
+  <div class="scrubber" aria-hidden="true"><span class="scrubber-fill" id="scrubberFill"></span></div>
+  <script src="../assets/js/content.js?v=20261125a"></script>
+  <script src="../assets/js/page.js?v=20261125a"></script>
+</body>
+</html>
