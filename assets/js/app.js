@@ -237,7 +237,7 @@
     var cards = S.projects.map(function (p) {
       return '<article class="project" data-stage="' + p.stage + '">' +
         '<div class="project-top"><span class="stage s-' + p.stage + '">' + STAGE[p.stage] + '</span><span class="muted">' + esc(p.period) + "</span></div>" +
-        '<h4 class="h3">' + esc(p.title) + "</h4>" +
+        '<h4 class="h3">' + (p.page ? '<a class="project-link" href="' + esc(p.page) + '">' + esc(p.title) + "</a>" : esc(p.title)) + "</h4>" +
         '<p class="project-status">' + esc(p.status) + "</p>" +
         '<dl class="project-dl">' +
           (p.problem ? "<div><dt>Problem</dt><dd>" + esc(p.problem) + "</dd></div>" : "") +
@@ -245,6 +245,7 @@
           (p.role ? "<div><dt>Role</dt><dd>" + esc(p.role) + "</dd></div>" : "") +
         "</dl>" +
         (p.resources && p.resources.length ? '<div class="lchips">' + p.resources.map(function (r) { return a(r.url, esc(r.label), "lchip"); }).join("") + "</div>" : "") +
+        (p.page ? '<a class="course-open project-more" href="' + esc(p.page) + '" aria-label="Learn more: ' + esc(p.title) + '">Learn more<span aria-hidden="true"> →</span></a>' : "") +
       "</article>";
     }).join("");
     var rel = S.releases.map(function (r) {
@@ -260,7 +261,7 @@
         "</div></div>" +
       '<div class="project-grid">' + cards + "</div>" +
       '<h3 class="sub-h rel-h">Released software & resources</h3><ul class="releases">' + rel + "</ul>" +
-      '<p class="legend">Statuses are those stated in each repository. A public repository does not imply that the related work is published or peer reviewed.</p>' +
+      '<p class="legend">A public repository does not imply that the related work is published or peer reviewed.</p>' +
     "</div>";
   }
 
